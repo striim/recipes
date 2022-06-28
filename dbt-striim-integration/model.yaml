@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: retailcdc
+    description: Snowflake test Database
+    database: retailcdc
+    schema: public
+    tables:
+      - name: retailazure
+        description: Raw test data
+        columns:
+          - name: storeid
+            description: Primary key for tracking
+            test:
+              - unique
+              - not_null
+    freshness:
+      warn_after:
+        count: 4
+        period: minute
+      error_after:
+        count: 5
+        period: minute
+    loaded_at_field: to_timestamp(datetime1)::timestamp_ntz
