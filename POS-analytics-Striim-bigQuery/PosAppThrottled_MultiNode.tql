@@ -1,0 +1,223 @@
+--Create DG with n number of servers (tested on 2)
+--Deploy PosApp flow on all nodes of DG
+--Deploy SourceFlow on any one node of DG
+--Deploy ProcessFlow on all nodes of DG
+
+CREATE APPLICATION PosApp;
+
+CREATE FLOW SourceFlow;
+
+CREATE source CsvDataSource USING CSVReader (
+  directory:'Samples/PosApp/appData',
+  header:Yes,
+  wildcard:'posdata.csv',
+  columndelimiter:',',
+  blocksize: 10240,
+  positionByEOF:false,
+  trimquote:false
+) OUTPUT TO CsvStream;
+
+CREATE TYPE PosData(
+  merchantId String, 
+  dateTime DateTime, 
+  hourValue integer, 
+  amount double, 
+  zip String
+);
+
+CREATE STREAM PosDataStream OF PosData PARTITION BY merchantId;
+
+CREATE CQ CsvToPosData
+INSERT INTO PosDataStream
+SELECT data[1],
+       TO_DATEF(data[4],'yyyyMMddHHmmss'),
+       DHOURS(TO_DATEF(data[4],'yyyyMMddHHmmss')),
+       TO_DOUBLE(data[7]),
+       data[9]
+FROM CsvStream c;
+
+
+END FLOW SourceFlow;
+
+CREATE FLOW ProcessFlow;
+
+CREATE JUMPING WINDOW PosData5Minutes 
+OVER PosDataStream KEEP WITHIN 5 MINUTE ON dateTime
+PARTITION BY merchantId;
+
+CREATE TYPE MerchantHourlyAve(
+  merchantId    String, 
+  hourValue integer, 
+  hourlyAve integer
+);
+
+CREATE TYPE MerchantTxRate(
+  merchantId String KEY, 
+  zip String, 
+  startTime DateTime, 
+  count integer, 
+  totalAmount double, 
+  hourlyAve integer, 
+  upperLimit double, 
+  lowerLimit double, 
+  category String, 
+  status String
+);
+
+CREATE STREAM MerchantTxRateOnlyStream OF MerchantTxRate PARTITION BY merchantId;
+
+CREATE STREAM MerchantTxRateWithStatusStream OF MerchantTxRate PARTITION BY merchantId;
+
+CREATE CACHE HourlyAveLookup using FileReader (
+  directory: 'Samples/PosApp/appData',
+  wildcard: 'hourlyData.txt'
+)
+PARSE USING DSVParser (
+  header: Yes,
+  trimquote:false
+) QUERY (keytomap:'merchantId') OF MerchantHourlyAve;
+
+
+
+
+CREATE CQ GenerateMerchantTxRateOnly INSERT INTO MerchantTxRateOnlyStream
+SELECT p.merchantId, p.zip, FIRST(p.dateTime),
+       COUNT(p.merchantId), SUM(p.amount), l.hourlyAve/12, 
+       l.hourlyAve/12 * CASE
+         WHEN l.hourlyAve/12 >10000 THEN 1.15
+         WHEN l.hourlyAve/12 > 800 THEN 1.2
+         WHEN l.hourlyAve/12 >200 THEN 1.25
+         ELSE 1.5 END,
+       l.hourlyAve/12 / CASE 
+         WHEN l.hourlyAve/12 >10000 THEN 1.15
+         WHEN l.hourlyAve/12 > 800 THEN 1.2
+         WHEN l.hourlyAve/12 >200 THEN 1.25
+         ELSE 1.5 END,
+       '<NOTSET>', '<NOTSET>'
+FROM PosData5Minutes p, HourlyAveLookup l
+WHERE p.merchantId = l.merchantId AND p.hourValue = l.hourValue
+GROUP BY p.merchantId;
+
+CREATE CQ GenerateMerchantTxRateWithStatus
+INSERT INTO MerchantTxRateWithStatusStream
+SELECT merchantId, zip, startTime, 
+       count, totalAmount, hourlyAve, upperLimit, lowerLimit,
+       CASE
+         WHEN count >10000 THEN 'HOT'
+         WHEN count > 800 THEN 'WARM'
+         WHEN count >200 THEN 'COOL'
+         ELSE 'COLD' END,
+       CASE
+         WHEN count > upperLimit THEN 'TOOHIGH'
+         WHEN count < lowerLimit THEN 'TOOLOW'
+         ELSE 'OK' END
+FROM MerchantTxRateOnlyStream;
+
+CREATE TYPE MerchantActivityContext(
+  MerchantId        String KEY,
+  StartTime     DateTime,
+  CompanyName   String,
+  Category      String,
+  Status            String,
+  Count         integer,
+  HourlyAve     integer,
+  UpperLimit        double,
+  LowerLimit        double,
+  Zip           String,
+  City          String,
+  State         String,
+  LatVal            double,
+  LongVal           double
+);
+
+CREATE WACTIONSTORE MerchantActivity CONTEXT OF MerchantActivityContext
+EVENT TYPES ( MerchantTxRate KEY(merchantId) ) 
+PERSIST IMMEDIATE USING ( storageProvider:'elasticsearch' );
+
+CREATE TYPE MerchantNameData(
+  merchantId        String KEY,
+  companyName       String
+);
+
+CREATE TYPE USAddressData(
+  country String,
+  zip String KEY,
+  city String,
+  state String,
+  stateCode String,
+  fullCity String,
+  someNum String,
+  pad String,
+  latVal double,
+  longVal double,
+  empty String,
+  empty2 String
+);
+
+
+CREATE CACHE NameLookup using FileReader (
+  directory: 'Samples/PosApp/appData',
+  WildCard:'MerchantNames.csv',
+  positionByEOF:false
+)
+PARSE USING DSVParser (
+  header:'yes',
+  trimquote:false
+)
+QUERY(keytomap:'merchantId') OF MerchantNameData;
+
+CREATE CACHE ZipLookup using FileReader (
+  directory: 'Samples/PosApp/appData',
+  wildcard: 'USAddresses.txt',
+  positionByEOF:false
+)
+PARSE USING DSVParser (
+  header: Yes,
+  columndelimiter: '\t',
+  trimquote:false
+) QUERY (keytomap:'zip') OF USAddressData;
+
+CREATE CQ GenerateWactionContext
+INSERT INTO MerchantActivity
+SELECT  m.merchantId, m.startTime, n.companyName, m.category, m.status,
+       m.count, m.hourlyAve, m.upperLimit, m.lowerLimit,
+       m.zip, z.city, z.state, z.latVal, z.longVal
+FROM MerchantTxRateWithStatusStream m, NameLookup n, ZipLookup z
+WHERE m.merchantId = n.merchantId AND m.zip = z.zip
+LINK SOURCE EVENT;
+
+CREATE STREAM AlertStream OF Global.AlertEvent;
+
+CREATE CQ GenerateAlerts
+INSERT INTO AlertStream
+SELECT n.CompanyName, m.MerchantId, 
+       CASE 
+         WHEN m.Status = 'OK' THEN 'info'
+         ELSE 'warning' END,
+       CASE 
+         WHEN m.Status = 'OK' THEN 'cancel'
+         ELSE 'raise' END,
+       CASE 
+         WHEN m.Status = 'OK' THEN textFromFields('Merchant $3 count of $6 is back between $9 and $8 ',m)
+         WHEN m.Status = 'TOOHIGH' THEN textFromFields('Merchant $3 count of $6 is above upper limit of $8 ',m)
+         WHEN m.Status = 'TOOLOW' THEN textFromFields('Merchant $3 count of $6 is below lower limit of $9 ',m)
+         ELSE ''
+         END
+FROM MerchantTxRateWithStatusStream m, NameLookup n
+WHERE m.merchantId = n.merchantId;
+
+END FLOW ProcessFlow;
+
+/**
+CREATE FLOW ProcessFlow_1;
+
+CREATE JUMPING WINDOW PosData5Minutes_1 
+OVER PosDataStream KEEP WITHIN 5 MINUTE ON dateTime
+PARTITION BY merchantId;
+
+END FLOW ProcessFlow_1;
+**/
+
+END APPLICATION PosApp;
+
+CREATE DASHBOARD USING "Samples/PosApp/PosAppThrottledDashboard.json";

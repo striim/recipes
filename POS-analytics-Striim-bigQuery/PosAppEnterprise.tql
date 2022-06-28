@@ -1,0 +1,312 @@
+-- The PosApp sample application demonstrates how a credit card
+-- payment processor might use Striim to generate reports on current
+-- transaction activity by merchant and send alerts when transaction
+-- counts for a merchant are higher or lower than average for the time
+-- of day.
+
+
+CREATE APPLICATION PosApp;
+
+-- All CREATE statements between here and the END APPLICATION
+-- statement will create objects in the PosApp application.
+
+-- source CsvDataSource
+
+CREATE source CsvDataSource USING FileReader (
+  directory:'Samples/PosApp/appData',
+  wildcard:'posdata.csv',
+  blocksize: 10240,
+  positionByEOF:false
+)
+PARSE USING DSVParser (
+  header:Yes,
+  trimquote:false
+) OUTPUT TO CsvStream;
+
+
+-- This is the primary data source for this application.
+-- In a real-world application, it would be real-time data. Here,
+-- the data comes from a comma-delimited file, posdata.csv. The first
+-- two lines of that file are:
+--
+-- BUSINESS NAME, MERCHANT ID, PRIMARY ACCOUNT NUMBER, POS DATA CODE, DATETIME, EXP DATE, CURRENCY CODE, AUTH AMOUNT, TERMINAL ID, ZIP, CITY
+-- COMPANY 1,D6RJPwyuLXoLqQRQcOcouJ26KGxJSf6hgbu,6705362103919221351,0,20130312173210,0916,USD,2.20,5150279519809946,41363,Quicksand
+--
+-- The "header:Yes" setting tells Striim that the first line contains
+-- field labels that should not be treated as data.
+--
+-- The "positionByEOF:false" setting tells Striim to start reading
+-- from the beginning of the file. (In a real-world application
+-- reading real log files, you would typically use the default "true"
+-- setting so that the application would read only new data.)
+--
+-- The OUTPUT TO clause automatically creates the stream
+-- CsvStream using the WAEvent type associated with the CSVReader
+-- adapater. The only field from WAEvent used by this application
+-- is "data", an array containing the delimited fields.
+
+
+-- CQ CsvToPosData
+
+CREATE CQ CsvToPosData
+INSERT INTO PosDataStream
+SELECT TO_STRING(data[1]) as merchantId,
+       TO_DATEF(data[4],'yyyyMMddHHmmss') as dateTime,
+       DHOURS(TO_DATEF(data[4],'yyyyMMddHHmmss')) as hourValue,
+       TO_DOUBLE(data[7]) as amount,
+       TO_STRING(data[9]) as zip
+FROM CsvStream;
+
+-- Here, "data" refers to the array mentioned above, and the number
+-- in brackets specifies a field from the array, counting from zero.
+-- Thus data[1] is MERCHANT ID, data[4] is DATETIME, data[7] is AUTH
+-- AMOUNT, and data[9] is ZIP.
+--
+-- The TO_STRING, TO_DATEF, and TO_DOUBLE functions cast the fields as
+-- the types to be used in PosDataStream, which is created automatically.
+
+-- The DATETIME field from the source is converted to both a dateTime
+-- value, used as the event timestamp by the application, and (via the
+-- function) an integer hourValue, which is used to look up
+-- historical hourly averages from the HourlyAveLookup cache,
+-- discussed below.
+--
+-- The other six fields are discarded. Thus the first line of data
+-- from posdata.csv has at this point been reduced to five values:
+--
+-- D6RJPwyuLXoLqQRQcOcouJ26KGxJSf6hgbu (merchantId)
+-- 20130312173210 (DateTime)
+-- 17 (hourValue)
+-- 2.20 (amount)
+-- 41363 (zip)
+
+
+-- CQ GenerateMerchantTxRateOnly
+--
+-- The PosData5Minutes window bounds the data so that the query can
+-- use the COUNT, FIRST, and SUM functions and join data from the
+-- HourlyAveLookup cache. (Aggregate functions cannot be used and
+-- joins cannot be performed on unbound real-time data.)
+--
+-- The HourlyAveLookup cache provides historical average sales
+-- amounts for the current hour for each merchant.
+
+CREATE JUMPING WINDOW PosData5Minutes
+OVER PosDataStream KEEP WITHIN 5 MINUTE ON dateTime;
+
+CREATE TYPE MerchantHourlyAve(
+  merchantId String,
+  hourValue integer,
+  hourlyAve integer
+);
+CREATE CACHE HourlyAveLookup using FileReader (
+  directory: 'Samples/PosApp/appData',
+  wildcard: 'hourlyData.txt'
+)
+PARSE USING DSVParser (
+  header: Yes,
+  trimquote:false,
+  trimwhitespace:true
+) QUERY (keytomap:'merchantId') OF MerchantHourlyAve;
+
+CREATE TYPE MerchantTxRate(
+  merchantId String KEY,
+  zip String,
+  startTime DateTime,
+  count integer,
+  totalAmount double,
+  hourlyAve integer,
+  upperLimit double,
+  lowerLimit double,
+  category String,
+  status String
+);
+CREATE STREAM MerchantTxRateOnlyStream OF MerchantTxRate;
+
+CREATE CQ GenerateMerchantTxRateOnly
+INSERT INTO MerchantTxRateOnlyStream
+SELECT p.merchantId,
+       FIRST(p.zip),
+       FIRST(p.dateTime),
+       COUNT(p.merchantId),
+       SUM(p.amount),
+       l.hourlyAve/12,
+       l.hourlyAve/12 * CASE
+         WHEN l.hourlyAve/12 >10000 THEN 1.15
+         WHEN l.hourlyAve/12 > 800 THEN 1.2
+         WHEN l.hourlyAve/12 >200 THEN 1.25
+         ELSE 1.5 END,
+       l.hourlyAve/12 / CASE
+         WHEN l.hourlyAve/12 >10000 THEN 1.15
+         WHEN l.hourlyAve/12 > 800 THEN 1.2
+         WHEN l.hourlyAve/12 >200 THEN 1.25
+         ELSE 1.5 END,
+       '<NOTSET>',
+       '<NOTSET>'
+FROM PosData5Minutes p, HourlyAveLookup l
+WHERE p.merchantId = l.merchantId AND p.hourValue = l.hourValue
+GROUP BY p.merchantId;
+
+-- This query aggregates five minutes' worth of data for each
+-- merchant, calculating the total transaction count and amount, and
+-- calculates the upperLimit and lowerLimit values based on the
+-- historical average transaction count for the current hour of the
+-- day from the HourlyAveLookup cache. The category and status fields
+-- are left unset to be populated by the next query.
+
+
+-- CQ GenerateMerchantTxRateWithStatus
+--
+-- This query sets the count values used by the Dashboard map and the
+-- status values used to trigger alerts.
+
+CREATE STREAM MerchantTxRateWithStatusStream OF MerchantTxRate;
+
+CREATE CQ GenerateMerchantTxRateWithStatus
+INSERT INTO MerchantTxRateWithStatusStream
+SELECT merchantId,
+       zip,
+       startTime,
+       count,
+       totalAmount,
+       hourlyAve,
+       upperLimit,
+       lowerLimit,
+       CASE
+         WHEN count >10000 THEN 'HOT'
+         WHEN count > 800 THEN 'WARM'
+         WHEN count >200 THEN 'COOL'
+         ELSE 'COLD' END,
+       CASE
+         WHEN count > upperLimit THEN 'TOOHIGH'
+         WHEN count < lowerLimit THEN 'TOOLOW'
+         ELSE 'OK' END
+FROM MerchantTxRateOnlyStream;
+
+
+-- WAction store MerchantActivity
+--
+-- The following group of statements create and populate the MerchantActivity
+-- WAction store. Data from the MerchantTxRateWithStatusStream is enhanced
+-- with merchant details from NameLookup cache and with latitude and longitude
+-- values from the USAddressData cache.
+
+CREATE TYPE MerchantActivityContext(
+  MerchantId String KEY,
+  StartTime  DateTime,
+  CompanyName String,
+  Category String,
+  Status String,
+  Count integer,
+  HourlyAve integer,
+  UpperLimit double,
+  LowerLimit double,
+  Zip String,
+  City String,
+  State String,
+  LatVal double,
+  LongVal double
+);
+
+CREATE WACTIONSTORE MerchantActivity CONTEXT OF MerchantActivityContext
+EVENT TYPES ( MerchantTxRate KEY(merchantId) )
+PERSIST IMMEDIATE USING ( storageProvider:'elasticsearch' );
+
+
+CREATE TYPE MerchantNameData(
+  merchantId String KEY,
+  companyName String
+);
+
+CREATE TYPE USAddressData(
+  country String,
+  zip String KEY,
+  city String,
+  state String,
+  stateCode String,
+  fullCity String,
+  someNum String,
+  pad String,
+  latVal double,
+  longVal double,
+  empty String,
+  empty2 String
+);
+
+CREATE CACHE NameLookup using FileReader (
+  directory:'Samples/PosApp/appData',
+  WildCard:'MerchantNames.csv',
+  positionByEOF:false
+)
+PARSE USING DSVParser (
+  header:'yes',
+  trimquote:false,
+  trimwhitespace:true
+) 
+QUERY(keytomap:'merchantId') OF MerchantNameData;
+
+CREATE CACHE ZipLookup using FileReader (
+  directory: 'Samples/PosApp/appData',
+  wildcard: 'USAddresses.txt',
+  positionByEOF:false
+)
+PARSE USING DSVParser (
+  header: Yes,
+  columndelimiter: '\t',
+  trimquote:false,
+  trimwhitespace:true
+) QUERY (keytomap:'zip') OF USAddressData;
+
+
+CREATE CQ GenerateWactionContext
+INSERT INTO MerchantActivity
+SELECT  m.merchantId,
+        m.startTime,
+        n.companyName,
+        m.category,
+        m.status,
+        m.count,
+        m.hourlyAve,
+        m.upperLimit,
+        m.lowerLimit,
+        m.zip,
+        z.city,
+        z.state,
+        z.latVal,
+        z.longVal
+FROM MerchantTxRateWithStatusStream m, NameLookup n, ZipLookup z
+WHERE m.merchantId = n.merchantId AND m.zip = z.zip
+LINK SOURCE EVENT;
+
+-- CQ GenerateAlerts
+--
+-- This CQ sends an alert when a merchant's status value changes to
+-- TOOHIGH or TOOLOW, then another alert when the value returns to OK.
+
+
+CREATE STREAM AlertStream OF Global.AlertEvent;
+
+CREATE CQ GenerateAlerts
+INSERT INTO AlertStream
+SELECT n.CompanyName,
+       m.MerchantId,
+       CASE
+         WHEN m.Status = 'OK' THEN 'info'
+         ELSE 'warning' END,
+       CASE
+         WHEN m.Status = 'OK' THEN 'cancel'
+         ELSE 'raise' END,
+       CASE
+         WHEN m.Status = 'OK'      THEN 'Merchant ' + n.companyName + ' count of ' + m.count + ' is back between '         + ROUND_DOUBLE(m.lowerLimit,0) + ' and ' + ROUND_DOUBLE(m.upperLimit,0)
+         WHEN m.Status = 'TOOHIGH' THEN 'Merchant ' + n.companyName + ' count of ' + m.count + ' is above upper limit of ' + ROUND_DOUBLE(m.upperLimit,0)
+         WHEN m.Status = 'TOOLOW'  THEN 'Merchant ' + n.companyName + ' count of ' + m.count + ' is below lower limit of ' + ROUND_DOUBLE(m.lowerLimit,0)
+         ELSE ''
+         END
+FROM MerchantTxRateWithStatusStream m, NameLookup n
+WHERE m.merchantId = n.merchantId;
+
+CREATE SUBSCRIPTION AlertSub USING WebAlertAdapter( ) INPUT FROM AlertStream;
+
+END APPLICATION PosApp;
+
+CREATE DASHBOARD USING "Samples/PosApp/PosAppDashboard.json";

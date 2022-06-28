@@ -1,0 +1,2171 @@
+{
+  "dashboard": {
+    "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Dashboard",
+    "name": "PosAppDash",
+    "uri": "SAMPLES:DASHBOARD:POSAPPDASH:1",
+    "uuid": {
+      "uuidstring": "01ec1f74-fcc4-dc31-98ea-02b2b16d07fb"
+    },
+    "version": 1,
+    "owner": 0,
+    "ctime": 1420677413092,
+    "nsName": "Samples",
+    "namespaceId": {
+      "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+    },
+    "type": "DASHBOARD",
+    "description": null,
+    "reverseIndexObjectDependencies": [],
+    "sourceText": null,
+    "metaInfoStatus": {
+      "anonymous": false,
+      "dropped": false,
+      "generated": false,
+      "adhoc": false,
+      "valid": true
+    },
+    "coDependentObjects": [],
+    "title": "",
+    "defaultLandingPage": "Page77",
+    "pages": [
+      "Page77",
+      "PosAppDashPage530",
+      "PosAppDashPage4070"
+    ]
+  },
+  "pages": [
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Page",
+      "name": "Page77",
+      "uri": "SAMPLES:PAGE:PAGE77:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc32-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1420677413042,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "PAGE",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Main",
+      "gridJSON": "{\"components\":[{\"x\":0,\"y\":2,\"width\":6,\"height\":16,\"id\":\"gridcomponent6030\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"VectorMap5928\"},{\"x\":0,\"y\":0,\"width\":6,\"height\":2,\"id\":\"gridcomponent7005\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value6917\"},{\"x\":0,\"y\":21,\"width\":6,\"height\":16,\"id\":\"gridcomponent2104\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"ScatterPlot1988\"},{\"x\":6,\"y\":2,\"width\":6,\"height\":16,\"id\":\"gridcomponent1464\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"BarChart1348\"},{\"x\":6,\"y\":0,\"width\":4,\"height\":2,\"id\":\"gridcomponent9772\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value9684\"},{\"x\":6,\"y\":19,\"width\":6,\"height\":3,\"id\":\"gridcomponent1890\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value1802\"},{\"x\":9.726708074534162,\"y\":0,\"width\":2.2732919254658386,\"height\":2,\"id\":\"gridcomponent129874\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Table129788\"},{\"x\":0,\"y\":19,\"width\":6,\"height\":2,\"id\":\"gridcomponent10406\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value10310\"},{\"x\":6,\"y\":21,\"width\":6,\"height\":16,\"id\":\"component-6792\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization6726\"}],\"settings\":{\"cols\":12,\"cellheight\":20,\"rows\":48,\"background\":\"\"},\"id\":\"Samples.PAGE.Page77\"}",
+      "queryVisualizations": [
+        "VectorMap5928",
+        "Value6917",
+        "ScatterPlot1988",
+        "BarChart1348",
+        "Value9684",
+        "Value1802",
+        "Table129788",
+        "Value10310",
+        "Visualization6726"
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Page",
+      "name": "PosAppDashPage530",
+      "uri": "SAMPLES:PAGE:POSAPPDASHPAGE530:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc33-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1420738361066,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "PAGE",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Company details",
+      "gridJSON": "{\"components\":[{\"x\":0,\"y\":0,\"width\":9,\"height\":17,\"id\":\"gridcomponent834\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"LineChart718\"},{\"x\":0,\"y\":17,\"width\":12,\"height\":17,\"id\":\"component-2677\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Table2650\"},{\"x\":9,\"y\":0,\"width\":3,\"height\":11,\"id\":\"component-58894\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Gauge58875\"},{\"x\":10,\"y\":12,\"width\":1,\"height\":5,\"id\":\"component-63383\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Icon63350\"},{\"x\":9,\"y\":12,\"width\":1,\"height\":5,\"id\":\"component-65983\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value65946\"},{\"x\":11,\"y\":12,\"width\":1,\"height\":5,\"id\":\"component-76460\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value76423\"}],\"settings\":{\"cols\":12,\"cellheight\":20},\"id\":\"PosAppDashPage530\"}",
+      "queryVisualizations": [
+        "LineChart718",
+        "Table2650",
+        "Gauge58875",
+        "Icon63350",
+        "Value65946",
+        "Value76423"
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Page",
+      "name": "PosAppDashPage4070",
+      "uri": "SAMPLES:PAGE:POSAPPDASHPAGE4070:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc34-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1423009719974,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "PAGE",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Interactive HeatMap",
+      "gridJSON": "{\"components\":[{\"x\":0.0,\"y\":0.0,\"width\":12.0,\"height\":2,\"id\":\"gridcomponent9229\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Value9141\"},{\"x\":0.0,\"y\":3.0,\"width\":6.0,\"height\":20,\"id\":\"component-1407\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"DonutChart1340\"},{\"x\":6.0,\"y\":3.0,\"width\":6.0,\"height\":20,\"id\":\"component-1538\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"DonutChart1473\"},{\"x\":0.0,\"y\":23.0,\"width\":6.0,\"height\":19,\"id\":\"component-8800\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"LeafletMap8749\"},{\"x\":6.0,\"y\":23.0,\"width\":6.0,\"height\":20,\"id\":\"component-5369\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"HeatMap5304\"}],\"settings\":{\"type\":\"TWELVECOLGRID\",\"cols\":12,\"cellheight\":20},\"id\":\"grid4063\"}",
+      "queryVisualizations": [
+        "Value9141",
+        "DonutChart1340",
+        "DonutChart1473",
+        "LeafletMap8749",
+        "HeatMap5304"
+      ]
+    }
+  ],
+  "queryVisualizations": [
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "VectorMap5928",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VECTORMAP5928:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc35-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312562,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled VectorMap",
+      "query": "PosAppMainPageMap",
+      "visualizationType": "VectorMap",
+      "config": "{\"locationType\":\"LONGITUDE\",\"longitudeField\":\"LongVal\",\"latitudeField\":\"LatVal\",\"valueField\":\"Count\",\"viewCenterLongitude\":37,\"viewCenterLatitude\":-50,\"viewXOffset\":\"1400\",\"viewYOffset\":\"-7700\",\"viewZoom\":\".18\",\"tilesUrl\":\"http:\\/\\/{s}.tile.osm.org\\/{z}\\/{x}\\/{y}.png\",\"retentionStrategyType\":\"current\",\"categoryField\":\"CompanyName\",\"countryCode\":\"\",\"drilldown\":{\"show_drilldown\":true,\"page\":\"PosAppDashPage530\",\"pageparams\":[{\"id\":\"pageparams6835\",\"pageparam\":\"mid\",\"srcfield\":\"MerchantId\"}]},\"tooltips\":{\"show_all\":false,\"tooltip_values\":[{\"id\":\"tooltip_values11473\",\"label\":\"Company\",\"srcfield\":\"CompanyName\"},{\"id\":\"tooltip_values11547\",\"label\":\"Category\",\"srcfield\":\"Category\"},{\"id\":\"tooltip_values11619\",\"label\":\"Status\",\"srcfield\":\"Status\"},{\"id\":\"tooltip_values11691\",\"label\":\"Count\",\"srcfield\":\"Count\"}]},\"conditionalColor\":[{\"id\":\"conditionalColor17739\",\"matched\":false,\"style\":{\"color\":\"#00a8e7\",\"alias\":\"Cold\"},\"expression\":\"Category == \\\"COLD\\\"\"},{\"id\":\"conditionalColor17964\",\"matched\":false,\"style\":{\"color\":\"#a2cf0f\",\"alias\":\"Cool\"},\"expression\":\"Category == \\\"COOL\\\"\"},{\"id\":\"conditionalColor18187\",\"matched\":false,\"style\":{\"color\":\"#EC8209\",\"alias\":\"Warm\"},\"expression\":\"Category == \\\"WARM\\\"\"},{\"id\":\"conditionalColor18410\",\"matched\":false,\"style\":{\"color\":\"#E8322C\",\"alias\":\"Hot\"},\"expression\":\"Category == \\\"HOT\\\"\"}],\"minBubbleSize\":\"5\",\"maxBubbleSize\":\"15\",\"show_legend\":false,\"colorField\":\"Category\",\"maxValues\":\"100\",\"maxSeries\":\"500\",\"filter\":{\"visible\":false}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value6917",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE6917:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc36-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312564,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Value",
+      "query": "PosAppMcount",
+      "visualizationType": "Value",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"\",\"templates\":[{\"id\":\"templates7613\",\"matched\":true,\"style\":{\"background\":\"transparent\",\"color\":\"#293439\"},\"userTemplate\":\"<div class=\\\"text-widget\\\"><div style=\\\"padding: 5px; font-weight: 100; font-size: 1.5em\\\">Latest event count for {{ mcount }} merchants (map and scatter plot)</div></div>\",\"expression\":\"true\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"clear_filters_button\":false,\"filter\":{\"visible\":false},\"timeField\":\"\",\"zIndex\":2,\"_spec\":{\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"current\"},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"verticallyCentered\"},{\"attribute\":\"clear_filters_button\",\"value\":false},{\"attribute\":\"templates\",\"type\":{\"extends\":{\"name\":\"WebActionConditions\",\"itemtype\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]}},\"itemtype\":{\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"color\",\"value\":\"#000\"}]}},{\"attribute\":\"userTemplate\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"verticallyCentered\":false,\"pollingQuerySettings\":{\"pollingEnabled\":false,\"pollingInterval\":5},\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "ScatterPlot1988",
+      "uri": "SAMPLES:QUERYVISUALIZATION:SCATTERPLOT1988:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc37-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312563,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled ScatterPlot",
+      "query": "PosAppMainPageScatter",
+      "visualizationType": "ScatterPlot",
+      "config": "{\"retentionStrategyType\":\"all\",\"categoryField\":\"MerchantId\",\"xAxis\":[{\"id\":\"StartTime\",\"field\":\"StartTime\",\"title\":\"\",\"type\":\"datetime\"}],\"yAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"logarithmic\"}],\"zAxis\":[],\"series\":[{\"id\":\"series2779\",\"visible\":null,\"color\":\"#E40525\",\"name\":\"\",\"alias\":\"\",\"yAxis\":\"Count\",\"xAxis\":\"StartTime\",\"zAxis\":\"\",\"categories\":\"\"}],\"drilldown\":{\"show_drilldown\":true,\"page\":\"PosAppDashPage530\",\"pageparams\":[{\"id\":\"pageparams6484\",\"pageparam\":\"mid\",\"srcfield\":\"MerchantId\"}]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[],\"show_legend\":false,\"colorField\":\"CompanyName\",\"maxValues\":\"500\",\"maxSeries\":\"100\",\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"},\"filter\":{\"visible\":false},\"type\":null,\"timeField\":\"\",\"maxPoints\":\"500\",\"zIndex\":3,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxPoints\",\"value\":\"500\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]}},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":false,\"pollingInterval\":5},\"show_all_labels\":false,\"show_data_labels\":false}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "BarChart1348",
+      "uri": "SAMPLES:QUERYVISUALIZATION:BARCHART1348:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc38-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312571,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled BarChart",
+      "query": "PosAppMainPageBar",
+      "visualizationType": "BarChart",
+      "config": "{\"type\":\"bar\",\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"xAxis\":[{\"id\":\"State\",\"field\":\"State\",\"title\":\"\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series2158\",\"visible\":null,\"color\":\"#206306\",\"name\":\"\",\"alias\":\"\",\"yAxis\":\"Count\",\"xAxis\":\"State\",\"zAxis\":\"\",\"categories\":\"\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[{\"id\":\"conditionalColor9371\",\"matched\":false,\"style\":{\"color\":\"#EC8209\",\"alias\":\"\"},\"expression\":\"true\"}],\"show_legend\":false,\"colorField\":\"\",\"maxValues\":\"10\",\"maxSeries\":\"10\",\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"},\"filter\":{\"visible\":false},\"timeField\":\"\",\"zIndex\":4,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"type\",\"value\":\"column\"}]},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5},\"show_all_labels\":false,\"show_data_labels\":false,\"maxPoints\":\"500\"}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value9684",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE9684:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc39-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312567,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Value",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Top ten states  by total event count\",\"color\":\"#293439\",\"background\":\"transparent\",\"labelHead\":\"text-widget heading\",\"visualizationType\":\"LABEL\",\"zIndex\":5,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"colors\":[],\"verticallyCentered\":false}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value1802",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE1802:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc3a-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312569,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Value",
+      "query": "",
+      "visualizationType": "Value",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"\",\"templates\":[{\"id\":\"templates2916\",\"matched\":true,\"style\":{\"background\":\"transparent\",\"color\":\"#293439\"},\"userTemplate\":\"<div class=\\\"text-widget\\\"><div style=\\\"padding: 5px; font-weight: 100; font-size: 1.5em\\\">Heat map (click here for additional visualizations)</div></div>\",\"expression\":\"true\"}],\"drilldown\":{\"show_drilldown\":true,\"page\":\"PosAppDashPage4070\",\"pageparams\":[]},\"clear_filters_button\":false,\"filter\":{\"visible\":false},\"timeField\":\"\",\"zIndex\":6,\"_spec\":{\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"current\"},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"verticallyCentered\"},{\"attribute\":\"clear_filters_button\",\"value\":false},{\"attribute\":\"templates\",\"type\":{\"extends\":{\"name\":\"WebActionConditions\",\"itemtype\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]}},\"itemtype\":{\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"color\",\"value\":\"#000\"}]}},{\"attribute\":\"userTemplate\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"verticallyCentered\":false,\"pollingQuerySettings\":{\"pollingEnabled\":false,\"pollingInterval\":5},\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Table129788",
+      "uri": "SAMPLES:QUERYVISUALIZATION:TABLE129788:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc3b-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312569,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Table",
+      "query": "PosAppMainSearchBox",
+      "visualizationType": "Table",
+      "config": "{\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"show_headers\":false,\"show_lines\":false,\"pagesize\":\"0\",\"searchParam\":\"search\",\"enableSearch\":true,\"columns\":[],\"timeField\":\"\",\"enablePercentageColumnsWidth\":false,\"maxValues\":\"100\",\"maxPoints\":\"500\",\"maxSeries\":\"20\",\"defaultSortField\":\"\",\"defaultSortOrder\":\"asc\",\"zIndex\":7,\"_spec\":{\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"show_headers\",\"value\":true},{\"attribute\":\"show_lines\",\"value\":true},{\"attribute\":\"pagesize\",\"value\":\"5\"},{\"attribute\":\"searchParam\",\"value\":null},{\"attribute\":\"enableSearch\",\"value\":false},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"enablePercentageColumnsWidth\",\"value\":false},{\"attribute\":\"columns\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"},{\"attribute\":\"sortOrder\"},{\"attribute\":\"widthPercentage\"},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"width\"},{\"attribute\":\"iconConditions\",\"type\":{\"extends\":{\"name\":\"WebActionConditions\",\"itemtype\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]}},\"itemtype\":{\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"icon\"},{\"attribute\":\"color\"}]}},\"editor\":{\"options\":{\"add_text\":\"Add a condition\"}}},{\"attribute\":\"conditionalColors\",\"type\":{\"extends\":{\"name\":\"WebActionConditions\",\"itemtype\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]}},\"itemtype\":{\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"color\"}]}},\"editor\":{\"options\":{\"add_text\":\"Add a condition\"}}}]}}},{\"attribute\":\"data\"},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxPoints\",\"value\":\"500\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"defaultSortField\",\"value\":\"\"},{\"attribute\":\"defaultSortOrder\",\"value\":\"asc\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"filter\":{\"visible\":true},\"pollingQuerySettings\":{\"pollingEnabled\":false,\"pollingInterval\":5},\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value10310",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE10310:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc3d-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312571,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Value",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"click a point in the map or scatter plot to drill down to company details\",\"color\":\"#6e6e6e\",\"background\":\"transparent\",\"labelHead\":\"\",\"visualizationType\":\"LABEL\",\"zIndex\":8,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"colors\":[],\"verticallyCentered\":false}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization6726",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VISUALIZATION6726:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc3e-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1452208603096,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled HeatMap",
+      "query": "PosAppMainPageHeatMap",
+      "visualizationType": "HeatMap",
+      "config": "{\"label_cells\":false,\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"colorField\":\"\",\"show_legend\":false,\"maxValues\":\"100\",\"maxSeries\":\"20\",\"xAxis\":[{\"id\":\"Category\",\"field\":\"Category\",\"title\":\"\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"Status\",\"field\":\"Status\",\"title\":\"\",\"type\":\"category\"}],\"zAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"linear\"}],\"series\":[{\"id\":\"series7869\",\"visible\":null,\"color\":null,\"name\":\"\",\"alias\":\"\",\"yAxis\":\"Status\",\"xAxis\":\"Category\",\"zAxis\":\"Count\",\"categories\":\"\"}],\"filter\":{\"visible\":true},\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[],\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"},\"type\":null,\"timeField\":\"\",\"zIndex\":9,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"label_cells\",\"value\":false}]},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5},\"show_all_labels\":false,\"show_data_labels\":false,\"maxPoints\":\"500\"}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "LineChart718",
+      "uri": "SAMPLES:QUERYVISUALIZATION:LINECHART718:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc3f-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312565,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled LineChart",
+      "query": "PosAppCompanyDrilldownCharts",
+      "visualizationType": "LineChart",
+      "config": "{\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"xAxis\":[{\"id\":\"StartTime\",\"field\":\"StartTime\",\"title\":\"\",\"type\":\"datetime\"}],\"yAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"linear\"},{\"id\":\"UpperLimit\",\"field\":\"UpperLimit\",\"title\":\"\",\"type\":\"linear\"},{\"id\":\"LowerLimit\",\"field\":\"LowerLimit\",\"title\":\"\",\"type\":\"linear\"},{\"id\":\"HourlyAve\",\"field\":\"HourlyAve\",\"title\":\"\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series1523\",\"visible\":null,\"color\":\"#E045E4\",\"name\":\"\",\"alias\":\"count\",\"yAxis\":\"Count\",\"xAxis\":\"StartTime\",\"zAxis\":\"\",\"categories\":\"\"},{\"id\":\"series23905\",\"visible\":null,\"color\":\"#45EEE6\",\"name\":\"\",\"alias\":\"upper\",\"yAxis\":\"UpperLimit\",\"xAxis\":\"StartTime\",\"zAxis\":\"\",\"categories\":\"\"},{\"id\":\"series38357\",\"visible\":null,\"color\":\"#52E23E\",\"name\":\"\",\"alias\":\"lower\",\"yAxis\":\"LowerLimit\",\"xAxis\":\"StartTime\",\"zAxis\":\"\",\"categories\":\"\"},{\"id\":\"series51166\",\"visible\":null,\"color\":\"#0143E4\",\"name\":\"\",\"alias\":\"ave\",\"yAxis\":\"HourlyAve\",\"xAxis\":\"StartTime\",\"zAxis\":\"\",\"categories\":\"\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[{\"id\":\"conditionalColor15938\",\"matched\":false,\"style\":{\"color\":\"#00a8e7\",\"alias\":\"count\"},\"expression\":\"seriesAlias == \\\"count\\\"\"},{\"id\":\"conditionalColor43280\",\"matched\":false,\"style\":{\"color\":\"#E8322C\",\"alias\":\"upper\"},\"expression\":\"seriesAlias == \\\"upper\\\"\"},{\"id\":\"conditionalColor43988\",\"matched\":false,\"style\":{\"color\":\"#EC8209\",\"alias\":\"lower\"},\"expression\":\"seriesAlias == \\\"lower\\\"\"},{\"id\":\"conditionalColor44748\",\"matched\":false,\"style\":{\"color\":\"#a2cf0f\",\"alias\":\"average\"},\"expression\":\"seriesAlias == \\\"ave\\\"\"}],\"show_legend\":true,\"colorField\":\"\",\"type\":\"line\",\"stack\":\"none\",\"maxValues\":\"100\",\"maxSeries\":\"20\",\"filter\":{\"visible\":false},\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Table2650",
+      "uri": "SAMPLES:QUERYVISUALIZATION:TABLE2650:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc40-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312565,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled LineChart",
+      "query": "PosAppCompanyDrilldownCharts",
+      "visualizationType": "Table",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"CompanyName\",\"show_headers\":true,\"show_lines\":true,\"pagesize\":\"1\",\"columns\":[{\"id\":\"columns3378\",\"label\":\"Company\",\"srcfield\":\"CompanyName\",\"drilldown\":{\"show_drilldown\":true,\"page\":\"\",\"pageparams\":[{\"id\":\"pageparams12726\",\"pageparam\":\"mid\",\"srcfield\":\"MerchantId\"}]}},{\"id\":\"columns3578\",\"label\":\"City\",\"srcfield\":\"City\",\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]}},{\"id\":\"columns3774\",\"label\":\"State\",\"srcfield\":\"State\",\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]}},{\"id\":\"columns3970\",\"label\":\"Zip\",\"srcfield\":\"Zip\",\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]}},{\"id\":\"columns7694\",\"label\":\"Status\",\"srcfield\":\"Status\",\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]}},{\"id\":\"columns7890\",\"label\":\"Category\",\"srcfield\":\"Category\",\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]}}],\"searchParam\":\"search\",\"enableSearch\":false,\"maxValues\":\"100\",\"maxSeries\":\"20\",\"defaultSortField\":\"\",\"defaultSortOrder\":\"asc\",\"filter\":{\"visible\":false}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Gauge58875",
+      "uri": "SAMPLES:QUERYVISUALIZATION:GAUGE58875:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc41-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312566,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled LineChart",
+      "query": "PosAppCompanyDrilldownCharts",
+      "visualizationType": "Gauge",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"\",\"current_value\":0,\"unit\":\"Count\",\"min\":0,\"max\":\"30000\",\"field\":\"Count\",\"thresholds\":[],\"filter\":{\"visible\":true}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Icon63350",
+      "uri": "SAMPLES:QUERYVISUALIZATION:ICON63350:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc42-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312566,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled LineChart",
+      "query": "PosAppCompanyDrilldownCharts",
+      "visualizationType": "Icon",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"\",\"conditions\":[{\"id\":\"conditions65189\",\"color\":\"#E8322C\",\"matched\":false,\"icon\":\"PLUS\",\"expression\":\"Status == \\\"TOOHIGH\\\"\"},{\"id\":\"conditions65402\",\"color\":\"#ff8800\",\"matched\":false,\"icon\":\"MINUS\",\"expression\":\"Status == \\\"TOOLOW\\\"\"},{\"id\":\"conditions65578\",\"color\":\"#a2cf0f\",\"matched\":true,\"icon\":\"CHECK\",\"expression\":\"Status == \\\"OK\\\"\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"filter\":{\"visible\":false}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value65946",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE65946:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc43-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312566,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled LineChart",
+      "query": "PosAppCompanyDrilldownCharts",
+      "visualizationType": "Value",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"\",\"templates\":[{\"id\":\"templates68017\",\"matched\":true,\"style\":{\"background\":\"transparent\",\"color\":\"#FFD451\"},\"userTemplate\":\"<div style=\\\"font-size: 250%;\\\">{{Status}}<\\/div>\",\"expression\":\"true\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"clear_filters_button\":false,\"filter\":{\"visible\":false}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value76423",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE76423:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc44-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312567,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled LineChart",
+      "query": "PosAppCompanyDrilldownCharts",
+      "visualizationType": "Value",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"\",\"templates\":[{\"id\":\"templates78777\",\"matched\":true,\"style\":{\"background\":\"transparent\",\"color\":\"#FFD451\"},\"userTemplate\":\"<div style=\\\"font-size: 250%;\\\">{{Category}}<\\/div>\",\"expression\":\"true\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"clear_filters_button\":false,\"filter\":{\"visible\":false}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Value9141",
+      "uri": "SAMPLES:QUERYVISUALIZATION:VALUE9141:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc45-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312563,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Value",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Click on the pie chart labels to filter the data shown in the maps. To reset the filters, click the eye icon at left, then click <strong>Clear All</strong>.\",\"color\":\"#c5cfd3\",\"background\":\"transparent\",\"labelHead\":\"text-widget heading\",\"visualizationType\":\"LABEL\",\"zIndex\":1,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "DonutChart1340",
+      "uri": "SAMPLES:QUERYVISUALIZATION:DONUTCHART1340:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc46-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312560,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Query",
+      "query": "PosAppHeatMapDrilldownDonuts",
+      "visualizationType": "DonutChart",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"Status\",\"show_legend\":false,\"xAxis\":[{\"id\":\"Status\",\"field\":\"Status\",\"title\":\"\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series7449\",\"visible\":null,\"color\":\"#E8322C\",\"name\":\"\",\"alias\":\"\",\"yAxis\":\"Count\",\"xAxis\":\"Status\",\"zAxis\":\"\",\"categories\":\"\"}],\"drilldown\":{\"show_drilldown\":true,\"page\":\"PosAppDashPage4070\",\"pageparams\":[{\"id\":\"pageparams11821\",\"pageparam\":\"status\",\"srcfield\":\"Status\"}]},\"tooltips\":{\"show_all\":false,\"tooltip_values\":[{\"id\":\"tooltip_values12183\",\"label\":\"status\",\"srcfield\":\"Status\"},{\"id\":\"tooltip_values12476\",\"label\":\"count\",\"srcfield\":\"Count\"}]},\"conditionalColor\":[{\"id\":\"conditionalColor17137\",\"matched\":false,\"style\":{\"color\":\"#a2cf0f\",\"alias\":\"\"},\"expression\":\"Status==\\\"OK\\\"\"},{\"id\":\"conditionalColor17406\",\"matched\":false,\"style\":{\"color\":\"#5C5F9D\",\"alias\":\"\"},\"expression\":\"Status==\\\"TOOLOW\\\"\"},{\"id\":\"conditionalColor17677\",\"matched\":false,\"style\":{\"color\":\"#E8322C\",\"alias\":\"\"},\"expression\":\"Status==\\\"TOOHIGH\\\"\"}],\"colorField\":\"Status\",\"maxValues\":\"100\",\"maxSeries\":\"20\",\"filter\":{\"visible\":true},\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"},\"type\":null,\"timeField\":\"\",\"zIndex\":1,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"current\"}]},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "DonutChart1473",
+      "uri": "SAMPLES:QUERYVISUALIZATION:DONUTCHART1473:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc47-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312560,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Query",
+      "query": "PosAppHeatMapDrilldownDonuts",
+      "visualizationType": "DonutChart",
+      "config": "{\"retentionStrategyType\":\"current\",\"categoryField\":\"Category\",\"show_legend\":false,\"xAxis\":[{\"id\":\"Category\",\"field\":\"Category\",\"title\":\"\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series13519\",\"visible\":null,\"color\":\"#E8322C\",\"name\":\"\",\"alias\":\"\",\"yAxis\":\"Count\",\"xAxis\":\"Category\",\"zAxis\":\"\",\"categories\":\"\"}],\"drilldown\":{\"show_drilldown\":true,\"page\":\"PosAppDashPage4070\",\"pageparams\":[{\"id\":\"pageparams17927\",\"pageparam\":\"category\",\"srcfield\":\"Category\"}]},\"tooltips\":{\"show_all\":false,\"tooltip_values\":[{\"id\":\"tooltip_values18289\",\"label\":\"category\",\"srcfield\":\"Category\"},{\"id\":\"tooltip_values18436\",\"label\":\"count\",\"srcfield\":\"Count\"}]},\"conditionalColor\":[{\"id\":\"conditionalColor24128\",\"matched\":false,\"style\":{\"color\":\"#00a8e7\",\"alias\":\"\"},\"expression\":\"Category==\\\"COLD\\\"\"},{\"id\":\"conditionalColor24397\",\"matched\":false,\"style\":{\"color\":\"#a2cf0f\",\"alias\":\"\"},\"expression\":\"Category==\\\"COOL\\\"\"},{\"id\":\"conditionalColor24668\",\"matched\":false,\"style\":{\"color\":\"#EC8209\",\"alias\":\"\"},\"expression\":\"Category==\\\"WARM\\\"\"},{\"id\":\"conditionalColor24943\",\"matched\":false,\"style\":{\"color\":\"#E8322C\",\"alias\":\"\"},\"expression\":\"Category==\\\"HOT\\\"\"}],\"colorField\":\"Category\",\"maxValues\":\"100\",\"maxSeries\":\"20\",\"filter\":{\"visible\":true},\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"},\"type\":null,\"timeField\":\"\",\"zIndex\":1,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"current\"}]},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "LeafletMap8749",
+      "uri": "SAMPLES:QUERYVISUALIZATION:LEAFLETMAP8749:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc48-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312559,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Query",
+      "query": "PosAppHeatMapDrilldownMap",
+      "visualizationType": "LeafletMap",
+      "config": "{\"viewXOffset\":-50,\"viewYOffset\":36,\"viewZoom\":\"2\",\"locationType\":\"LONGITUDE\",\"longitudeField\":\"LongVal\",\"latitudeField\":\"LatVal\",\"valueField\":\"Count\",\"viewCenterLongitude\":\"-98.35\",\"viewCenterLatitude\":\"39.50\",\"tilesUrl\":\"http://{s}.tile.osm.org/{z}/{x}/{y}.png\",\"minBubbleSize\":\"2\",\"maxBubbleSize\":\"12\",\"retentionStrategyType\":\"current\",\"categoryField\":\"CompanyName\",\"show_legend\":false,\"countryCode\":\"\",\"drilldown\":{\"show_drilldown\":true,\"page\":\"PosAppDashPage530\",\"pageparams\":[{\"id\":\"pageparams9643\",\"pageparam\":\"mid\",\"srcfield\":\"MerchantId\"}]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[{\"id\":\"conditionalColor9717\",\"matched\":false,\"style\":{\"color\":\"#00a8e7\",\"alias\":\"\"},\"expression\":\"Category == \\\"COLD\\\"\"},{\"id\":\"conditionalColor9908\",\"matched\":false,\"style\":{\"color\":\"#a2cf0f\",\"alias\":\"\"},\"expression\":\"Category == \\\"COOL\\\"\"},{\"id\":\"conditionalColor10097\",\"matched\":false,\"style\":{\"color\":\"#EC8209\",\"alias\":\"\"},\"expression\":\"Category == \\\"WARM\\\"\"},{\"id\":\"conditionalColor10286\",\"matched\":false,\"style\":{\"color\":\"#E8322C\",\"alias\":\"\"},\"expression\":\"Category == \\\"HOT\\\"\"}],\"colorField\":\"\",\"maxValues\":\"100\",\"maxSeries\":\"500\",\"filter\":{\"visible\":false},\"timeField\":\"\",\"zIndex\":1,\"_spec\":{\"extends\":{\"name\":\"Map\",\"properties\":[{\"attribute\":\"locationType\",\"value\":\"LONGITUDE\"},{\"attribute\":\"longitudeField\",\"value\":\"\"},{\"attribute\":\"latitudeField\",\"value\":\"\"},{\"attribute\":\"countryCode\"},{\"attribute\":\"valueField\",\"value\":\"\"},{\"attribute\":\"viewCenterLongitude\",\"value\":36},{\"attribute\":\"viewCenterLatitude\",\"value\":-50},{\"attribute\":\"viewXOffset\",\"value\":null},{\"attribute\":\"viewYOffset\",\"value\":null},{\"attribute\":\"viewZoom\",\"value\":null},{\"attribute\":\"data\"},{\"attribute\":\"tilesUrl\",\"value\":\"http://{s}.tile.osm.org/{z}/{x}/{y}.png\"},{\"attribute\":\"minBubbleSize\",\"value\":10},{\"attribute\":\"maxBubbleSize\",\"value\":10},{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":1}]},\"properties\":[{\"attribute\":\"viewXOffset\",\"value\":-50},{\"attribute\":\"viewYOffset\",\"value\":36},{\"attribute\":\"viewZoom\",\"value\":2},{\"attribute\":\"minBubbleSize\",\"value\":100},{\"attribute\":\"maxBubbleSize\",\"value\":100}]},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "HeatMap5304",
+      "uri": "SAMPLES:QUERYVISUALIZATION:HEATMAP5304:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc4-dc49-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1428873312572,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Query",
+      "query": "PosAppHeatMapDrilldownHeatMap",
+      "visualizationType": "HeatMap",
+      "config": "{\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"show_legend\":false,\"xAxis\":[{\"id\":\"Category\",\"field\":\"Category\",\"title\":\"\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"Status\",\"field\":\"Status\",\"title\":\"\",\"type\":\"category\"}],\"zAxis\":[{\"id\":\"Count\",\"field\":\"Count\",\"title\":\"\",\"type\":\"linear\"}],\"series\":[{\"id\":\"series5981\",\"visible\":null,\"color\":\"#656151\",\"name\":\"\",\"alias\":\"\",\"yAxis\":\"Status\",\"xAxis\":\"Category\",\"zAxis\":\"Count\",\"categories\":\"\"}],\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[],\"colorField\":\"\",\"label_cells\":false,\"maxValues\":\"100\",\"maxSeries\":\"20\",\"filter\":{\"visible\":false},\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"},\"type\":null,\"timeField\":\"\",\"zIndex\":1,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"label_cells\",\"value\":false}]},\"colors\":[],\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5}}"
+    }
+  ],
+  "parametrizedQuery": [
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppMainPageMap",
+      "uri": "SAMPLES:QUERY:POSAPPMAINPAGEMAP:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fcc7-2621-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734786618,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppMainPageMap select * from MerchantActivity w where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) and (:search IS NULL or AnyAttrLike(w, :search)) order by StartTime",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select * from MerchantActivity w where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) and (:search IS NULL or AnyAttrLike(w, :search)) order by StartTime;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fcc7-2622-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fccc-5641-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fd2c-5091-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 4,
+        "City": 11,
+        "CompanyName": 3,
+        "Count": 6,
+        "HourlyAve": 7,
+        "LatVal": 13,
+        "LongVal": 14,
+        "LowerLimit": 9,
+        "MerchantId": 1,
+        "StartTime": 2,
+        "State": 12,
+        "Status": 5,
+        "UpperLimit": 8,
+        "Zip": 10
+      },
+      "queryParameters": [
+        "status",
+        "category",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "LatVal",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LongVal",
+          "type": "java.lang.Double"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppMcount",
+      "uri": "SAMPLES:QUERY:POSAPPMCOUNT:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fd3b-b9e1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734786972,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppMcount select count(distinct(MerchantId)) as mcount from MerchantActivity where :search IS NULL OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select count(distinct(MerchantId)) as mcount from MerchantActivity where  :search IS NULL OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fd3b-b9e2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fd44-9381-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fd62-54b1-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "mcount": 1
+      },
+      "queryParameters": [
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "mcount",
+          "type": "java.lang.Long"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppMainPageScatter",
+      "uri": "SAMPLES:QUERY:POSAPPMAINPAGESCATTER:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fd6f-9b21-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734787455,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppMainPageScatter select * from MerchantActivity w where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) and (:search IS NULL or AnyAttrLike(w, :search)) ORDER BY StartTime SAMPLE BY Count MAXLIMIT 500",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select * from MerchantActivity w where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) and (:search IS NULL or AnyAttrLike(w, :search)) ORDER BY StartTime SAMPLE BY Count MAXLIMIT 500;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fd6f-9b22-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fd76-ee21-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fdad-6771-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 4,
+        "City": 11,
+        "CompanyName": 3,
+        "Count": 6,
+        "HourlyAve": 7,
+        "LatVal": 13,
+        "LongVal": 14,
+        "LowerLimit": 9,
+        "MerchantId": 1,
+        "StartTime": 2,
+        "State": 12,
+        "Status": 5,
+        "UpperLimit": 8,
+        "Zip": 10
+      },
+      "queryParameters": [
+        "status",
+        "category",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "LatVal",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LongVal",
+          "type": "java.lang.Double"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppMainPageBar",
+      "uri": "SAMPLES:QUERY:POSAPPMAINPAGEBAR:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fdb7-2b71-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734787812,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppMainPageBar select sum(Count) as Count, State from MerchantActivity w where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) and (:search IS NULL or AnyAttrLike(w, :search)) group by State order by sum(Count) desc limit 10",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select sum(Count) as Count, State from MerchantActivity w where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) and (:search IS NULL or AnyAttrLike(w, :search)) group by State order by sum(Count) desc limit 10;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fdb7-2b72-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fdbd-45f1-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fde2-8131-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Count": 1,
+        "State": 2
+      },
+      "queryParameters": [
+        "status",
+        "category",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "Count",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppMainSearchBox",
+      "uri": "SAMPLES:QUERY:POSAPPMAINSEARCHBOX:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fdec-1e21-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788060,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppMainSearchBox select CompanyName from MerchantActivity where :search IS NULL OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName from MerchantActivity where :search IS NULL OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fdec-1e22-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fdf1-2731-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe07-4741-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "CompanyName": 1
+      },
+      "queryParameters": [
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppMainPageHeatMap",
+      "uri": "SAMPLES:QUERY:POSAPPMAINPAGEHEATMAP:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe12-6ad1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788375,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppMainPageHeatMap select sum(Count) as Count, Status, Category from MerchantActivity w where :search IS NULL OR AnyAttrLike(w, :search) group by Status, Category",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select sum(Count) as Count, Status, Category \r\nfrom MerchantActivity w \r\nwhere  :search IS NULL OR AnyAttrLike(w, :search) \r\ngroup by Status, Category;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe12-6ad2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe17-73e1-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe39-a1e1-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 3,
+        "Count": 1,
+        "Status": 2
+      },
+      "queryParameters": [
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "Count",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppCompanyDrilldownCharts",
+      "uri": "SAMPLES:QUERY:POSAPPCOMPANYDRILLDOWNCHARTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe42-f0b1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788759,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppCompanyDrilldownCharts select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe42-f0b2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe4d-c621-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe73-4f81-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 12,
+        "City": 7,
+        "CompanyName": 1,
+        "Count": 2,
+        "HourlyAve": 5,
+        "LowerLimit": 4,
+        "MerchantId": 10,
+        "StartTime": 6,
+        "State": 8,
+        "Status": 11,
+        "UpperLimit": 3,
+        "Zip": 9
+      },
+      "queryParameters": [
+        "mid",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppCompanyDrilldownCharts",
+      "uri": "SAMPLES:QUERY:POSAPPCOMPANYDRILLDOWNCHARTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe42-f0b1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788759,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppCompanyDrilldownCharts select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe42-f0b2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe4d-c621-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe73-4f81-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 12,
+        "City": 7,
+        "CompanyName": 1,
+        "Count": 2,
+        "HourlyAve": 5,
+        "LowerLimit": 4,
+        "MerchantId": 10,
+        "StartTime": 6,
+        "State": 8,
+        "Status": 11,
+        "UpperLimit": 3,
+        "Zip": 9
+      },
+      "queryParameters": [
+        "mid",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppCompanyDrilldownCharts",
+      "uri": "SAMPLES:QUERY:POSAPPCOMPANYDRILLDOWNCHARTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe42-f0b1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788759,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppCompanyDrilldownCharts select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe42-f0b2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe4d-c621-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe73-4f81-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 12,
+        "City": 7,
+        "CompanyName": 1,
+        "Count": 2,
+        "HourlyAve": 5,
+        "LowerLimit": 4,
+        "MerchantId": 10,
+        "StartTime": 6,
+        "State": 8,
+        "Status": 11,
+        "UpperLimit": 3,
+        "Zip": 9
+      },
+      "queryParameters": [
+        "mid",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppCompanyDrilldownCharts",
+      "uri": "SAMPLES:QUERY:POSAPPCOMPANYDRILLDOWNCHARTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe42-f0b1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788759,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppCompanyDrilldownCharts select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe42-f0b2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe4d-c621-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe73-4f81-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 12,
+        "City": 7,
+        "CompanyName": 1,
+        "Count": 2,
+        "HourlyAve": 5,
+        "LowerLimit": 4,
+        "MerchantId": 10,
+        "StartTime": 6,
+        "State": 8,
+        "Status": 11,
+        "UpperLimit": 3,
+        "Zip": 9
+      },
+      "queryParameters": [
+        "mid",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppCompanyDrilldownCharts",
+      "uri": "SAMPLES:QUERY:POSAPPCOMPANYDRILLDOWNCHARTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe42-f0b1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788759,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppCompanyDrilldownCharts select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe42-f0b2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe4d-c621-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe73-4f81-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 12,
+        "City": 7,
+        "CompanyName": 1,
+        "Count": 2,
+        "HourlyAve": 5,
+        "LowerLimit": 4,
+        "MerchantId": 10,
+        "StartTime": 6,
+        "State": 8,
+        "Status": 11,
+        "UpperLimit": 3,
+        "Zip": 9
+      },
+      "queryParameters": [
+        "mid",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppCompanyDrilldownCharts",
+      "uri": "SAMPLES:QUERY:POSAPPCOMPANYDRILLDOWNCHARTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe42-f0b1-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734788759,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppCompanyDrilldownCharts select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\"",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select CompanyName, Count, UpperLimit, LowerLimit, HourlyAve, StartTime, City, State, Zip, MerchantId, Status, Category from MerchantActivity where (MerchantID=:mid AND :search IS NULL) OR CompanyName LIKE \"%:search%\";",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe42-f0b2-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe4d-c621-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fe73-4f81-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 12,
+        "City": 7,
+        "CompanyName": 1,
+        "Count": 2,
+        "HourlyAve": 5,
+        "LowerLimit": 4,
+        "MerchantId": 10,
+        "StartTime": 6,
+        "State": 8,
+        "Status": 11,
+        "UpperLimit": 3,
+        "Zip": 9
+      },
+      "queryParameters": [
+        "mid",
+        "search"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppHeatMapDrilldownDonuts",
+      "uri": "SAMPLES:QUERY:POSAPPHEATMAPDRILLDOWNDONUTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe7e-c131-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734789065,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppHeatMapDrilldownDonuts select count(*) as Count, Status, Category from MerchantActivity group by Status, Category",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select count(*) as Count, Status, Category from MerchantActivity group by Status, Category;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe7e-e841-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe85-50e1-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fea3-1211-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 3,
+        "Count": 1,
+        "Status": 2
+      },
+      "queryParameters": [],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "Count",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppHeatMapDrilldownDonuts",
+      "uri": "SAMPLES:QUERY:POSAPPHEATMAPDRILLDOWNDONUTS:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fe7e-c131-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734789065,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppHeatMapDrilldownDonuts select count(*) as Count, Status, Category from MerchantActivity group by Status, Category",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select count(*) as Count, Status, Category from MerchantActivity group by Status, Category;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fe7e-e841-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fe85-50e1-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fea3-1211-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 3,
+        "Count": 1,
+        "Status": 2
+      },
+      "queryParameters": [],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "Count",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppHeatMapDrilldownMap",
+      "uri": "SAMPLES:QUERY:POSAPPHEATMAPDRILLDOWNMAP:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-feab-7681-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734789309,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppHeatMapDrilldownMap select * from MerchantActivity where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) group by merchantId",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select * from MerchantActivity where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) group by merchantId;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-feab-7682-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-feb0-3171-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-fec8-9b71-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 4,
+        "City": 11,
+        "CompanyName": 3,
+        "Count": 6,
+        "HourlyAve": 7,
+        "LatVal": 13,
+        "LongVal": 14,
+        "LowerLimit": 9,
+        "MerchantId": 1,
+        "StartTime": 2,
+        "State": 12,
+        "Status": 5,
+        "UpperLimit": 8,
+        "Zip": 10
+      },
+      "queryParameters": [
+        "status",
+        "category"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "MerchantId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "StartTime",
+          "type": "org.joda.time.DateTime"
+        },
+        {
+          "name": "CompanyName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Count",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "HourlyAve",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "UpperLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LowerLimit",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "Zip",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "City",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "State",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "LatVal",
+          "type": "java.lang.Double"
+        },
+        {
+          "name": "LongVal",
+          "type": "java.lang.Double"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "PosAppHeatMapDrilldownHeatMap",
+      "uri": "SAMPLES:QUERY:POSAPPHEATMAPDRILLDOWNHEATMAP:1",
+      "uuid": {
+        "uuidstring": "01ec1f74-fed2-5f71-98ea-02b2b16d07fb"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1632734789552,
+      "nsName": "Samples",
+      "namespaceId": {
+        "uuidstring": "01ec1f74-d63e-0961-9916-02b2b16d07fb"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY PosAppHeatMapDrilldownHeatMap select sum(Count) as Count, Status, Category from MerchantActivity where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) group by Status, Category",
+      "metaInfoStatus": {
+        "anonymous": false,
+        "dropped": false,
+        "generated": false,
+        "adhoc": false,
+        "valid": true
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select sum(Count) as Count, Status, Category  from MerchantActivity where (:status IS NULL or (Status = :status)) and (:category IS NULL or (Category = :category)) group by Status, Category;",
+      "appUUID": {
+        "uuidstring": "01ec1f74-fed2-5f72-98ea-02b2b16d07fb"
+      },
+      "streamUUID": {
+        "uuidstring": "01ec1f74-fed7-ddb1-98ea-02b2b16d07fb"
+      },
+      "cqUUID": {
+        "uuidstring": "01ec1f74-feed-afa1-98ea-02b2b16d07fb"
+      },
+      "typeInfo": {
+        "Category": 3,
+        "Count": 1,
+        "Status": 2
+      },
+      "queryParameters": [
+        "status",
+        "category"
+      ],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "Count",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "Status",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Category",
+          "type": "java.lang.String"
+        }
+      ]
+    }
+  ]
+}
