@@ -6,7 +6,7 @@ CREATE FLOW INITIAL_oracle_databricks_SourceFlow;
 CREATE SOURCE INITIAL_oracle_databricks_DBSource USING DatabaseReader ( 
   Tables: '"QATEST"."RETAILDATA2MTEST\\_INITIAL"', 
   ConnectionURL: 'jdbc:oracle:thin:@//localhost:1522/ORCL', 
-  Password: '4VsWVaGkl9V0CCdpw/CVE0cdLIXEbckXCeBIqzZthoU=', 
+  Password: '******************', 
   DatabaseProviderType: 'ORACLE', 
   Username: 'admin', 
   FetchSize: 10000, 
@@ -18,17 +18,17 @@ END FLOW INITIAL_oracle_databricks_SourceFlow;
 
 CREATE OR REPLACE TARGET DeltaLake_INITIAL_oracle_databricks_Target USING Global.DeltaLakeWriter ( 
   Mode: 'APPENDONLY', 
-  hostname: 'adb-2708413894079367.7.azuredatabricks.net', 
+  hostname: 'adb-270*****************.7.azuredatabricks.net', 
   stageLocation: '/test/', 
   ParallelThreads: '1', 
-  connectionUrl: 'jdbc:spark://adb-2708413894079367.7.azuredatabricks.net:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2708413894079367/0623-134622-xkot911x;AuthMech=3;UID=token;PWD=<personal-access-token>', 
+  connectionUrl: 'jdbc:spark://adb-270*****************..7.azuredatabricks.net:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/270*****************./0623-13******-x******;AuthMech=3;UID=token;PWD=<personal-access-token>', 
   CDDLAction: 'Process', 
   Tables: 'QATEST.RETAILDATA2MTEST_INITIAL,qatest.retaildata2mtest_initial', 
   adapterName: 'DeltaLakeWriter', 
   personalAccessToken_encrypted: 'true', 
   uploadPolicy: 'eventcount:10000,interval:60s', 
   ConnectionRetryPolicy: 'initialRetryDelay=10s, retryDelayMultiplier=2, maxRetryDelay=1m, maxAttempts=5, totalTimeout=10m', 
-  personalAccessToken: 'D/iDgPXe/wREtoY4MQA6vbjR3bY45l/H+DgKnfY58ypFjCFM8bv6YE7GQfYkhzKu' ) 
+  personalAccessToken: '*********************' ) 
 INPUT FROM INITIAL_oracle_databricks_OutputStream;
 
 END APPLICATION INITIAL_oracle_databricks;
