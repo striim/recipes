@@ -8,7 +8,7 @@ CREATE OR REPLACE SOURCE Retail3_CDC_PostgresCDC USING Global.PostgreSQLReader (
   CDDLCapture: false, 
   Username: 'cdcuser', 
   ReplicationSlotName: 'striim_slot', 
-  ConnectionURL: 'jdbc:postgresql://34.82.0.93:5432/cdcRetail', 
+  ConnectionURL: 'jdbc:postgresql://{*****}:5432/cdcRetail', 
   Password: 'RjggJcWyhZDAfQvyEksX/w==', 
   Password_encrypted: 'true', 
   Tables: '"public"."Retailcdc"', 
@@ -50,7 +50,7 @@ CREATE TARGET BigQuery_Retail3_CDC_Target USING Global.BigQueryWriter (
   QuoteCharacter: '\"', 
   projectId: 'striim-growth-team', 
   BatchPolicy: 'eventCount:1000, Interval:30', 
-  ServiceAccountKey: 'UploadedFiles/sweta_prabha_160/striim-growth-team-44f824941e87.json' ) 
+  ServiceAccountKey: 'UploadedFiles/sweta_prabha_160/striim.json' ) 
 INPUT FROM Retail3_CDC_OutputStream;
 
 ALTER FLOW Retail3_CDC_SourceFlow;
@@ -111,7 +111,7 @@ CREATE TARGET StoreTracking USING Global.BigQueryWriter (
   QuoteCharacter: '\"', 
   projectId: 'striim-growth-team', 
   BatchPolicy: 'eventCount:1000, Interval:30', 
-  ServiceAccountKey: 'UploadedFiles/sweta_prabha_160/striim-growth-team-44f824941e87.json' ) 
+  ServiceAccountKey: 'UploadedFiles/sweta_prabha_160/striim.json' ) 
 INPUT FROM storeActivityStream;
 
 CREATE OR REPLACE TARGET ProductTracking USING Global.BigQueryWriter ( 
@@ -132,7 +132,7 @@ CREATE OR REPLACE TARGET ProductTracking USING Global.BigQueryWriter (
   QuoteCharacter: '\"', 
   projectId: 'striim-growth-team', 
   BatchPolicy: 'eventCount:1000, Interval:30', 
-  ServiceAccountKey: 'UploadedFiles/sweta_prabha_160/striim-growth-team-44f824941e87.json' ) 
+  ServiceAccountKey: 'UploadedFiles/sweta_prabha_160/striim.json' ) 
 INPUT FROM ProductTrackStream;
 
 END FLOW Retail3_CDC_SourceFlow;
