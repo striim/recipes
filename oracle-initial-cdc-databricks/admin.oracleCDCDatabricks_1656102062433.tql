@@ -1,0 +1,46 @@
+
+CREATE APPLICATION oracleCDCDatabricks;
+
+CREATE OR REPLACE SOURCE oracleCDC_source USING Global.OracleReader ( 
+  TransactionBufferDiskLocation: '.striim/LargeBuffer', 
+  adapterName: 'OracleReader', 
+  DatabaseRole: 'PRIMARY', 
+  Password: '4VsWVaGkl9V0CCdpw/CVE0cdLIXEbckXCeBIqzZthoU=', 
+  Compression: false, 
+  connectionRetryPolicy: 'timeOut=30, retryInterval=30, maxRetries=3', 
+  Password_encrypted: 'true', 
+  SupportPDB: false, 
+  QuiesceMarkerTable: 'QUIESCEMARKER', 
+  Tables: 'qatest.RETAILDATA2MTEST', 
+  CDDLAction: 'Process', 
+  CommittedTransactions: true, 
+  QueueSize: 2048, 
+  DictionaryMode: 'OnlineCatalog', 
+  SetConservativeRange: false, 
+  CDDLCapture: false, 
+  ConnectionURL: 'jdbc:oracle:thin:@//localhost:1522/ORCL', 
+  TransactionBufferType: 'Disk', 
+  FetchSize: 50000, 
+  Username: 'admin', 
+  TransactionBufferSpilloverSize: '100MB', 
+  FilterTransactionBoundaries: true, 
+  SendBeforeImage: true ) 
+OUTPUT TO oracle_output_stream;
+
+CREATE OR REPLACE TARGET delta_lake_databricksTarget USING Global.DeltaLakeWriter ( 
+  Mode: 'APPENDONLY', 
+  uploadPolicy: 'eventcount:50000,interval:60s', 
+  hostname: 'adb-2708413894079367.7.azuredatabricks.net', 
+  Tables: 'qatest.RETAILDATA2MTEST,default.retaildatapreview12_databricks_csv', 
+  stageLocation: '/test/', 
+  ParallelThreads: '1', 
+  connectionUrl: 'jdbc:spark://adb-2708413894079367.7.azuredatabricks.net:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/2708413894079367/0623-134622-xkot911x;AuthMech=3;UID=token;PWD=<personal-access-token>', 
+  CDDLAction: 'Process', 
+  adapterName: 'DeltaLakeWriter', 
+  personalAccessToken_encrypted: 'true', 
+  ConnectionRetryPolicy: 'initialRetryDelay=10s, retryDelayMultiplier=2, maxRetryDelay=1m, maxAttempts=5, totalTimeout=10m', 
+  personalAccessToken: 'D/iDgPXe/wREtoY4MQA6vbjR3bY45l/H+DgKnfY58ypFjCFM8bv6YE7GQfYkhzKu' ) 
+INPUT FROM oracle_output_stream;
+
+END APPLICATION oracleCDCDatabricks;
+
