@@ -1,1 +1,3 @@
-This repository contains codes for Striim Recipes and Tutorials
+Samples for all Striim Recipes and Sample Applications
+
+https://www.striim.com/recipes/
