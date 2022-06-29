@@ -1,4 +1,5 @@
-# Samples for all Striim Recipes and Sample Applications
+# Streaming SQL Recipes with Striim
+## Build real-time analytics and streaming change data capture pipelines with SQL
 
 https://www.striim.com/recipes/
 
