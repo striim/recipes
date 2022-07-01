@@ -1,0 +1,61 @@
+
+CREATE APPLICATION schemapostgres1;
+
+CREATE OR REPLACE SOURCE schema_source USING Global.PostgreSQLReader ( 
+  ConnectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  Username: 'cdcuser', 
+  ReplicationSlotName: 'striim_slot', 
+  Password: 'RjggJcWyhZDAfQvyEksX/w==', 
+  Password_encrypted: 'true', 
+  PostgresConfig: '{\n\"ReplicationPluginConfig\": {\n\t\t\"Name\": \"WAL2JSON\",\n\t\t\"Format\": \"1\"\n\t}\n}', 
+  CDDLAction: 'Process', 
+  CDDLTrackingTable: 'striim.ddlcapturetable', 
+  adapterName: 'PostgreSQLReader', 
+  CDDLCapture: true, 
+  ConnectionURL: 'jdbc:postgresql://**.**.**:5432/cdcRetail', 
+  Tables: '"striim"."data1";"striim"."data2"', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO source_stream;
+
+CREATE TARGET static_table USING Global.SnowflakeWriter ( 
+  tables: '"striim"."data2",PUBLIC.DATA2', 
+  password: 'I/2FLiTTRHJOizZLKXdxUw==', 
+  password_encrypted: 'true', 
+  username: 'edward', 
+  s3SecretAccessKey: '', 
+  azureContainerName: 'striim-snowflake-container', 
+  optimizedMerge: 'false', 
+  connectionUrl: 'jdbc:snowflake://*******warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  columnDelimiter: '|', 
+  s3Region: 'us-west-1', 
+  appendOnly: 'false', 
+  uploadPolicy: 'eventcount:10000,interval:5m', 
+  externalStageType: 'Local', 
+  azureAccountAccessKey: '', 
+  fileFormatOptions: 'null_if = \"\"', 
+  s3BucketName: 'striim-snowflake-bucket', 
+  CDDLAction: 'Halt' ) 
+INPUT FROM source_stream;
+
+CREATE TARGET dynamic_table USING Global.SnowflakeWriter ( 
+  password: 'I/2FLiTTRHJOizZLKXdxUw==', 
+  password_encrypted: 'true', 
+  username: 'edward', 
+  s3SecretAccessKey: '', 
+  azureContainerName: 'striim-snowflake-container', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  connectionUrl: 'jdbc:snowflake://striim_partner.east-us-2.azure.snowflakecomputing.com:443?warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  columnDelimiter: '|', 
+  s3Region: 'us-west-1', 
+  appendOnly: 'false', 
+  uploadPolicy: 'eventcount:10000,interval:5m', 
+  externalStageType: 'Local', 
+  azureAccountAccessKey: '', 
+  tables: '"striim"."data1",PUBLIC.DATA1', 
+  fileFormatOptions: 'null_if = \"\"', 
+  s3BucketName: 'striim-snowflake-bucket' ) 
+INPUT FROM source_stream;
+
+END APPLICATION schemapostgres1;
+
