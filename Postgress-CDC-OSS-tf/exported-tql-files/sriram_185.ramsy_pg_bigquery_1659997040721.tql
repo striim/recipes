@@ -1,0 +1,44 @@
+
+CREATE APPLICATION ramsy_pg_bigquery USE EXCEPTIONSTORE TTL : '7d' ;
+
+CREATE FLOW ramsy_pg_bigquery_SourceFlow;
+
+CREATE OR REPLACE SOURCE ramsy_pg_bigquery_PostgresCDC USING Global.PostgreSQLReader (
+  adapterName: 'PostgreSQLReader',
+  CDDLCapture: false,
+  ConnectionURL: 'jdbc:postgresql://<enter-hostname-orURL>/gcppg',
+  Password: '<enter-password>',
+  Username: 'replication_user',
+  Password_encrypted: 'true',
+  Tables: '"qatest"."retaildata\\_cdc"',
+  PostgresConfig: '{\n\"ReplicationPluginConfig\": {\n\t\t\"Name\": \"WAL2JSON\",\n\t\t\"Format\": \"1\"\n\t}\n}',
+  CDDLAction: 'Process',
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3',
+  ReplicationSlotName: 'test_slot',
+  FilterTransactionBoundaries: true )
+OUTPUT TO ramsy_pg_bigquery_OutputStream;
+
+END FLOW ramsy_pg_bigquery_SourceFlow;
+
+CREATE OR REPLACE TARGET BigQuery_ramsy_pg_bigquery_Target USING Global.BigQueryWriter (
+  ColumnDelimiter: '|',
+  NullMarker: 'NULL',
+  streamingUpload: 'false',
+  Tables: '"qatest"."retaildata_cdc",pos_dataset.posdata',
+  Encoding: 'UTF-8',
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30',
+  AllowQuotedNewLines: 'false',
+  CDDLAction: 'Process',
+  projectId: 'gcpstriimproj',
+  optimizedMerge: 'false',
+  TransportOptions: 'connectionTimeout=300, readTimeout=120',
+  adapterName: 'BigQueryWriter',
+  Mode: 'APPENDONLY',
+  ServiceAccountKey: '<upload-json-file-from-gcloud>.json',
+  StandardSQL: 'true',
+  includeInsertId: 'true',
+  QuoteCharacter: '\"',
+  BatchPolicy: 'eventCount:100, Interval:10' )
+INPUT FROM ramsy_pg_bigquery_OutputStream;
+
+END APPLICATION ramsy_pg_bigquery;
