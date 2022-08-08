@@ -13,14 +13,9 @@ create TABLE qatest.retaildata_cdc (
 	DATETIME varchar(50) NULL
 );
 
+-- The below sql command creates a new role with replication permissions
+CREATE ROLE replication_user NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN REPLICATION NOBYPASSRLS PASSWORD '<your-password>';
+
 
 SELECT pg_create_logical_replication_slot('test_slot', 'wal2json');
 
-
-INSERT INTO qatest.retaildata_cdc
-(store_id, "NAME", city, state, zip, customer_account_no, order_id, sku, order_amount, datetime)
-VALUES('100', 'John Doe', 'Chicago', 'Illinois', '60007', '1234567', '98765', '1234567/S', '20', '20130801080012');
-
-INSERT INTO qatest.retaildata_cdc
-(store_id, "NAME", city, state, zip, customer_account_no, order_id, sku, order_amount, datetime)
-VALUES('101', 'Jane Doe', 'Chicago', 'Illinois', '60007', '1234568', '98766', '1234567/E', '25', '20140801080012');
