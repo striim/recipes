@@ -1,0 +1,44 @@
+
+CREATE APPLICATION LagMonitor USE EXCEPTIONSTORE TTL : '7d' ;
+
+CREATE FLOW LagMonitor_SourceFlow;
+
+CREATE OR REPLACE SOURCE LagMonitor_PostgresCDC USING Global.PostgreSQLReader ( 
+  adapterName: 'PostgreSQLReader', 
+  CDDLCapture: false, 
+  Username: 'cdcuser', 
+  ReplicationSlotName: 'striim_slot', 
+  ConnectionURL: 'jdbc:postgresql://34.82.0.93:5432/cdcRetail', 
+  Password_encrypted: 'true', 
+  Tables: '"public"."Retailcdc"', 
+  PostgresConfig: '{\n\"ReplicationPluginConfig\": {\n\t\t\"Name\": \"WAL2JSON\",\n\t\t\"Format\": \"1\"\n\t}\n}', 
+  CDDLAction: 'Process', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true, 
+  Password: 'odl8642sJPkc7huJhybZwA==' ) 
+OUTPUT TO LagMonitor_OutputStream;
+
+END FLOW LagMonitor_SourceFlow;
+
+CREATE TARGET BigQuery_LagMonitor_Target USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:1000000, Interval:90', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  ServiceAccountKey: 'UploadedFiles/admin/striim-growth-team-44f824941e87.json', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  includeInsertId: 'true', 
+  Tables: '"public"."Retailcdc",Retail.retailData2M', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team' ) 
+INPUT FROM LagMonitor_OutputStream;
+
+END APPLICATION LagMonitor;
+
