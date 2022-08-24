@@ -1,0 +1,3 @@
+TableName,LagThresholdinMinutes,Emailto
+public.Retailcdc,2,support@striim.com
+Retail.retailData2M,2,support@striim.com
