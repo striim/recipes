@@ -3,4 +3,4 @@
         
 
 [Link to full recipe](https://www.striim.com/tutorial/ensure-data-freshness-with-streaming-sql/)
-![Striim, schema evolution](https://github.com/striim/recipes/blob/main/striim-Lag-monitor/Image)
+![Striim, schema evolution](https://github.com/striim/recipes/blob/main/striim-Lag-monitor/Image.png)
