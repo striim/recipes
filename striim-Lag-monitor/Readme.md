@@ -6,7 +6,7 @@
 ![Striim, schema evolution](https://github.com/striim/recipes/blob/main/striim-Lag-monitor/Image.png)
 
 
-## Setting Up the Utility Tool</br>
+## Setting Up the Utility </br>
 
 ### Step 1: Download the TQL files
 
