@@ -1,0 +1,67 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Download Java
+      get_url:
+        url: "https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz"
+        dest: "/home/jdk-8u341-linux-x64.tar.gz"
+ 
+    - name: Make jvm/ directory to store Java JDK
+      shell: "mkdir -p /usr/lib/jvm"
+
+    - name: Untar Java JDK
+      shell: "tar zxvf /home/jdk-8u341-linux-x64.tar.gz -C /usr/lib/jvm"
+
+    - name: Set Java path
+      shell: 'update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_341/bin/java" 1'
+
+    - name: Set Java path
+      shell: "update-alternatives --set java /usr/lib/jvm/jdk1.8.0_341/bin/java"
+
+    - name: Download Striim
+      get_url:
+        url: "https://striim-downloads.s3.us-west-1.amazonaws.com/Releases/4.1.0/Striim_4.1.0.tgz"
+        dest: "/home/striim.tgz"
+    
+    - name: Untar strim.tgz file
+      shell: "tar zxvf /home/striim.tgz -C /opt/" 
+    
+    - name: Copy Striim credentials
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+        - { src: "files/sks.jks", dest: "/opt/Striim/conf/" }
+        - { src: "files/sksKey.pwd", dest: "/opt/Striim/conf/" }
+        - { src: "files/startUp.properties", dest: "/opt/Striim/conf/" }
+
+    # Install PostgreSQL 
+    - name: Install packages
+      yum:
+        name:
+          - postgresql
+          - postgresql-server
+          - postgresql-contrib
+          - postgresql-libs
+        state: present
+
+    - name: Check if PostgreSQL is initialized
+      stat:
+        path: "/var/lib/pgsql/data/pg_hba.conf"
+      register: postgres_data
+
+    - name: Initialize PostgreSQL
+      shell: "postgresql-setup initdb"
+      when: not postgres_data.stat.exists
+
+    - name: Start and enable service
+      service:
+        name: postgresql
+        state: started
+        enabled: true
+
+    - name: Copy pg_hba.conf file 
+      copy:
+        src: "files/psql_config/pg_hba.conf"
+        dest: "/var/lib/pgsql/data/"

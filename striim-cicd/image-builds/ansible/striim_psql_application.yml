@@ -1,0 +1,142 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    # Install PostgreSQL 
+    - name: Install packages
+      yum:
+        name:
+          - python3
+          - postgresql
+          - postgresql-server
+          - postgresql-contrib
+          - postgresql-libs
+        state: present
+    
+    - name: Python install psycopg2
+      shell: "python3 -m pip install psycopg2-binary"
+    
+    - name: Check if PostgreSQL is initialized
+      stat:
+        path: "/var/lib/pgsql/data/pg_hba.conf"
+      register: postgres_data
+
+    - name: Initialize PostgreSQL
+      shell: "postgresql-setup initdb"
+      when: not postgres_data.stat.exists
+
+    - name: Start and enable service
+      service:
+        name: postgresql
+        state: started
+        enabled: true
+
+    - name: "Create app database"
+      postgresql_db:
+        state: present
+        name: "source_db"
+      become: yes
+      become_user: postgres
+
+    - name: "Create db user"
+      postgresql_user:
+        state: present
+        name: "source_user"
+        password: "cloud123"
+      become: yes
+      become_user: postgres
+
+    - name: "Grant db user access to app db"
+      postgresql_privs:
+        type: database
+        database: "source_db"
+        roles: "source_user"
+        grant_option: no
+        privs: all
+      become: yes
+      become_user: postgres
+
+    - name: "Allow trust connection for the db user"
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: trust
+        users: "source_user"
+        create: true
+      become: yes
+      become_user: postgres
+      notify: restart postgres
+    
+    - name: "Allow trust connection for the db user"
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: trust
+        address: 127.0.0.1/32 
+        users: "all"
+        create: true
+      become: yes
+      become_user: postgres
+      notify: restart postgres
+    
+    - name: "Allow trust connection for the db user"
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: trust
+        address: ::1/128
+        users: "all"
+        create: true
+      become: yes
+      become_user: postgres
+      notify: restart postgres
+    
+    - name: "Copy dump file to /tmp/"
+      copy:
+        src: "files/psql_queries/dump.sql"
+        dest: "/tmp/"
+
+    - name: "Run dump.sql file"
+      become: true
+      become_user: postgres
+      shell:  psql source_db  < /tmp/dump.sql
+
+    - name: Download Java
+      get_url:
+        url: "https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz"
+        dest: "/home/jdk-8u341-linux-x64.tar.gz"
+ 
+    - name: Make jvm/ directory to store Java JDK
+      shell: "mkdir -p /usr/lib/jvm"
+
+    - name: Untar Java JDK
+      shell: "tar zxvf /home/jdk-8u341-linux-x64.tar.gz -C /usr/lib/jvm"
+
+    - name: Set Java path
+      shell: 'update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_341/bin/java" 1'
+
+    - name: Set Java path
+      shell: "update-alternatives --set java /usr/lib/jvm/jdk1.8.0_341/bin/java"
+
+    - name: Download Striim
+      get_url:
+        url: "https://striim-downloads.s3.us-west-1.amazonaws.com/Releases/4.1.0/Striim_4.1.0.tgz"
+        dest: "/home/striim.tgz"
+    
+    - name: Untar strim.tgz file
+      shell: "tar zxvf /home/striim.tgz -C /opt/" 
+    
+    - name: Copy Striim credentials
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+        - { src: "files/sks.jks", dest: "/opt/Striim/conf/" }
+        - { src: "files/sksKey.pwd", dest: "/opt/Striim/conf/" }
+        - { src: "files/startUp.properties", dest: "/opt/Striim/conf/" }
+  handlers:
+    - name: restart postgres
+      service: name=postgresql state=restarted 

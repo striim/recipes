@@ -1,0 +1,64 @@
+{
+    "variables":{
+        "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+        "subscription_id": "{{env `SUBSCRIPTION_ID`}}",
+        "client_id": "{{env `CLIENT_ID`}}",
+        "client_secret": "{{env `CLIENT_SECRET`}}"
+    },
+    
+    "builders":[
+        {
+            "type": "azure-arm",
+            "client_secret": "{{user `client_secret`}}",
+            "client_id": "{{user `client_id`}}",
+            "subscription_id": "{{user `subscription_id`}}",
+            "image_publisher": "OpenLogic",
+            "image_offer": "CentOS",
+            "image_sku": "8_5",
+            "location": "West US",
+            "os_type": "Linux",
+            "managed_image_name": "azure-centos-striim-image-{{timestamp}}",
+            "managed_image_resource_group_name": "myResourceGroup"
+        },
+       {
+            "type": "amazon-ebs",
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "region": "us-west-2",
+            "ami_name": "aws-centos-striim-image-{{timestamp}}",
+            "source_ami": "ami-0cea098ed2ac54925",
+            "instance_type": "t2.xlarge",
+            "ssh_username": "ec2-user",
+            "launch_block_device_mappings": [
+                {
+                  "delete_on_termination": true,
+                  "device_name": "/dev/xvda",
+                  "volume_size": 50,
+                  "volume_type": "gp2"
+                }
+            ]
+        },
+    	{
+            "type": "googlecompute",
+            "project_id": "ancient-yeti-175123",
+            "source_image": "centos-7-v20220719",
+            "zone": "us-central1-a",
+            "image_name": "gcp-centos-striim-image-{{timestamp}}",
+            "ssh_username": "dev-gcp-image",
+            "account_file": "account-file.json"
+       }
+    ],
+    "provisioners":[
+        {   
+            "only": ["googlecompute", "azure-arm"],
+            "type": "ansible",
+            "playbook_file": "ansible/striim_default_application.yml"
+        },
+        {   
+            "only": ["amazon-ebs"],
+            "type": "ansible",
+            "playbook_file": "ansible/striim_psql_application.yml"
+        }
+    ]
+}
