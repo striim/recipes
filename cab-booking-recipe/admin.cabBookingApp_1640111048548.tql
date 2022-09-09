@@ -1,0 +1,120 @@
+
+CREATE APPLICATION cabBookingApp;
+
+CREATE OR REPLACE SOURCE cabCsvSource USING Global.FileReader ( 
+  adapterName: 'FileReader', 
+  rolloverstyle: 'Default', 
+  blocksize: 64, 
+  skipbom: true, 
+  directory: 'Samples/cabApp', 
+  includesubdirectories: false, 
+  wildcard: 'uber_data.csv', 
+  positionbyeof: false ) 
+PARSE USING Global.DSVParser ( 
+  trimwhitespace: false, 
+  columndelimiter: ',', 
+  columndelimittill: '-1', 
+  trimquote: true, 
+  ignoreemptycolumn: false, 
+  separator: ':', 
+  parserName: 'DSVParser', 
+  quoteset: '\"', 
+  handler: 'com.webaction.proc.DSVParser_1_0', 
+  charset: 'UTF-8', 
+  linenumber: 1, 
+  ignoremultiplerecordbegin: 'true', 
+  ignorerowdelimiterinquote: false, 
+  blockascompleterecord: false, 
+  rowdelimiter: '\n', 
+  nocolumndelimiter: false, 
+  headerlineno: 0, 
+  header: true ) 
+OUTPUT TO cabCsvSourceStream;
+
+CREATE OR REPLACE TYPE cabBookingStream_Type (
+ id java.lang.Integer,
+ lat java.lang.Float,
+ lat1 java.lang.Integer,
+ lon java.lang.Float,
+ lon2 java.lang.Integer,
+ demand java.lang.Integer);
+
+CREATE CQ CabCQ2 
+INSERT INTO CabCQ2Stream 
+select TO_INT(data[0]) as tripNo,
+       TO_DATEF(data[1],'yyyy-MM-dd HH:mm:ss') as BdateTime,
+       TO_FLOAT(data[2]) as lat,
+	   TO_FLOAT(data[3]) as lon,
+       TO_STRING(data[4]) as company
+FROM cabCsvSourceStream;
+
+CREATE WACTIONSTORE LatLon2dashboardWaction CONTEXT OF cabBookingStream_Type USING ( storageProvider: 'elasticsearch' );
+
+CREATE JUMPING WINDOW window30CabData OVER CabCQ2Stream 
+KEEP WITHIN 30 MINUTE ON BdateTime;
+
+CREATE TARGET CabData2BQ USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:1000000, Interval:90', 
+  Encoding: 'UTF-8', 
+  Tables: 'CabBookingData.CabData', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  includeInsertId: 'true', 
+  QuoteCharacter: '\"', 
+  ServiceAccountKey: 'UploadedFiles/keen-quest-335320-822b39868760.json', 
+  projectId: 'keen-quest-335320' ) 
+INPUT FROM CabCQ2Stream;
+
+CREATE CQ AggregareCQ2 
+INSERT INTO Aggregate2Stream 
+select To_int(TripNo) as id,
+		To_float(lat) as lat, 
+		To_int((lat+90)*10) as lat1, 
+		To_float(lon) as lon,
+		To_int((lon+180)*10) as lon2,
+  		count(*) as demand
+        from window30CabData
+		group by lat1,lon2;;
+
+CREATE OR REPLACE CQ LatLon2CQ 
+INSERT INTO LatLon2dashboardWaction 
+select 	first(tripNo) as id,
+		first(lat) as lat, 
+		To_int((lat+90)*10) as lat1, 
+		first(lon) as lon,
+		To_int((lon+180)*10) as lon2,
+		count(*) as demand
+		from window30CabData
+		group by lat1,lon2;
+
+CREATE OR REPLACE TARGET Aggregate2Bigquery USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:1000000, Interval:90', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  adapterName: 'BigQueryWriter', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  includeInsertId: 'true', 
+  QuoteCharacter: '\"', 
+  ServiceAccountKey: 'UploadedFiles/keen-quest-335320-822b39868760.json', 
+  projectId: 'keen-quest-335320', 
+  Tables: 'CabBookingData.DemandData' ) 
+INPUT FROM Aggregate2Stream;
+
+END APPLICATION cabBookingApp;
+
