@@ -1,8 +1,8 @@
-#How to create real-time analytics dashboards for retail data using Striim
+# How to create real-time analytics dashboards for retail data using Striim
 ## Use Striim's Dashboard feature to visualize retail data in real-time
 
 
-##How to deploy and run this Striim Application? </br>
+## How to deploy and run this Striim Application? </br>
 
 ### Step 1: Download the TQL files
 
