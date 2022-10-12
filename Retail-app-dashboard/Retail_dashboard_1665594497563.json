@@ -1,0 +1,585 @@
+{
+  "dashboard": {
+    "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Dashboard",
+    "name": "Retail_Walmart",
+    "uri": "SWETA_PRABHA_160:DASHBOARD:RETAIL_WALMART:1",
+    "uuid": {
+      "uuidstring": "01ed466e-08c1-5bf1-ada9-a2c3d9b21b1d"
+    },
+    "version": 1,
+    "owner": 0,
+    "ctime": 1665167392559,
+    "nsName": "sweta_prabha_160",
+    "namespaceId": {
+      "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+    },
+    "type": "DASHBOARD",
+    "description": null,
+    "reverseIndexObjectDependencies": [],
+    "sourceText": null,
+    "metaInfoStatus": {
+      "generated": false,
+      "dropped": false,
+      "valid": true,
+      "anonymous": false,
+      "adhoc": false
+    },
+    "coDependentObjects": [],
+    "title": "Retail_Walmart",
+    "defaultLandingPage": "Page331",
+    "pages": [
+      "Page331"
+    ]
+  },
+  "pages": [
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Page",
+      "name": "Page331",
+      "uri": "SWETA_PRABHA_160:PAGE:PAGE331:1",
+      "uuid": {
+        "uuidstring": "01ed466e-08aa-9fa1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665167392410,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "PAGE",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Default Dashboard Page",
+      "gridJSON": "{\"components\":[{\"x\":6,\"y\":2,\"width\":6,\"height\":24,\"id\":\"component-1863\",\"style\":{\"margin\":0,\"background\":{\"color\":\"#EEF1F2\"},\"border\":{\"color\":\"#EEF1F2\",\"size\":0}},\"content_id\":\"Visualization1831\"},{\"x\":0,\"y\":2,\"width\":6,\"height\":21,\"id\":\"component-14025\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization14005\"},{\"x\":0,\"y\":0,\"width\":6,\"height\":2,\"id\":\"component-33304\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization33289\"},{\"x\":6,\"y\":0,\"width\":6,\"height\":2,\"id\":\"component-3119\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization3104\"},{\"x\":6,\"y\":26,\"width\":6,\"height\":19,\"id\":\"component-3925\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization3893\"},{\"x\":6,\"y\":26,\"width\":1,\"height\":5,\"id\":\"component-4014\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization3999\"},{\"x\":0,\"y\":23,\"width\":6,\"height\":22,\"id\":\"component-10792\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization10760\"},{\"x\":0,\"y\":23,\"width\":5,\"height\":2,\"id\":\"component-12909\",\"style\":{\"margin\":0,\"background\":{\"color\":\"transparent\"},\"border\":{\"color\":\"transparent\",\"size\":0}},\"content_id\":\"Visualization12894\"}],\"settings\":{\"cols\":12,\"cellheight\":20,\"rows\":45,\"background\":\"\"},\"id\":\"sweta_prabha_160.PAGE.Page331\"}",
+      "queryVisualizations": [
+        "Visualization1831",
+        "Visualization14005",
+        "Visualization33289",
+        "Visualization38898",
+        "Visualization3104",
+        "Visualization3893",
+        "Visualization3999",
+        "Visualization10760",
+        "Visualization12894"
+      ]
+    }
+  ],
+  "queryVisualizations": [
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization1831",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION1831:1",
+      "uuid": {
+        "uuidstring": "01ed4671-c2e0-1eb1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665168993307,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled BarChart",
+      "query": "Top_Referrals",
+      "visualizationType": "BarChart",
+      "config": "{\"type\":\"bar\",\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"timeField\":\"\",\"colorField\":\"\",\"show_legend\":false,\"show_all_labels\":false,\"show_data_labels\":false,\"maxValues\":\"10\",\"maxPoints\":\"500\",\"maxSeries\":\"10\",\"zIndex\":1,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"show_all_labels\",\"value\":false},{\"attribute\":\"show_data_labels\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxPoints\",\"value\":\"500\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"type\",\"value\":\"column\"}]},\"colors\":[],\"xAxis\":[{\"id\":\"referralURL\",\"field\":\"referralURL\",\"title\":\"Referral Link\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"count1\",\"field\":\"count1\",\"title\":\"Number of Referrals\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series3074\",\"visible\":null,\"color\":null,\"name\":\"\",\"alias\":\"\",\"yAxis\":\"count1\",\"xAxis\":\"referralURL\",\"zAxis\":\"\",\"categories\":\"\"}],\"filter\":{\"visible\":true},\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5},\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[{\"id\":\"conditionalColor8995\",\"matched\":false,\"style\":{\"color\":\"transparent\",\"alias\":\"\"},\"expression\":\"\"}],\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization14005",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION14005:1",
+      "uuid": {
+        "uuidstring": "01ed4675-5746-f761-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665170530774,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Table",
+      "query": "Top_Spender",
+      "visualizationType": "Table",
+      "config": "{\"retentionStrategyType\":\"all\",\"categoryField\":\"custname\",\"timeField\":\"\",\"show_headers\":true,\"show_lines\":true,\"pagesize\":\"10\",\"searchParam\":null,\"enableSearch\":false,\"enablePercentageColumnsWidth\":false,\"maxValues\":\"10\",\"maxPoints\":\"500\",\"maxSeries\":\"10\",\"defaultSortField\":\"spent\",\"defaultSortOrder\":\"asc\",\"zIndex\":2,\"_spec\":{\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"show_headers\",\"value\":true},{\"attribute\":\"show_lines\",\"value\":true},{\"attribute\":\"pagesize\",\"value\":\"5\"},{\"attribute\":\"searchParam\",\"value\":null},{\"attribute\":\"enableSearch\",\"value\":false},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"enablePercentageColumnsWidth\",\"value\":false},{\"attribute\":\"columns\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"},{\"attribute\":\"sortOrder\"},{\"attribute\":\"widthPercentage\"},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"width\"},{\"attribute\":\"iconConditions\",\"type\":{\"extends\":{\"name\":\"WebActionConditions\",\"itemtype\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]}},\"itemtype\":{\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"icon\"},{\"attribute\":\"color\"}]}},\"editor\":{\"options\":{\"add_text\":\"Add a condition\"}}},{\"attribute\":\"conditionalColors\",\"type\":{\"extends\":{\"name\":\"WebActionConditions\",\"itemtype\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]}},\"itemtype\":{\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"color\"}]}},\"editor\":{\"options\":{\"add_text\":\"Add a condition\"}}}]}}},{\"attribute\":\"data\"},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxPoints\",\"value\":\"500\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"defaultSortField\",\"value\":\"\"},{\"attribute\":\"defaultSortOrder\",\"value\":\"asc\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"filter\":{\"visible\":true},\"pollingQuerySettings\":{\"pollingEnabled\":true,\"pollingInterval\":5},\"columns\":[{\"id\":\"columns17722\",\"label\":\"Customer Name\",\"srcfield\":\"custname\",\"sortOrder\":1,\"widthPercentage\":40,\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"width\":0,\"iconConditions\":[],\"conditionalColors\":[]},{\"id\":\"columns18096\",\"label\":\"County ID\",\"srcfield\":\"countyID\",\"sortOrder\":2,\"widthPercentage\":30,\"drilldown\":{\"show_drilldown\":false,\"page\":\"Page331\",\"pageparams\":[]},\"width\":0,\"iconConditions\":[],\"conditionalColors\":[]},{\"id\":\"columns18470\",\"label\":\"Order Amount\",\"srcfield\":\"spent\",\"sortOrder\":3,\"widthPercentage\":30,\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"width\":0,\"iconConditions\":[],\"conditionalColors\":[]}],\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization33289",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION33289:1",
+      "uuid": {
+        "uuidstring": "01ed467d-2e19-75b9-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665173897663,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Label",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Top 10 Spenders \",\"color\":\"#000\",\"background\":\"transparent\",\"labelHead\":\"text-widget sub-title\",\"visualizationType\":\"LABEL\",\"zIndex\":3,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"},{\"attribute\":\"verticallyCentered\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"verticallyCentered\":false,\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization38898",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION38898:1",
+      "uuid": {
+        "uuidstring": "01ed467d-6a98-5d61-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665173999158,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Label",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Top 10 Referral Link - Global\",\"color\":\"#000\",\"background\":\"transparent\",\"labelHead\":\"text-widget heading\",\"visualizationType\":\"LABEL\",\"zIndex\":4,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"},{\"attribute\":\"verticallyCentered\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"verticallyCentered\":false,\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization3104",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION3104:1",
+      "uuid": {
+        "uuidstring": "01ed467e-4915-9c84-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665174372433,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Label",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Top 10 Referral Links - Global\",\"color\":\"#000\",\"background\":\"transparent\",\"labelHead\":\"text-widget sub-title\",\"visualizationType\":\"LABEL\",\"zIndex\":4,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"},{\"attribute\":\"verticallyCentered\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"verticallyCentered\":false,\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization3893",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION3893:1",
+      "uuid": {
+        "uuidstring": "01ed467e-62ba-db31-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665174415459,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled PieChart",
+      "query": "Santa_Clara_Referral",
+      "visualizationType": "PieChart",
+      "config": "{\"retentionStrategyType\":\"all\",\"type\":null,\"categoryField\":\"\",\"timeField\":\"\",\"colorField\":\"referralURL\",\"show_legend\":false,\"show_all_labels\":false,\"show_data_labels\":false,\"maxValues\":\"100\",\"maxPoints\":\"500\",\"maxSeries\":\"20\",\"zIndex\":5,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"show_all_labels\",\"value\":false},{\"attribute\":\"show_data_labels\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxPoints\",\"value\":\"500\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"current\"}]},\"colors\":[],\"xAxis\":[{\"id\":\"referralURL\",\"field\":\"referralURL\",\"title\":\"\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"count2\",\"field\":\"count2\",\"title\":\"\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series10539\",\"visible\":null,\"color\":null,\"name\":\"\",\"alias\":\"\",\"yAxis\":\"count2\",\"xAxis\":\"referralURL\",\"zAxis\":\"\",\"categories\":\"\"}],\"filter\":{\"visible\":true},\"pollingQuerySettings\":{\"pollingEnabled\":false,\"pollingInterval\":5},\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[],\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization3999",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION3999:1",
+      "uuid": {
+        "uuidstring": "01ed467e-6d10-1eb1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665174432795,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Label",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Referrals - Santa Clara (County ID: 43)\",\"color\":\"#000\",\"background\":\"transparent\",\"labelHead\":\"text-widget heading\",\"visualizationType\":\"LABEL\",\"zIndex\":6,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"},{\"attribute\":\"verticallyCentered\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"verticallyCentered\":false,\"colors\":[]}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization10760",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION10760:1",
+      "uuid": {
+        "uuidstring": "01ed4680-bdc0-a2b1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665175427163,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled BarChart",
+      "query": "Top10_counties",
+      "visualizationType": "BarChart",
+      "config": "{\"type\":\"column\",\"retentionStrategyType\":\"all\",\"categoryField\":\"\",\"timeField\":\"\",\"colorField\":\"\",\"show_legend\":false,\"show_all_labels\":false,\"show_data_labels\":false,\"maxValues\":\"100\",\"maxPoints\":\"500\",\"maxSeries\":\"20\",\"zIndex\":7,\"_spec\":{\"extends\":{\"name\":\"WebActionGraph\",\"properties\":[{\"attribute\":\"retentionStrategyType\",\"value\":\"all\"},{\"attribute\":\"type\",\"value\":null},{\"attribute\":\"categoryField\",\"value\":\"\"},{\"attribute\":\"timeField\",\"value\":\"\"},{\"attribute\":\"colorField\",\"value\":\"\"},{\"attribute\":\"xAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"},{\"attribute\":\"dateTimeFormat\"}]}}},{\"attribute\":\"yAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"zAxis\",\"type\":{\"itemtype\":{\"name\":\"Axis\",\"properties\":[{\"attribute\":\"title\"},{\"attribute\":\"field\"},{\"attribute\":\"type\",\"value\":\"linear\"}]}}},{\"attribute\":\"series\",\"type\":{\"itemtype\":{\"name\":\"AxesSeries\",\"properties\":[{\"attribute\":\"name\"},{\"attribute\":\"visible\",\"value\":null},{\"attribute\":\"alias\"},{\"attribute\":\"color\",\"value\":null},{\"attribute\":\"yAxis\"},{\"attribute\":\"xAxis\"},{\"attribute\":\"zAxis\"},{\"attribute\":\"categories\"},{\"attribute\":\"data\"}]}}},{\"attribute\":\"filter\",\"type\":{\"extends\":{\"name\":\"PageParamFilter\",\"properties\":[{\"attribute\":\"visible\",\"value\":true}]}}},{\"attribute\":\"pollingQuerySettings\",\"type\":{\"extends\":{\"name\":\"PollingQuerySettings\",\"properties\":[{\"attribute\":\"pollingEnabled\",\"value\":false},{\"attribute\":\"pollingInterval\",\"value\":5}]}}},{\"attribute\":\"drilldown\",\"type\":{\"extends\":{\"name\":\"DrillDown\",\"properties\":[{\"attribute\":\"show_drilldown\",\"value\":false},{\"attribute\":\"page\"},{\"attribute\":\"pageparams\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"pageparam\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"tooltips\",\"type\":{\"extends\":{\"name\":\"Tooltips\",\"properties\":[{\"attribute\":\"show_all\",\"value\":true},{\"attribute\":\"tooltip_values\",\"type\":{\"itemtype\":{\"properties\":[{\"attribute\":\"label\"},{\"attribute\":\"srcfield\"}]}}}]}}},{\"attribute\":\"conditionalColor\",\"type\":{\"extends\":{\"name\":\"ConditionalColors\",\"itemtype\":{\"extends\":{\"name\":\"WebActionCondition\",\"properties\":[{\"attribute\":\"expression\"},{\"attribute\":\"matched\",\"value\":false}]},\"properties\":[{\"attribute\":\"style\",\"type\":{\"properties\":[{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"alias\",\"value\":\"\"}]}}]}}}},{\"attribute\":\"show_legend\",\"value\":false},{\"attribute\":\"show_all_labels\",\"value\":false},{\"attribute\":\"show_data_labels\",\"value\":false},{\"attribute\":\"yAxisLimits\",\"type\":{\"extends\":{\"name\":\"YAxisLimits\",\"properties\":[{\"attribute\":\"upperBound\"},{\"attribute\":\"lowerBound\"}]}}},{\"attribute\":\"maxValues\",\"value\":\"100\"},{\"attribute\":\"maxPoints\",\"value\":\"500\"},{\"attribute\":\"maxSeries\",\"value\":\"20\"},{\"attribute\":\"zIndex\",\"value\":\"1\"}]},\"properties\":[{\"attribute\":\"type\",\"value\":\"column\"}]},\"colors\":[],\"xAxis\":[{\"id\":\"countyID\",\"field\":\"countyID\",\"title\":\"County ID\",\"type\":\"category\"}],\"yAxis\":[{\"id\":\"orderamount\",\"field\":\"orderamount\",\"title\":\"Order Amount\",\"type\":\"linear\"}],\"zAxis\":[],\"series\":[{\"id\":\"series16376\",\"visible\":null,\"color\":null,\"name\":\"\",\"alias\":\"\",\"yAxis\":\"orderamount\",\"xAxis\":\"countyID\",\"zAxis\":\"\",\"categories\":\"\"}],\"filter\":{\"visible\":true},\"pollingQuerySettings\":{\"pollingEnabled\":false,\"pollingInterval\":5},\"drilldown\":{\"show_drilldown\":false,\"page\":\"\",\"pageparams\":[]},\"tooltips\":{\"show_all\":true,\"tooltip_values\":[]},\"conditionalColor\":[],\"yAxisLimits\":{\"upperBound\":\"\",\"lowerBound\":\"\"}}"
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$QueryVisualization",
+      "name": "Visualization12894",
+      "uri": "SWETA_PRABHA_160:QUERYVISUALIZATION:VISUALIZATION12894:1",
+      "uuid": {
+        "uuidstring": "01ed4680-e2c1-71c1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665175489244,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERYVISUALIZATION",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": null,
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "title": "Untitled Label",
+      "query": "",
+      "visualizationType": "Label",
+      "config": "{\"label\":\"Top 10 County IDs\",\"color\":\"#000\",\"background\":\"transparent\",\"labelHead\":\"text-widget sub-title\",\"visualizationType\":\"LABEL\",\"zIndex\":8,\"_spec\":{\"properties\":[{\"attribute\":\"label\",\"value\":\"\"},{\"attribute\":\"color\",\"value\":\"#000\"},{\"attribute\":\"background\",\"value\":\"transparent\"},{\"attribute\":\"labelHead\",\"value\":\"\"},{\"attribute\":\"visualizationType\",\"value\":\"LABEL\"},{\"attribute\":\"zIndex\",\"value\":\"1\"},{\"attribute\":\"userTemplate\"},{\"attribute\":\"verticallyCentered\"}]},\"userTemplate\":\"<div class=\\\"text-widget\\\"></div>\",\"verticallyCentered\":false,\"colors\":[]}"
+    }
+  ],
+  "parametrizedQuery": [
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "Top_Referrals",
+      "uri": "SWETA_PRABHA_160:QUERY:TOP_REFERRALS:1",
+      "uuid": {
+        "uuidstring": "01ed4673-d6d8-cff1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665169885931,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY sweta_prabha_160.QUERY.Top_Referrals select sum(cnt) as count1, referralURL from WATOPURLS w group by referralURL order by sum(cnt) desc limit 10",
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select sum(cnt) as count1, referralURL from WATOPURLS w group by referralURL order by sum(cnt) desc limit 10;",
+      "appUUID": {
+        "uuidstring": "01ed4673-d6d8-cff2-ada9-a2c3d9b21b1d"
+      },
+      "streamUUID": {
+        "uuidstring": "01ed4673-d6db-dd31-ada9-a2c3d9b21b1d"
+      },
+      "cqUUID": {
+        "uuidstring": "01ed4673-d6e8-8761-ada9-a2c3d9b21b1d"
+      },
+      "typeInfo": {
+        "count1": 1,
+        "referralURL": 2
+      },
+      "queryParameters": [],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "count1",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "referralURL",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "Top_Spender",
+      "uri": "SWETA_PRABHA_160:QUERY:TOP_SPENDER:1",
+      "uuid": {
+        "uuidstring": "01ed467b-e034-c5b1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665173337608,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY sweta_prabha_160.QUERY.Top_Spender select orderamount as spent, custname, countyID from WATOPPRELOYALCUST order by orderamount",
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select orderamount as spent, custname, countyID from WATOPPRELOYALCUST order by orderamount;",
+      "appUUID": {
+        "uuidstring": "01ed467b-e034-c5b2-ada9-a2c3d9b21b1d"
+      },
+      "streamUUID": {
+        "uuidstring": "01ed467b-e037-fa01-ada9-a2c3d9b21b1d"
+      },
+      "cqUUID": {
+        "uuidstring": "01ed467b-e045-4071-ada9-a2c3d9b21b1d"
+      },
+      "typeInfo": {
+        "countyID": 3,
+        "spent": 1,
+        "custname": 2
+      },
+      "queryParameters": [],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "spent",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "custname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "countyID",
+          "type": "java.lang.Integer"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "Santa_Clara_Referral",
+      "uri": "SWETA_PRABHA_160:QUERY:SANTA_CLARA_REFERRAL:1",
+      "uuid": {
+        "uuidstring": "01ed4680-6e4d-20a1-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665175293981,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY sweta_prabha_160.QUERY.Santa_Clara_Referral select referralURL, cnt as count2 from WATOPURLS w2 where countyID = 43 group by referralURL",
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select referralURL, cnt as count2 from WATOPURLS w2 where countyID = 43 group by referralURL;",
+      "appUUID": {
+        "uuidstring": "01ed4680-6e4d-20a2-ada9-a2c3d9b21b1d"
+      },
+      "streamUUID": {
+        "uuidstring": "01ed4680-6e50-2de1-ada9-a2c3d9b21b1d"
+      },
+      "cqUUID": {
+        "uuidstring": "01ed4680-6e5b-c6a1-ada9-a2c3d9b21b1d"
+      },
+      "typeInfo": {
+        "count2": 2,
+        "referralURL": 1
+      },
+      "queryParameters": [],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "referralURL",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "count2",
+          "type": "java.lang.Long"
+        }
+      ]
+    },
+    {
+      "metaObjectClass": "com.webaction.runtime.meta.MetaInfo$Query",
+      "name": "Top10_counties",
+      "uri": "SWETA_PRABHA_160:QUERY:TOP10_COUNTIES:1",
+      "uuid": {
+        "uuidstring": "01ed4681-8192-cb01-ada9-a2c3d9b21b1d"
+      },
+      "version": 1,
+      "owner": 0,
+      "ctime": 1665175755812,
+      "nsName": "sweta_prabha_160",
+      "namespaceId": {
+        "uuidstring": "01ec9413-ff0c-a131-8831-deb3309e0675"
+      },
+      "type": "QUERY",
+      "description": null,
+      "reverseIndexObjectDependencies": [],
+      "sourceText": "CREATE NAMEDQUERY sweta_prabha_160.QUERY.Top10_counties select countyID, sum(cnt) as order_numbers, sum(orderamount) as orderamount from WATOPCOUNTY w3 group by countyID order by sum(orderamount) desc limit 10",
+      "metaInfoStatus": {
+        "generated": false,
+        "dropped": false,
+        "valid": true,
+        "anonymous": false,
+        "adhoc": false
+      },
+      "coDependentObjects": [],
+      "adhocQuery": false,
+      "queryDefinition": "select countyID, sum(cnt) as order_numbers, sum(orderamount) as orderamount from WATOPCOUNTY w3 group by countyID order by sum(orderamount) desc limit 10;",
+      "appUUID": {
+        "uuidstring": "01ed4681-8192-cb02-ada9-a2c3d9b21b1d"
+      },
+      "streamUUID": {
+        "uuidstring": "01ed4681-8195-b131-ada9-a2c3d9b21b1d"
+      },
+      "cqUUID": {
+        "uuidstring": "01ed4681-81a1-e631-ada9-a2c3d9b21b1d"
+      },
+      "typeInfo": {
+        "countyID": 1,
+        "orderamount": 3,
+        "order_numbers": 2
+      },
+      "queryParameters": [],
+      "bindParameters": null,
+      "projectionFields": [
+        {
+          "name": "countyID",
+          "type": "java.lang.Integer"
+        },
+        {
+          "name": "order_numbers",
+          "type": "java.lang.Long"
+        },
+        {
+          "name": "orderamount",
+          "type": "java.lang.Long"
+        }
+      ]
+    }
+  ]
+}
