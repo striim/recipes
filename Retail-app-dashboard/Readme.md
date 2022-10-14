@@ -1,6 +1,8 @@
-# How to create real-time analytics dashboards for retail data using Striim
-## Use Striim's Dashboard feature to visualize retail data in real-time
+# Real-Time Customer Analytics with Change Data Capture + Streaming SQL Joins
+## Use Striim for real-time analytics with in-flight data processing and transformation
 
+[Link to full recipe](https://www.striim.com/tutorial/real-time-customer-analytics-with-change-data-capture-streaming-sql-joins/)
+![Striim, Retail](https://github.com/striim/recipes/blob/main/Retail-app-dashboard/Image.png)
 
 ## How to deploy and run this Striim Application? </br>
 
