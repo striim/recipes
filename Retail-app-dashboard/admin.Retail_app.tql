@@ -1,9 +1,9 @@
 
-CREATE APPLICATION Retail_app_walmart;
+CREATE APPLICATION Retail_app;
 
-CREATE FLOW Retail_app_walmart_SourceFlow;
+CREATE FLOW Retail_app_SourceFlow;
 
-CREATE OR REPLACE SOURCE Retail_app_walmart_DBSource USING Global.DatabaseReader ( 
+CREATE OR REPLACE SOURCE Retail_app_DBSource USING Global.DatabaseReader ( 
   Username: 'cdcuser', 
   QuiesceOnILCompletion: true, 
   ConnectionURL: 'jdbc:postgresql://******:5432/cdcRetail', 
@@ -124,7 +124,7 @@ custkey, custname, countyID,count(*) as cnt, sum(price) as price
  from CustomerWindowRows w
 group by custkey;
 
-END FLOW Retail_app_walmart_SourceFlow;
+END FLOW Retail_app_SourceFlow;
 
-END APPLICATION Retail_app_walmart;
+END APPLICATION Retail_app;
 
