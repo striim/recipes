@@ -1,0 +1,58 @@
+
+CREATE APPLICATION AuditLogApp;
+
+CREATE FLOW AuditLogApp_SourceFlow;
+
+CREATE SOURCE AuditLogApp_PostgresCDC USING Global.PostgreSQLReader ( 
+  Username: 'cdcuser', 
+  ConnectionURL: 'jdbc:postgresql://*****:5432/cdcRetail', 
+  Password: 'RjggJcWyhZDAfQvyEksX/w==', 
+  ReplicationSlotName: 'striiim_slot', 
+  Password_encrypted: 'true', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true, 
+  Tables: '"public"."address"' ) 
+OUTPUT TO AuditLogApp_OutputStream;
+
+CREATE OR REPLACE TARGET AddressTable USING Global.SnowflakeWriter ( 
+  password: '*******', 
+  password_encrypted: 'true', 
+  uploadPolicy: 'eventcount:100,interval:5s', 
+  username: 'edward', 
+  CDDLAction: 'Process', 
+  azureContainerName: 'striim-snowflake-container', 
+  optimizedMerge: 'false', 
+  connectionUrl: 'jdbc:snowflake://*********?warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  tables: '"public"."address",PUBLIC.ADDRESS', 
+  columnDelimiter: '|', 
+  s3Region: 'us-west-1', 
+  appendOnly: 'false', 
+  externalStageType: 'Local', 
+  adapterName: 'SnowflakeWriter', 
+  fileFormatOptions: 'null_if = \"\"', 
+  s3BucketName: 'striim-snowflake-bucket' ) 
+INPUT FROM AuditLogApp_OutputStream;
+
+CREATE OR REPLACE TARGET HistoricalAddressTable USING Global.SnowflakeWriter ( 
+  password: '*******', 
+  password_encrypted: 'true', 
+  uploadPolicy: 'eventcount:100,interval:5s', 
+  appendOnly: 'true', 
+  username: 'edward', 
+  CDDLAction: 'Process', 
+  azureContainerName: 'striim-snowflake-container', 
+  optimizedMerge: 'false', 
+  connectionUrl: 'jdbc:snowflake://*********warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  columnDelimiter: '|', 
+  s3Region: 'us-west-1', 
+  externalStageType: 'Local', 
+  adapterName: 'SnowflakeWriter', 
+  fileFormatOptions: 'null_if = \"\"', 
+  tables: '"public"."address",PUBLIC.HISTORICALADDRESS', 
+  s3BucketName: 'striim-snowflake-bucket' ) 
+INPUT FROM AuditLogApp_OutputStream;
+
+END FLOW AuditLogApp_SourceFlow;
+
+END APPLICATION AuditLogApp;
+
