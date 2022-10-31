@@ -17,7 +17,7 @@ PRIMARY KEY (“Serial”));
 
 ### Step 2: Set up the target tables on Snowflake
 
-Create an ADDRESS table and HISTORICALADDRESS table on snowflake with the same column names and data types as your source table.
+Create an ADDRESS table with the same column names and data types as your source table and AUDIT table with additional columns for operation and timestamp on snowflake.
 
 ### Step 3: Configure your source and target adapters on Striim
 
