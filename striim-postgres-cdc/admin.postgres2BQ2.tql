@@ -1,0 +1,132 @@
+
+CREATE OR REPLACE APPLICATION postgres2BQ;
+
+CREATE FLOW postgres2BQ_SourceFlow;
+
+CREATE SOURCE postgres2BQ_PostgresCDC USING Global.PostgreSQLReader ( 
+  Username: 'cdcuser', 
+  ConnectionURL: 'jdbc:postgresql://*******:5432/cdcRetail', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  ReplicationSlotName: 'striiim_slot', 
+  Password_encrypted: 'true', 
+  Tables: '"public"."Retailcdc"', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO postgres2BQ_OutputStream;
+
+END FLOW postgres2BQ_SourceFlow;
+
+CREATE OR REPLACE TARGET BigQuery_postgres2BQ_Target USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:10000, Interval:30', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  adapterName: 'BigQueryWriter', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  Tables: '"public"."Retailcdc",Retail.retailData2M', 
+  ServiceAccountKey: 'UploadedFiles/admin/sgt-bq-sync-sa.json', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team' ) 
+INPUT FROM postgres2BQ_OutputStream;
+
+ALTER FLOW postgres2BQ_SourceFlow;
+
+CREATE CQ ParseData2 
+INSERT INTO RetailOrders1 
+SELECT  data[0] as storeId,
+        data[6] as orderId,
+        data[7] as sku,
+        TO_DOUBLE(data[8]) as orderAmount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as dateTime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourValue,
+        data[3] as state,
+        data[2] as city,
+        data[4] as zip
+FROM postgres2BQ_OutputStream;;
+
+CREATE JUMPING WINDOW Orders15min OVER RetailOrders1 
+KEEP WITHIN 1 SECOND ON dateTime1;
+
+CREATE CQ ProductActivity1 
+INSERT INTO ProductTrackStream 
+SELECT sku, COUNT(*), SUM(orderAmount), FIRST(dateTime1)
+FROM Orders15min;;
+
+CREATE CQ StoreActivity 
+INSERT INTO storeActivityStream 
+SELECT storeId, COUNT(*), SUM(orderAmount), FIRST(dateTime1)
+FROM Orders15min;;
+
+CREATE CQ CityActivity 
+INSERT INTO CityActivityStream 
+SELECT city, COUNT(*), SUM(orderAmount), FIRST(dateTime1)
+FROM Orders15min;;
+
+CREATE TARGET ProductTracking USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  ServiceAccountKey: 'UploadedFiles/admin/striim-growth-team-44f824941e87copy.json', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:1000000, Interval:90', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  Tables: 'Retail.Product', 
+  StandardSQL: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team' ) 
+INPUT FROM ProductTrackStream;
+
+CREATE TARGET StoreTracking USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  ServiceAccountKey: 'UploadedFiles/admin/striim-growth-team-44f824941e87copy.json', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:1000000, Interval:90', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  Tables: 'Retail.Store', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team' ) 
+INPUT FROM storeActivityStream;
+
+CREATE TARGET CityTracking USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  ServiceAccountKey: 'UploadedFiles/admin/striim-growth-team-44f824941e87copy.json', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:1000000, Interval:90', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team', 
+  Tables: 'Retail.City' ) 
+INPUT FROM CityActivityStream;
+
+END FLOW postgres2BQ_SourceFlow;
+
+END APPLICATION postgres2BQ;
+

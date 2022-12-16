@@ -1,0 +1,39 @@
+
+CREATE APPLICATION postgres2BQ1;
+
+CREATE FLOW postgres2BQ_SourceFlow;
+
+CREATE SOURCE postgres2BQ_PostgresCDC USING Global.PostgreSQLReader ( 
+  Username: 'cdcuser', 
+  ConnectionURL: 'jdbc:postgresql://*******:5432/cdcRetail', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  ReplicationSlotName: 'striiim_slot', 
+  Password_encrypted: 'true', 
+  Tables: '"public"."Retailcdc"', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO postgres2BQ_OutputStream;
+
+END FLOW postgres2BQ_SourceFlow;
+
+CREATE TARGET BigQuery_postgres2BQ_Target USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  BatchPolicy: 'eventCount:10000, Interval:30', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  ServiceAccountKey: 'UploadedFiles/admin/striim-growth-team-44f824941e87.json', 
+  StandardSQL: 'true', 
+  Tables: '"public"."Retailcdc",Retail.retailData2M', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team' ) 
+INPUT FROM postgres2BQ_OutputStream;
+
+END APPLICATION postgres2BQ1;
+
