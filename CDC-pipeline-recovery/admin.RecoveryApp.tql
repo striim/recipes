@@ -1,0 +1,38 @@
+
+CREATE OR REPLACE APPLICATION RecoveryApp RECOVERY 10 SECOND INTERVAL;
+
+CREATE OR REPLACE SOURCE PostgresSource USING Global.PostgreSQLReader ( 
+  Tables: '"striim"."data1"', 
+  adapterName: 'PostgreSQLReader', 
+  ConnectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  CDDLCapture: false, 
+  Username: 'cdcuser', 
+  ConnectionURL: 'jdbc:postgresql://******:5432/cdcRetail', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  ReplicationSlotName: 'striiim_slot', 
+  Password_encrypted: 'true', 
+  PostgresConfig: '{\n\"ReplicationPluginConfig\": {\n\t\t\"Name\": \"WAL2JSON\",\n\t\t\"Format\": \"1\"\n\t}\n}', 
+  CDDLAction: 'Process', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO SourceStream;
+
+CREATE OR REPLACE TARGET SnowflakeTarget USING Global.SnowflakeWriter ( 
+  streamingUpload: 'false', 
+  password_encrypted: 'true', 
+  username: 'edward', 
+  CDDLAction: 'Process', 
+  StreamingConfiguration: 'MaxParallelRequests=5, MaxRequestSizeInMB=5, MaxRecordsPerRequest=10000', 
+  optimizedMerge: 'false', 
+  columnDelimiter: '|', 
+  connectionUrl: 'jdbc:snowflake://striim_partner***********:443?warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  appendOnly: 'false', 
+  uploadPolicy: 'eventcount:10000,interval:5m', 
+  externalStageType: 'Local', 
+  adapterName: 'SnowflakeWriter', 
+  fileFormatOptions: 'null_if = \"\"', 
+  tables: '"striim"."data1",PUBLIC.DATA1', 
+  password: 'b4KSR/EwGGt/mAdXVVVnUg==' ) 
+INPUT FROM SourceStream;
+
+END APPLICATION RecoveryApp;
+
