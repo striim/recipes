@@ -1,0 +1,42 @@
+
+CREATE APPLICATION dbtApp;
+
+CREATE SOURCE sf_source USING Global.PostgreSQLReader ( 
+  Username: 'cdcuser', 
+  ConnectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  CDDLCapture: false, 
+  ReplicationSlotName: 'striim_slot', 
+  ConnectionURL: 'jdbc:postgresql://{**.**.*.**}:5432/cdcRetail', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  Password_encrypted: 'true', 
+  Tables: '"public"."Retailcdc"', 
+  PostgresConfig: '{\n\"ReplicationPluginConfig\": {\n\t\t\"Name\": \"WAL2JSON\",\n\t\t\"Format\": \"1\"\n\t}\n}', 
+  CDDLAction: 'Process', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO sf_stream;
+
+CREATE CQ sf_cq 
+INSERT INTO sf_cq_stream 
+select * from sf_stream s;;
+
+CREATE TARGET sf_target USING Global.SnowflakeWriter ( 
+  streamingUpload: 'false', 
+  password_encrypted: 'true', 
+  connectionUrl: 'jdbc:snowflake://************/?warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  username: 'edward', 
+  StreamingConfiguration: 'MaxParallelRequests=5, MaxRequestSizeInMB=5, MaxRecordsPerRequest=10000', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  privateKey: '', 
+  columnDelimiter: '|', 
+  tables: 'PUBLIC.RETAILAZURE', 
+  privateKey_encrypted: 'true', 
+  appendOnly: 'false', 
+  uploadPolicy: 'eventcount:10000,interval:5m', 
+  externalStageType: 'Local', 
+  fileFormatOptions: 'null_if = \"\"', 
+  password: 'b4KSR/EwGGt/mAdXVVVnUg==' ) 
+INPUT FROM sf_cq_stream;
+
+END APPLICATION dbtApp;
+
