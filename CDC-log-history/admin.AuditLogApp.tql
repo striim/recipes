@@ -1,0 +1,47 @@
+
+CREATE OR REPLACE APPLICATION dbtApp;
+
+CREATE OR REPLACE SOURCE sf_source USING Global.PostgreSQLReader ( 
+  adapterName: 'PostgreSQLReader', 
+  ConnectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  CDDLCapture: false, 
+  Username: 'cdcuser', 
+  ReplicationSlotName: 'striim_slot', 
+  ConnectionURL: 'jdbc:postgresql://34.82.0.93:5432/cdcRetail', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  Password_encrypted: 'true', 
+  PostgresConfig: '{\n\"ReplicationPluginConfig\": {\n\t\t\"Name\": \"WAL2JSON\",\n\t\t\"Format\": \"1\"\n\t}\n}', 
+  CDDLAction: 'Process', 
+  FilterTransactionBoundaries: true, 
+  Tables: '"public"."address"' ) 
+OUTPUT TO sf_stream;
+
+CREATE OR REPLACE CQ sf_cq 
+INSERT INTO auditstream 
+SELECT TO_STRING(META(sf_stream,"OperationName")) as operation, 
+		TO_STRING(META(sf_stream,"Timestamp")) as change_time,
+		TO_LONG(data[0]) as serial,
+		TO_STRING(data[1]) as name,
+		TO_STRING(data[2]) as address
+		FROM sf_stream;;
+
+CREATE OR REPLACE TARGET sf_target USING Global.SnowflakeWriter ( 
+  streamingUpload: 'false', 
+  password_encrypted: 'true', 
+  username: 'edward', 
+  CDDLAction: 'Process', 
+  StreamingConfiguration: 'MaxParallelRequests=5, MaxRequestSizeInMB=5, MaxRecordsPerRequest=10000', 
+  optimizedMerge: 'false', 
+  columnDelimiter: '|', 
+  appendOnly: 'false', 
+  tables: 'PUBLIC.AUDIT', 
+  connectionUrl: 'jdbc:snowflake://************/?warehouse=LOAD_WH&db=RETAILCDC&schema=public', 
+  uploadPolicy: 'eventcount:10000,interval:5m', 
+  externalStageType: 'Local', 
+  adapterName: 'SnowflakeWriter', 
+  fileFormatOptions: 'null_if = \"\"', 
+  password: 'b4KSR/EwGGt/mAdXVVVnUg==' ) 
+INPUT FROM auditstream;
+
+END APPLICATION dbtApp;
+
