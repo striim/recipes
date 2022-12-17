@@ -1,0 +1,161 @@
+
+CREATE OR REPLACE APPLICATION Retail_app;
+
+CREATE TYPE Aggcounty (
+ countyID java.lang.Long,
+ count java.lang.Integer,
+ price java.lang.Long);
+
+CREATE FLOW Retail_app_SourceFlow;
+
+CREATE OR REPLACE TYPE Customer (
+ CustKey java.lang.Long KEY,
+ Customer java.lang.String);
+
+CREATE SOURCE Retail_app_PostgresCDC USING Global.PostgreSQLReader ( 
+  Username: 'cdcuser', 
+  ConnectionURL: 'jdbc:postgresql://*****:5432/cdcRetail', 
+  Tables: '"public"."order_pg_with_url"', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  ReplicationSlotName: 'striiim_slot', 
+  Password_encrypted: 'true', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO Retail_app_OutputStream;
+
+END FLOW Retail_app_SourceFlow;
+
+CREATE TYPE CustETEntry (
+ orderdate org.joda.time.DateTime,
+ custkey java.lang.Long,
+ custname java.lang.String,
+ countyID java.lang.Long,
+ cnt java.lang.Integer,
+ price java.lang.Long);
+
+CREATE TYPE ReferralEntry (
+ order_date org.joda.time.DateTime,
+ countryID java.lang.Long,
+ reflink java.lang.String,
+ count java.lang.Integer,
+ countryidreflink java.lang.String);
+
+CREATE TYPE custcacheType (
+ ColumnName0 java.lang.Long,
+ ColumnName1 java.lang.String);
+
+ALTER FLOW Retail_app_SourceFlow;
+
+CREATE OR REPLACE WACTIONSTORE WATOPCOUNTY CONTEXT OF Aggcounty USING ( storageProvider: 'elasticsearch' );
+
+CREATE OR REPLACE CACHE Custcache1 USING Global.FileReader ( 
+  positionbyeof: true, 
+  wildcard: 'cust_names_60k.csv', 
+  rolloverstyle: 'Default', 
+  blocksize: 64, 
+  skipbom: true, 
+  directory: 'UploadedFiles/admin', 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  blockascompleterecord: false,
+  charset: 'UTF-8',
+  columndelimiter: ',',
+  columndelimittill: '-1',
+  handler: 'com.webaction.proc.DSVParser_1_0',
+  header: false,
+  headerlineno: 0,
+  ignoreemptycolumn: false,
+  ignoremultiplerecordbegin: 'true',
+  ignorerowdelimiterinquote: false,
+  linenumber: '-1',
+  nocolumndelimiter: false,
+  quoteset: '\"',
+  rowdelimiter: '\n',
+  separator: ':',
+  trimquote: true,
+  trimwhitespace: false ) 
+QUERY ( 
+  keytomap: 'CustKey',
+  skipinvalid: 'false' ) 
+OF Customer;
+
+CREATE WACTIONSTORE WATOPPRELOYALCUST CONTEXT OF CustETEntry USING ( storageProvider: 'elasticsearch' );
+
+CREATE WACTIONSTORE WATOPCUST CONTEXT OF CustETEntry USING ( storageProvider: 'elasticsearch' );
+
+CREATE WACTIONSTORE WATOPURLS CONTEXT OF ReferralEntry USING ( storageProvider: 'elasticsearch' );
+
+CREATE OR REPLACE CQ LineCSVtoData8 
+INSERT INTO orderStream9 
+SELECT TO_DATE(data[0])as order_Date, 
+		TO_LONG(data[1]) as orderKey, 
+		TO_LONG(data[2]) as custKey, 
+		TO_LONG(data[2])/1000 as countyID, 
+		TO_LONG(data[4]) as orderAmount, 
+		TO_STRING(data[5]) as reflink, 
+		c.customer as custname 
+		FROM Retail_app_OutputStream, 
+		Custcache1 c 
+		where TO_LONG(data[4]) > 1000 
+		and TO_LONG(data[2]) = c.custkey
+		LIMIT 10000;
+
+CREATE CQ TopCounty 
+INSERT INTO WATOPCUST 
+select od, custkey, custname, countyId, cnt, max(price) 
+from
+(Select 
+last(order_Date) as od, countyID,custkey, custname, count(*) as cnt, sum(orderAmount) as price
+ from OrderWindow1min w 
+ group by countyID,custkey
+ having count(*) > 0) T
+group by T.countyID;;
+
+CREATE JUMPING WINDOW OrderWindow1min OVER orderStream9 
+KEEP RANGE 1 MINUTE ON order_Date WITHIN 1 MINUTE 
+PARTITION BY countyID;
+
+CREATE JUMPING WINDOW RefWindow1min OVER orderStream9 
+KEEP RANGE 1 MINUTE ON order_Date WITHIN 1 MINUTE 
+PARTITION BY countyID,reflink;
+
+CREATE CQ AggCounty 
+INSERT INTO WATOPCOUNTY 
+Select 
+countyID,count(*) as cnt, sum(orderAmount) as price
+ from OrderWindow1min w 
+ group by countyID
+ having count(*) > 0;;
+
+CREATE CQ TopCustomer 
+INSERT INTO aggregatestream 
+Select 
+ last(order_date) as orderdate,
+ custkey, custname, countyID,count(*) as cnt, sum(orderAmount) as price
+ from OrderWindow1min w 
+ group by custkey
+ having count(*) > 0;;
+
+CREATE CQ TopReferral 
+INSERT INTO WATOPURLS 
+select last(order_date), countyID, reflink, count(*), countyID.toString()+reflink 
+from RefWindow1min
+group by countyId, reflink
+having count(*) > 0;;
+
+CREATE JUMPING WINDOW CustomerWindowRows OVER aggregatestream 
+KEEP 3 ROWS WITHIN 1 MINUTE 
+PARTITION BY custkey;
+
+CREATE CQ PrevLoyalCustomers 
+INSERT INTO WATOPPRELOYALCUST 
+select 
+ last(orderdate),
+custkey, custname, countyID,count(*) as cnt, sum(price) as price
+ from CustomerWindowRows w
+group by custkey;;
+
+END FLOW Retail_app_SourceFlow;
+
+END APPLICATION Retail_app;
+
