@@ -1,0 +1,54 @@
+
+CREATE OR REPLACE APPLICATION KafkaWriter;
+
+CREATE OR REPLACE SOURCE MongodbSource USING Global.MongoDBReader ( 
+  adapterName: 'MongoDBReader', 
+  password_encrypted: 'true', 
+  connectionUrl: 'mongodb+srv://********-striim-devtesting.*****.mongodb.net/test', 
+  userName: 'sweta', 
+  readPreference: 'primaryPreferred', 
+  FullDocumentUpdateLookup: false, 
+  mode: 'Incremental', 
+  password: 'sc7tk9jfSotP6Jq2lsG5rQ==', 
+  QuiesceOnILCompletion: false, 
+  authDB: 'admin', 
+  sslEnabled: false, 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  collections: 'sample_airbnb.listingsAndReviews', 
+  authType: 'Default' ) 
+OUTPUT TO mongoOutputStream;
+
+CREATE CQ MongoCQ 
+INSERT INTO MongoProcessedStream 
+SELECT
+TO_STRING(data.get("_id")) as id,
+TO_STRING(data.get("name")) as name,
+TO_STRING(data.get("property_type")) as property_type,
+TO_STRING(data.get("room_type")) as room_type,
+TO_STRING(data.get("bed_type")) as bed_type,
+TO_STRING(data.get("minimum_nights")) as minimum_nights,
+TO_STRING(data.get("cancellation_policy")) as cancellation_policy,
+TO_STRING(data.get("accommodates")) as accommodates,
+TO_STRING(data.get("bedrooms")) as no_of_bedrooms,
+TO_STRING(data.get("beds")) as no_of_beds,
+TO_STRING(data.get("number_of_reviews")) as no_of_reviews
+FROM mongoOutputStream l;
+
+CREATE TARGET KafkaTarget USING Global.KafkaWriter VERSION '2.1.0'( 
+  brokerAddress: 'pkc*******.us-******.gcp.confluent.cloud:9092', 
+  Topic: 'CDCtopic', 
+  KafkaConfigValueSeparator: '==', 
+  MessageKey: '', 
+  KafkaConfigPropertySeparator: ':', 
+  MessageHeader: '', 
+  ParallelThreads: '', 
+  KafkaConfig: 'session.timeout.ms==60000:sasl.mechanism==PLAIN:sasl.jaas.config==org.apache.kafka.common.security.plain.PlainLoginModule required username=\"***********" password=\"***********";:ssl.endpoint.identification.algorithm==https:security.protocol==SASL_SSL', 
+  Mode: 'Sync' ) 
+FORMAT USING Global.JSONFormatter  ( 
+  jsonMemberDelimiter: '\n', 
+  EventsAsArrayOfJsonObjects: 'true', 
+  jsonobjectdelimiter: '\n' ) 
+INPUT FROM MongoProcessedStream;
+
+END APPLICATION KafkaWriter;
+
