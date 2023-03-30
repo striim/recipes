@@ -3,7 +3,7 @@
         
 
 [Link to full recipe](https://www.striim.com/tutorial/stream-data-from-an-aws-s3-bucket-to-google-bigquery-for-real-time-data-analytics/)
-![Striim, schema evolution](https://github.com/striim/recipes/blob/main/striim-s3-reader/S3.png)
+![Striim, schema evolution](https://github.com/striim/recipes/blob/main/striim-s3-reader/Image.png)
 
 
 ## Setting Up the Striim Application </br>
@@ -17,5 +17,3 @@
 ### Step 4: Configure the target
 
 ### Step 5: Deploy and Run your real-time streaming application
-
-
