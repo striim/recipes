@@ -1,0 +1,72 @@
+
+CREATE APPLICATION S32stream USE EXCEPTIONSTORE TTL : '7d' ;
+
+CREATE FLOW S32stream_SourceFlow;
+
+CREATE SOURCE S32stream_Source USING Global.S3Reader ( 
+  bucketname: 's3reader-recipe', 
+  blocksize: 64, 
+  secretaccesskey: '************', 
+  secretaccesskey_encrypted: 'true', 
+  objectnameprefix: 'posdata5L', 
+  accesskeyid: '********' ) 
+PARSE USING Global.DSVParser ( 
+  trimwhitespace: false, 
+  commentcharacter: '', 
+  linenumber: '-1', 
+  columndelimiter: ',', 
+  trimquote: true, 
+  columndelimittill: '-1', 
+  ignoreemptycolumn: false, 
+  separator: ':', 
+  quoteset: '\"', 
+  charset: 'UTF-8', 
+  ignoremultiplerecordbegin: 'true', 
+  ignorerowdelimiterinquote: false, 
+  header: false, 
+  blockascompleterecord: false, 
+  rowdelimiter: '\n', 
+  nocolumndelimiter: false, 
+  headerlineno: 0 ) 
+OUTPUT TO S32stream_Source_Stream;
+
+CREATE OR REPLACE CQ ProcessStream 
+INSERT INTO NewProcessedStream 
+select data[0] as business_name,
+		data[1] as merchant_id,
+		data[2] as primary_account_number,
+		data[3] as pos_code,
+		data[4] as date_time,
+		data[5] as exp_date,
+		data[6] as currency_code,
+		data[7] as auth_amount,
+		data[8] as terminal_id,
+		data[9] as zip,
+		data[10] as city
+from S32stream_Source_Stream;;
+
+CREATE OR REPLACE TARGET BQTarget USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  BatchPolicy: 'eventCount:1000, Interval:1', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  Tables: 'public.posdata', 
+  optimizedMerge: 'false', 
+  ServiceAccountKey: 'UploadedFiles/admin/*****.json', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  adapterName: 'BigQueryWriter', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  includeInsertId: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-team' ) 
+INPUT FROM NewProcessedStream;
+
+END FLOW S32stream_SourceFlow;
+
+END APPLICATION S32stream;
+
