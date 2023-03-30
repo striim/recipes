@@ -1,5 +1,5 @@
-# Ensure Data Freshness with Streaming SQL
-## Use Striim’s SQL to monitor and alert on lag between source and target systems
+# Stream Data from an AWS S3 Bucket to Google BigQuery for Real-Time Data Analytics
+## Use Striim's S3 reader for data streaming from S3 bucket
         
 
 [Link to full recipe](https://www.striim.com/tutorial/stream-data-from-an-aws-s3-bucket-to-google-bigquery-for-real-time-data-analytics/)
