@@ -1,0 +1,45 @@
+
+CREATE APPLICATION S3groceryapp;
+
+CREATE OR REPLACE SOURCE Source_review USING Global.S3Reader ( 
+  bucketname: 's3reader-recipe', 
+  blocksize: 64, 
+  objectnameprefix: 'Grocery1000.json', 
+  secretaccesskey: '******************', 
+  secretaccesskey_encrypted: 'true', 
+  accesskeyid: '**********', 
+  adapterName: 'S3Reader' ) 
+PARSE USING Global.JSONParser ( 
+  handler: 'com.webaction.proc.JSONParser_1_0', 
+  parserName: 'JSONParser' ) 
+OUTPUT TO groceryStream;
+
+CREATE OR REPLACE CQ CQ_grocery 
+INSERT INTO groceryPCStream 
+SELECT 
+  ('ReviewerID=' + data.get('reviewerID').textValue() + ", " +
+  'asin=' + data.get('asin').textValue()+ ", " +
+  'rating=' + data.get('overall'))
+  as prompt,
+  data.get('reviewText').textValue() 
+  as completion 
+ 
+ FROM groceryStream j;
+
+CREATE TARGET outputPC USING Global.FileWriter ( 
+  DataEncryptionKeyPassphrase: '', 
+  flushpolicy: 'EventCount:10000,Interval:30s', 
+  rolloveronddl: 'true', 
+  encryptionpolicy: '', 
+  filename: 'grocery_parsed.json', 
+  DataEncryptionKeyPassphrase_encrypted: 'true', 
+  rolloverpolicy: 'EventCount:10000,Interval:30s', 
+  directory: 'UploadedFiles/sweta_prabha_355/' ) 
+FORMAT USING Global.JSONFormatter  ( 
+  jsonMemberDelimiter: '\n', 
+  EventsAsArrayOfJsonObjects: 'true', 
+  jsonobjectdelimiter: '\n' ) 
+INPUT FROM groceryPCStream;
+
+END APPLICATION S3groceryapp;
+
