@@ -1,0 +1,41 @@
+
+CREATE APPLICATION app6;
+
+CREATE CQ query_app6 
+INSERT INTO app6_stream 
+SELECT  TO_STRING(data[0]) as storeid,
+        TO_STRING(data[6]) as orderid,
+        TO_STRING(data[7]) as sku,
+        TO_DOUBLE(SRIGHT(data[8],1)) as orderamount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as datetime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourvalue,
+        TO_STRING(data[3]) as state,
+        TO_STRING(data[2]) as city,
+        TO_STRING(data[4]) as zip
+FROM app1_OutputStream;
+
+CREATE CQ pubsub_CQ 
+INSERT INTO Pubsub_Stream 
+select orderid, orderamount 
+from app6_stream
+where orderamount>500;;
+
+CREATE TARGET PunsubTarget USING Global.GooglePubSubWriter ( 
+  PubSubConfig: 'RetryDelay:1,MaxRetryDelay:60,TotalTimeout:600,InitialRpcTimeout:10,MaxRpcTimeout:10,RetryDelayMultiplier:2.0,RpcTimeoutMultiplier:1.0,NumThreads:5,MaxOutstandingElementCount:1000,MaxOutstandingRequestBytes:1000000', 
+  ProjectId: 'striim-growth-team', 
+  BatchPolicy: 'EventCount:1000,Interval:1m,Size:1000000', 
+  MessageAttributes: '', 
+  Topic: 'DataMeshTopic', 
+  ServiceAccountKey: 'UploadedFiles/admin/key.json' ) 
+FORMAT USING Global.JSONFormatter  ( 
+  quotecharacter: '\"', 
+  columndelimiter: ',', 
+  nullvalue: 'NULL', 
+  usequotes: 'false', 
+  rowdelimiter: '\n', 
+  standard: 'none', 
+  header: 'false' ) 
+INPUT FROM Pubsub_Stream;
+
+END APPLICATION app6;
+

@@ -1,0 +1,74 @@
+
+CREATE APPLICATION app3;
+
+CREATE CQ app3_query 
+INSERT INTO app3_stream 
+SELECT  TO_STRING(data[0]) as storeid,
+        TO_STRING(data[6]) as orderid,
+        TO_STRING(data[7]) as sku,
+        TO_DOUBLE(SRIGHT(data[8],1)) as orderamount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as datetime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourvalue,
+        TO_STRING(data[3]) as state,
+        TO_STRING(data[2]) as city,
+        TO_STRING(data[4]) as zip
+FROM app1_OutputStream;
+
+CREATE JUMPING WINDOW ProductActivity15min OVER app3_stream 
+KEEP WITHIN 15 MINUTE;
+
+CREATE JUMPING WINDOW StoreActivity_5min OVER app3_stream 
+KEEP WITHIN 5 MINUTE;
+
+CREATE CQ Query_15min_productActivity 
+INSERT INTO ProductActivity_BQstream 
+SELECT sku, COUNT(*), SUM(orderamount), FIRST(datetime1)
+FROM ProductActivity15min 
+GROUP BY sku;;
+
+CREATE CQ Query_5min_storeactivity 
+INSERT INTO StorActivity_stream 
+SELECT storeid, COUNT(*), SUM(orderamount), FIRST(datetime1)
+FROM StoreActivity_5min
+GROUP By storeid;;
+
+CREATE TARGET ProductActivity_BQ USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  ServiceAccountKey: 'UploadedFiles/admin/key.json', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team', 
+  Tables: 'public.Product', 
+  BatchPolicy: 'eventCount:10000, Interval:90' ) 
+INPUT FROM ProductActivity_BQstream;
+
+CREATE TARGET StoreActivity_BQ USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  Tables: 'Retail.Store', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  ServiceAccountKey: 'UploadedFiles/admin/key.json', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team', 
+  BatchPolicy: 'eventCount:10000, Interval:90' ) 
+INPUT FROM StorActivity_stream;
+
+END APPLICATION app3;
+

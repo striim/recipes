@@ -1,0 +1,28 @@
+
+CREATE APPLICATION app4;
+
+CREATE CQ query_app4 
+INSERT INTO app4_stream 
+SELECT  TO_STRING(data[0]) as storeid,
+        TO_STRING(data[6]) as orderid,
+        TO_STRING(data[7]) as sku,
+        TO_DOUBLE(SRIGHT(data[8],1)) as orderamount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as datetime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourvalue,
+        TO_STRING(data[3]) as state,
+        TO_STRING(data[2]) as city,
+        TO_STRING(data[4]) as zip
+FROM app1_OutputStream;;
+
+CREATE TARGET spanner_target USING Global.SpannerWriter ( 
+  CheckpointTable: 'CHKPOINT', 
+  BatchPolicy: 'EventCount: 1000, Interval: 60s', 
+  ParallelThreads: '', 
+  Tables: '"public"."Retail"', 
+  CDDLAction: 'Process', 
+  InstanceID: 'striim-growth-team', 
+  ServiceAccountKey: 'UploadedFiles/admin/key.json' ) 
+INPUT FROM app4_stream;
+
+END APPLICATION app4;
+

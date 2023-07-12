@@ -1,0 +1,37 @@
+
+CREATE APPLICATION app2;
+
+CREATE CQ Query_PersistStream_app2 
+INSERT INTO app2_stream 
+SELECT  TO_STRING(data[0]) as storeid,
+        TO_STRING(data[6]) as orderid,
+        TO_STRING(data[7]) as sku,
+        TO_DOUBLE(SRIGHT(data[8],1)) as orderamount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as datetime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourvalue,
+        TO_STRING(data[3]) as state,
+        TO_STRING(data[2]) as city,
+        TO_STRING(data[4]) as zip
+FROM app1_OutputStream;;
+
+CREATE TARGET App2BQ_target USING Global.BigQueryWriter ( 
+  ColumnDelimiter: '|', 
+  NullMarker: 'NULL', 
+  streamingUpload: 'false', 
+  Tables: 'public.Retailtarget', 
+  Encoding: 'UTF-8', 
+  ConnectionRetryPolicy: 'totalTimeout=600, initialRetryDelay=10, retryDelayMultiplier=2.0, maxRetryDelay=60 , maxAttempts=5, jittered=True, initialRpcTimeout=10, rpcTimeoutMultiplier=2.0, maxRpcTimeout=30', 
+  AllowQuotedNewLines: 'false', 
+  CDDLAction: 'Process', 
+  optimizedMerge: 'false', 
+  ServiceAccountKey: 'UploadedFiles/admin/key.json', 
+  TransportOptions: 'connectionTimeout=300, readTimeout=120', 
+  Mode: 'APPENDONLY', 
+  StandardSQL: 'true', 
+  QuoteCharacter: '\"', 
+  projectId: 'striim-growth-team', 
+  BatchPolicy: 'eventCount:10000, Interval:90' ) 
+INPUT FROM app2_stream;
+
+END APPLICATION app2;
+

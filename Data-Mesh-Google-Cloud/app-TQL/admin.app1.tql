@@ -1,0 +1,33 @@
+
+CREATE OR REPLACE APPLICATION app1 USE EXCEPTIONSTORE TTL : '7d' ;
+
+CREATE FLOW app1_SourceFlow;
+
+CREATE SOURCE app1_PostgresCDC USING Global.PostgreSQLReader ( 
+  Username: 'cdcuser', 
+  ConnectionURL: 'jdbc:postgresql://**.**.*.**:5432/cdcRetail', 
+  Password: 'b4KSR/EwGGt/mAdXVVVnUg==', 
+  ReplicationSlotName: 'striiim_slot', 
+  Password_encrypted: 'true', 
+  Tables: '"public"."Retailcdc"', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true ) 
+OUTPUT TO app1_OutputStream PERSIST USING admin.CloudKafkaProperties;
+
+CREATE CQ CQ_transformation5 
+INSERT INTO Transformed_stream5 
+SELECT  TO_STRING(data[0]) as storeid,
+        TO_STRING(data[6]) as orderid,
+        TO_STRING(data[7]) as sku,
+        TO_DOUBLE(SRIGHT(data[8],1)) as orderamount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as datetime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourvalue,
+        TO_STRING(data[3]) as state,
+        TO_STRING(data[2]) as city,
+        TO_STRING(data[4]) as zip
+FROM app1_OutputStream;;
+
+END FLOW app1_SourceFlow;
+
+END APPLICATION app1;
+

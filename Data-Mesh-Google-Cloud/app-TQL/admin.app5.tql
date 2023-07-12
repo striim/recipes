@@ -1,0 +1,50 @@
+
+CREATE APPLICATION app5;
+
+CREATE CQ query_app5 
+INSERT INTO app5_stream 
+SELECT  TO_STRING(data[0]) as storeid,
+        TO_STRING(data[6]) as orderid,
+        TO_STRING(data[7]) as sku,
+        TO_DOUBLE(SRIGHT(data[8],1)) as orderamount,
+        TO_DATE(data[9],'yyyyMMddHHmmss') as datetime1,
+        DHOURS(TO_DATE(data[9],'yyyyMMddHHmmss')) as hourvalue,
+        TO_STRING(data[3]) as state,
+        TO_STRING(data[2]) as city,
+        TO_STRING(data[4]) as zip
+FROM app1_OutputStream;;
+
+CREATE JUMPING WINDOW AB_Testing30secwindow OVER app5_stream 
+KEEP WITHIN 30 SECOND;
+
+CREATE JUMPING WINDOW ABTesting_window1min OVER app5_stream 
+KEEP WITHIN 1 MINUTE;
+
+CREATE CQ ABTesting30sec_CQ 
+INSERT INTO ABTest30sec_stream 
+select state, AVG(orderamount)
+from AB_Testing30secwindow
+group by state;;
+
+CREATE CQ ABTesting1min_CQ 
+INSERT INTO ABTest_1minstream 
+select state, AVG(orderamount)
+from ABTesting_window1min
+group by state;;
+
+CREATE EVENTTABLE Avgorderamount_30sec USING STREAM ( 
+  name: 'ABTest30sec_stream' ) 
+QUERY ( 
+  keytomap: 'state',
+  persistPolicy: 'true' ) 
+OF ABTest30sec_stream_Type;
+
+CREATE EVENTTABLE Avgorderamount1min_state6 USING STREAM ( 
+  name: 'ABTest_1minstream' ) 
+QUERY ( 
+  keytomap: 'state',
+  persistPolicy: 'true' ) 
+OF ABTest_1minstream_Type;
+
+END APPLICATION app5;
+
