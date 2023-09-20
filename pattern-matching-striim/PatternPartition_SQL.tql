@@ -1,0 +1,93 @@
+
+CREATE OR REPLACE APPLICATION PatternPartition;
+
+CREATE OR REPLACE TYPE TxnEvent_Type (
+ CC_Number java.lang.String,
+ Amount java.lang.String,
+ TXN_Type java.lang.String,
+ SessionID java.lang.String,
+ TXN_Timestamp java.lang.String);
+
+CREATE OR REPLACE STREAM Txn_Stream OF TxnEvent_Type;
+
+WITH UICONFIG = "{\"subType\":\"Field Masker\",\"config\":{\"stream\":\"admin.STREAM.Txn_Stream\",\"columns\":[{\"column\":\"CC_Number\",\"tqlFunction\":\"maskCreditCardNumber_partially\",\"alias\":\"CC_Number\",\"columns\":{},\"enabled\":true,\"columnType\":\"java.lang.String\"},{\"column\":\"Amount\",\"tqlFunction\":\"\",\"alias\":\"Amount\",\"columns\":{},\"enabled\":true,\"columnType\":\"java.lang.String\"},{\"column\":\"TXN_Type\",\"tqlFunction\":\"\",\"alias\":\"TXN_Type\",\"columns\":{},\"enabled\":true,\"columnType\":\"java.lang.String\"},{\"column\":\"SessionID\",\"tqlFunction\":\"\",\"alias\":\"SessionID\",\"columns\":{},\"enabled\":true,\"columnType\":\"java.lang.String\"},{\"column\":\"TXN_Timestamp\",\"tqlFunction\":\"\",\"alias\":\"TXN_Timestamp\",\"columns\":{},\"enabled\":true,\"columnType\":\"java.lang.String\"}]}}"
+CREATE CQ CreditCardMasking 
+INSERT INTO MaskedTXN_Stream 
+SELECT 
+maskCreditCardNumber(CC_Number, "ANONYMIZE_PARTIALLY") AS CC_Number, 
+Amount AS Amount, 
+TXN_Type AS TXN_Type, 
+SessionID AS SessionID, 
+TXN_Timestamp AS TXN_Timestamp 
+FROM Txn_Stream i;
+
+CREATE SOURCE PatternPartition_MysqlCDC USING Global.MysqlReader ( 
+  Compression: false, 
+  Password: '*********', 
+  Username: 'striimuser', 
+  Password_encrypted: 'true', 
+  connectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  FilterTransactionBoundaries: true, 
+  ConnectionURL: 'jdbc:mysql://**.***.**:3306', 
+  Tables: '"<DB>"."cctxn"', 
+  SendBeforeImage: true ) 
+OUTPUT TO Txn_Stream;
+
+CREATE CQ AuthChargeGrouping 
+INSERT INTO AuthChargePartitions 
+SELECT 
+LIST(A,B) as events,
+COUNT(B) as count
+FROM MaskedTXN_Stream m
+MATCH_PATTERN T A+ (W|B)
+DEFINE
+	A = m(TXN_Type = 'AUTH/HOLD'),
+	B = m(TXN_Type = 'CHARGE'),
+	T = TIMER(interval 3 minute),
+	W = WAIT(T)
+PARTITION BY m.SessionID;
+
+CREATE CQ CustomerCheckout 
+INSERT INTO CompletePartitions 
+SELECT events FROM AuthChargePartitions a
+WHERE a.count > 0;
+
+CREATE CQ CustomerPending 
+INSERT INTO IncompletePartitions 
+SELECT events FROM AuthChargePartitions a
+WHERE a.count = 0;
+
+CREATE OR REPLACE TARGET AuthCharge_Success USING Global.FileWriter ( 
+  rolloveronddl: 'false', 
+  encryptionpolicy: '', 
+  adapterName: 'FileWriter', 
+  rolloverpolicy: 'Interval:1h', 
+  flushpolicy: 'Interval:1h', 
+  filename: 'CompletePartitions', 
+  directory: 'UploadedFiles' ) 
+FORMAT USING Global.JSONFormatter  ( 
+  handler: 'com.webaction.proc.JSONFormatter', 
+  jsonMemberDelimiter: '\n', 
+  EventsAsArrayOfJsonObjects: 'true', 
+  formatterName: 'JSONFormatter', 
+  jsonobjectdelimiter: '\n' ) 
+INPUT FROM CompletePartitions;
+
+CREATE OR REPLACE TARGET AuthOnly_Timeout USING Global.FileWriter ( 
+  rolloveronddl: 'false', 
+  filename: 'TimedOutPartitions', 
+  flushpolicy: 'EventCount:1h', 
+  encryptionpolicy: '', 
+  adapterName: 'FileWriter', 
+  rolloverpolicy: 'Interval:1h', 
+  directory: 'UploadedFiles' ) 
+FORMAT USING Global.JSONFormatter  ( 
+  handler: 'com.webaction.proc.JSONFormatter', 
+  jsonMemberDelimiter: '\n', 
+  EventsAsArrayOfJsonObjects: 'true', 
+  formatterName: 'JSONFormatter', 
+  jsonobjectdelimiter: '\n' ) 
+INPUT FROM IncompletePartitions;
+
+END APPLICATION PatternPartition;
+
