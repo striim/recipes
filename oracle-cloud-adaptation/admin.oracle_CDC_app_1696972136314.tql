@@ -1,0 +1,96 @@
+
+CREATE OR REPLACE APPLICATION oracle_CDC_app;
+
+CREATE OR REPLACE SOURCE oracle_source USING Global.OracleReader ( 
+  TransactionBufferDiskLocation: '.striim/LargeBuffer', 
+  adapterName: 'OracleReader', 
+  DatabaseRole: 'PRIMARY', 
+  Compression: false, 
+  connectionRetryPolicy: 'timeOut=30, retryInterval=30, maxRetries=3', 
+  Password_encrypted: 'true', 
+  SupportPDB: false, 
+  QuiesceMarkerTable: 'QUIESCEMARKER', 
+  FetchSize: 1000, 
+  CDDLAction: 'Process', 
+  CommittedTransactions: true, 
+  QueueSize: 2048, 
+  DictionaryMode: 'OnlineCatalog', 
+  SetConservativeRange: false, 
+  CDDLCapture: false, 
+  Password: '***********', 
+  Username: 'qatest', 
+  TransactionBufferType: 'Memory', 
+  Tables: '"QATEST2"."HOSPITAL_COMPLICATIONS_DATA"', 
+  ConnectionURL: 'jdbc:oracle:thin:@//***.***.***.***:1521/ORCL', 
+  TransactionBufferSpilloverSize: '100MB', 
+  FilterTransactionBoundaries: true, 
+  SendBeforeImage: true ) 
+OUTPUT TO complication_data_stream;
+
+CREATE CACHE hospital_data_cache USING Global.DatabaseReader ( 
+  Password: '***********', 
+  Username: 'qatest', 
+  QuiesceOnILCompletion: false, 
+  Password_encrypted: 'true', 
+  ConnectionURL: 'jdbc:oracle:thin:@//***.***.***.***:1521/ORCL', 
+  FetchSize: 1000, 
+  Query: 'SELECT PROVIDER_ID,HOSPITAL_NAME,ADDRESS,CITY,STATE,ZIP_CODE,COUNTY,PHONE_NUMBER FROM QATEST2.HOSPITAL_DATA;', 
+  DatabaseProviderType: 'DEFAULT' ) 
+QUERY ( 
+  keytomap: 'PROVIDER_ID',
+  skipinvalid: 'false' ) 
+OF HospitalDataType;
+
+CREATE CQ replace_with_null_CQ 
+INSERT INTO nullified_stream2 
+SELECT 
+t
+FROM complication_data_stream t
+MODIFY 
+(
+data[5] = CASE WHEN TO_STRING(data[5]) == "Not Available" THEN NULL else TO_STRING(data[5]) END,
+data[6] = CASE WHEN TO_STRING(data[6]) == "Not Available" THEN NULL else TO_STRING(data[6]) END, 
+data[7] = CASE WHEN TO_STRING(data[7]) == "Not Available" THEN NULL else TO_STRING(data[7]) END, 
+data[8] = CASE WHEN TO_STRING(data[8]) == "Not Available" THEN NULL else TO_STRING(data[8]) END 
+);;
+
+CREATE CQ score_comparison_CQ 
+INSERT INTO score_comparison_stream 
+SELECT 
+CASE WHEN TO_STRING(data[4]) =="Not Available" or TO_STRING(data[4]) =="Number of Cases Too Small"
+	THEN putUserData(t, 'SCORE_COMPARISON', "OUTLIER")
+	WHEN TO_STRING(data[4]) =="Worse than the National Rate"
+	THEN putUserData(t, 'SCORE_COMPARISON', "BAD")
+	WHEN TO_STRING(data[4]) =="Better than the National Rate" OR TO_STRING(data[4]) =="No Different than the National Rate"
+	THEN putUserData(t, 'SCORE_COMPARISON', "GOOD")
+    ELSE putUserData(t, 'SCORE_COMPARISON', NULL)
+END 
+FROM nullified_stream2 t;;
+
+CREATE OR REPLACE CQ enrich_CQ 
+INSERT INTO enriched_output 
+SELECT data[1] as provider_id, data[2] as Measure_Name,
+				   data[3] as Measure_id,
+				   t.HOSPITAL_NAME as hosp_name,
+				   t.state as cache_state,  
+				   t.phone_number as cache_phone 
+				   FROM score_comparison_stream n, hospital_data_cache t where t.provider_id=TO_STRING(n.data[1]);
+
+CREATE TARGET target_data_mongo USING Global.MongoDBWriter ( 
+  Username: 'cdcuser', 
+  AuthType: 'SCRAM_SHA_1', 
+  AuthDB: 'admin', 
+  collections: 'HOSPITAL.hospital_score', 
+  Password: '**********', 
+  ParallelThreads: '', 
+  OrderedWrites: 'true', 
+  Password_encrypted: 'true', 
+  ConnectionRetryPolicy: 'retryInterval=60, maxRetries=3', 
+  keyseparator: ':', 
+  batchpolicy: 'EventCount:1000, Interval:30', 
+  ConnectionURL: 'mongodb+srv://<username>:<password>@cluster0.*******.mongodb.net/', 
+  upsertMode: 'false' ) 
+INPUT FROM enriched_output;
+
+END APPLICATION oracle_CDC_app;
+
