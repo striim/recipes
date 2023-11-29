@@ -1,0 +1,21 @@
+DiagnosisCode,Diagnosis
+A123,Hypertension (High Blood Pressure)
+B234,Diabetes Mellitus
+C345,Osteoarthritis
+D456,Asthma
+E567,Migraine
+F678,Influenza (Flu)
+G789,Depression
+H890,Hypothyroidism
+I901,Gastroesophageal Reflux Disease (GERD)
+J012,Chronic Obstructive Pulmonary Disease (COPD)
+K123,Coronary Artery Disease (CAD)
+L234,Rheumatoid Arthritis
+M345,Irritable Bowel Syndrome (IBS)
+N456,Allergic Rhinitis (Hay Fever)
+O567,Psoriasis
+P678,Osteoporosis
+Q789,Anxiety Disorder
+R890,Chronic Kidney Disease
+S901,Stroke
+T012,Breast Cancer

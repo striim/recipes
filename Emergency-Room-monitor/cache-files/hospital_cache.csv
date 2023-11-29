@@ -1,0 +1,116 @@
+HospitalID,HospitalName,City,State,ZipCode,Latitude,Longitude
+1,Jennifer Hospital,New Victor,SC,29001,30.35751,-84.69288
+2,Beth Hospital,East James,CA,90004,37.241374,-89.355644
+3,Rebecca Hospital,North Julie,NY,10003,31.026862,-114.298268
+4,Becky Hospital,Moorestad,DE,19709,39.638071,-102.023486
+5,Stephanie Hospital,North Nicholaston,NH,03032,30.315591,-99.619341
+6,Jeffrey Hospital,Maychester,AL,35006,38.813982,-101.648376
+7,Todd Hospital,Port Robert,SD,57004,33.277787,-87.988032
+8,Louis Hospital,New Christinemouth,KY,40007,38.422599,-92.659922
+9,Douglas Hospital,South Emma,TN,37015,40.591017,-118.884245
+10,Ruth Hospital,Ricardomouth,RI,02808,30.946894,-103.158454
+11,Gail Hospital,New Jackburgh,OH,43009,31.25516,-111.835543
+12,Julia Hospital,Port Amychester,PA,15007,38.107822,-90.276503
+13,Emily Hospital,North Misty,WV,24712,37.139091,-95.832183
+14,Jason Hospital,Parkerhaven,AL,35006,43.885522,-93.554921
+15,Anthony Hospital,Donnatown,TN,37010,31.576764,-89.98121
+16,Steven Hospital,West Alexanderville,SD,57002,30.859249,-99.922577
+17,Elizabeth Hospital,Higginsfurt,NE,68005,31.801954,-84.313474
+18,Mckenzie Hospital,Lake Jamesshire,WV,24724,43.306544,-83.600712
+19,Luis Hospital,Elizabethville,TX,75009,37.899738,-99.259453
+20,Lauren Hospital,Johnsonhaven,NC,27006,42.652292,-94.349016
+21,James Hospital,Port Jennifer,IN,46011,33.027391,-93.506463
+22,Alexis Hospital,Angelabury,NY,10001,43.884991,-114.344892
+23,Andrew Hospital,Whitneyton,SD,57005,35.281921,-97.063851
+24,Russell Hospital,South Isaacport,IL,60005,44.017958,-98.203736
+25,Nicholas Hospital,Port Cassandrabury,VA,20110,42.828475,-82.804501
+26,Danny Hospital,Aprilland,MN,55001,39.300482,-102.072176
+27,Travis Hospital,West Justin,KY,40004,32.530763,-113.524799
+28,Michele Hospital,Port Samanthamouth,KY,40007,41.929868,-83.13484
+29,Colleen Hospital,East Charles,PR,00602,41.324495,-117.610265
+30,Ernest Hospital,Brianton,TX,75009,44.676856,-119.406055
+31,Sarah Hospital,Port Clintonstad,ME,03902,37.396255,-114.467176
+32,Andrea Hospital,Lake Mark,AR,71631,41.11178,-95.004471
+33,Alicia Hospital,Georgeburgh,VA,20106,30.830537,-99.417197
+34,Christopher Hospital,Sarahton,MS,38603,39.145842,-112.023668
+35,Catherine Hospital,Mclaughlinton,DC,20003,31.963759,-99.907332
+36,Tim Hospital,Aaronmouth,MO,63005,33.233395,-108.899597
+37,Francis Hospital,Meganland,KS,66006,39.459405,-111.894871
+38,Erika Hospital,Port Larryfort,CO,80007,32.781552,-82.601328
+39,Anna Hospital,Jacquelinetown,RI,02808,37.045928,-105.972431
+40,Kevin Hospital,New Brandon,DC,20002,35.197757,-84.433664
+41,Amy Hospital,West Danielview,AS,99502,43.060454,-86.344947
+42,Mary Hospital,Mayton,WA,98004,33.149766,-99.689172
+43,Kristen Hospital,South Tanya,WV,24715,32.935349,-81.368532
+44,Melanie Hospital,Haneyborough,AL,35006,32.615465,-97.517329
+45,Gregory Hospital,West Samantha,FM,,43.447425,-103.186495
+46,Michael Hospital,East Robert,LA,70002,42.105546,-117.822913
+47,Thomas Hospital,Alvaradoport,NC,27011,38.469991,-98.40094
+48,Lonnie Hospital,North Jeff,ID,83210,31.454864,-96.940683
+49,Kimberly Hospital,Port Richard,MD,20607,33.716345,-104.003177
+50,Alison Hospital,Lorettaland,MD,20603,33.793745,-93.557829
+51,Heather Hospital,Lake Joyce,KS,66010,41.830876,-102.581298
+52,Stanley Hospital,Daughertyburgh,MS,38609,42.977474,-96.751238
+53,Jose Hospital,Pachecofort,IN,46001,33.025419,-119.743169
+54,Jeremy Hospital,East Elizabethbury,PA,15001,38.680351,-82.395744
+55,Katie Hospital,Millerhaven,WI,53005,35.618051,-109.194353
+56,Priscilla Hospital,Lake Kendra,MI,48006,43.190231,-116.813739
+57,Sara Hospital,Lake Jamie,MO,63011,34.223876,-80.291112
+58,Kathy Hospital,Christopherville,MP,03033,42.299404,-105.863393
+59,Kathleen Hospital,Hallfurt,AS,99504,36.832798,-97.661546
+60,Ashley Hospital,Grayport,NM,87001,43.819436,-118.269226
+61,Bradley Hospital,Lawrenceport,MA,01005,33.617979,-85.183921
+62,Nicole Hospital,North Philipbury,IA,50006,39.785306,-104.161755
+63,Miguel Hospital,Harrishaven,AL,35005,40.995984,-114.0268
+64,Autumn Hospital,Riddleshire,AS,99501,40.990334,-103.428251
+65,Jacob Hospital,East Arthur,PR,00603,43.255716,-104.937578
+66,Pamela Hospital,West Jasonville,FL,32024,30.29921,-103.874674
+67,Linda Hospital,Curtisberg,NE,68005,41.705767,-81.235362
+68,Chris Hospital,Port Bobby,HI,96707,32.222134,-88.651102
+69,Jonathan Hospital,West Lori,NM,87005,31.542935,-105.268429
+70,Joshua Hospital,Port Brianview,WI,53005,32.22834,-83.269538
+71,Tony Hospital,West Janice,OR,97005,37.820252,-117.414217
+72,Rachel Hospital,Lake David,TN,37015,43.891275,-87.731632
+73,Barbara Hospital,Evanmouth,NM,87004,39.840202,-116.771396
+74,Oscar Hospital,East Matthewfurt,WY,82009,31.242383,-84.307196
+75,Alexandra Hospital,East Jacquelinestad,NJ,07003,31.536305,-104.560142
+76,Lynn Hospital,East Kenneth,MH,,44.682926,-116.541979
+77,Melissa Hospital,East Jasonside,MH,,41.268922,-116.682726
+78,Larry Hospital,Michaelbury,IL,60004,32.089663,-91.421193
+79,Crystal Hospital,North Tina,WV,24712,31.140663,-102.475919
+80,Paul Hospital,New Cody,GA,30008,36.254213,-113.980936
+81,Chad Hospital,Port Michael,PW,,42.596554,-104.250093
+82,Dennis Hospital,West Thomasborough,AL,35004,42.90968,-91.148928
+83,Jenna Hospital,Rothstad,MD,20601,39.974973,-86.51119
+84,Michelle Hospital,Jonesview,ND,58005,34.75963,-110.218689
+85,Donald Hospital,Bruceshire,OR,97004,44.784854,-119.8343
+86,Joseph Hospital,New Pamela,NJ,07003,37.505756,-99.913557
+87,Megan Hospital,East Andrewborough,OR,97005,44.095806,-107.589574
+88,Stephen Hospital,East Davidfort,PA,15003,36.003192,-105.726897
+89,Billy Hospital,Millerfurt,NM,87006,31.966857,-86.597038
+90,Carolyn Hospital,South Robertborough,HI,96704,31.870194,-103.472538
+91,Ryan Hospital,West Michelle,NH,03034,43.338445,-113.523039
+92,Matthew Hospital,East Cassandra,PW,,35.251936,-117.033247
+93,Jerry Hospital,Emilyton,MA,01001,35.5138,-116.320136
+94,Chelsea Hospital,Kennedyfurt,MN,55003,36.411373,-83.223814
+95,Patricia Hospital,Millsfurt,OK,73004,30.700291,-118.836822
+96,Jesse Hospital,Robinport,DC,20005,31.380091,-99.759064
+97,Shelley Hospital,Jessehaven,FL,32011,31.944033,-114.04518
+98,Rebekah Hospital,South Sheila,TN,37014,36.271055,-100.460188
+99,Margaret Hospital,Mendozashire,NM,87001,37.434991,-86.090527
+100,Scott Hospital,Russellside,MP,03031,39.500477,-118.413863
+101,Blake Hospital,North Matthew,MN,55005,36.806016,-102.298266
+102,Ray Hospital,Rickyborough,FL,32009,38.227507,-119.578274
+103,Eric Hospital,East Jenniferfort,KS,66006,31.818742,-85.614429
+104,William Hospital,Lake Blakeland,MH,,42.03442,-92.575178
+105,Dawn Hospital,Ernesttown,AR,71603,30.498828,-114.803622
+106,Annette Hospital,Pamelabury,NH,03032,40.61614,-91.302517
+107,Brian Hospital,Parkerport,ID,83202,39.361156,-112.341686
+108,Courtney Hospital,Davidchester,WV,24712,34.751286,-87.885832
+109,Marilyn Hospital,Chadmouth,MI,48002,39.118713,-119.392999
+110,Lindsey Hospital,Lake Karenhaven,NE,68005,33.890696,-98.71259
+111,Dustin Hospital,South Pam,VT,05033,37.923069,-82.354908
+112,Cody Hospital,West Larrybury,MN,55001,41.510788,-114.607799
+113,David Hospital,Villanuevaview,AS,99505,33.349117,-80.936416
+114,Jacqueline Hospital,Johnbury,SD,57001,43.259006,-114.390855
+115,Jasmin Hospital,East Alyssa,CT,06013,42.336234,-108.820155
