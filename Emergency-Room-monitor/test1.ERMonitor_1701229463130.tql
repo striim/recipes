@@ -1,0 +1,887 @@
+
+CREATE OR REPLACE APPLICATION ERMonitor;
+
+CREATE OR REPLACE TYPE RoomsType (
+ id java.lang.String KEY,
+ name java.lang.String,
+ hospitalId java.lang.String,
+ roomType java.lang.String);
+
+CREATE OR REPLACE TYPE PatientsType (
+ id java.lang.String KEY,
+ firstName java.lang.String,
+ lastName java.lang.String,
+ gender java.lang.String,
+ age java.lang.Integer,
+ city java.lang.String,
+ state java.lang.String,
+ zip java.lang.String,
+ lat java.lang.Double,
+ lon java.lang.Double);
+
+CREATE OR REPLACE TYPE WaitTimesStream_Type (
+ name java.lang.String,
+ id java.lang.String,
+ waitTime java.lang.Integer,
+ totalTime java.lang.Integer,
+ waitStatus java.lang.String,
+ num java.lang.Long);
+
+CREATE OR REPLACE TYPE VisitType (
+ timestamp org.joda.time.DateTime,
+ hospitalId java.lang.String,
+ patientId java.lang.String,
+ stage java.lang.String,
+ visitDuration java.lang.Integer,
+ stageDuration java.lang.Integer,
+ symptoms java.lang.String,
+ roomId java.lang.String,
+ providerId java.lang.String,
+ diagnosisCode java.lang.String);
+
+CREATE OR REPLACE TYPE HospitalsType (
+ id java.lang.String KEY,
+ name java.lang.String,
+ city java.lang.String,
+ state java.lang.String,
+ zip java.lang.String,
+ lat java.lang.Double,
+ lon java.lang.Double);
+
+CREATE OR REPLACE TYPE ProvidersType (
+ id java.lang.String KEY,
+ firstName java.lang.String,
+ lastName java.lang.String,
+ hospitalId java.lang.String,
+ providerType java.lang.String);
+
+CREATE OR REPLACE TYPE DiagnosesType (
+ id java.lang.String KEY,
+ name java.lang.String);
+
+CREATE FLOW ReadData;
+
+CREATE OR REPLACE SOURCE VisitDataReader USING Global.FileReader ( 
+  PositionByEof: false, 
+  Wildcard: 'Patient_record_data.csv', 
+  adapterName: 'FileReader', 
+  rolloverstyle: 'Default', 
+  Directory: 'UploadedFiles/', 
+  blocksize: 64, 
+  skipbom: true, 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  trimwhitespace: false, 
+  linenumber: '-1', 
+  recordend: '', 
+  columndelimiter: ',', 
+  columndelimittill: '-1', 
+  trimquote: true, 
+  ignoreemptycolumn: false, 
+  separator: ':', 
+  parserName: 'DSVParser', 
+  ignoremultiplerecordbegin: true, 
+  quoteset: '\"', 
+  handler: 'com.webaction.proc.DSVParser_1_0', 
+  charset: 'UTF-8', 
+  eventtype: '', 
+  ignorerowdelimiterinquote: false, 
+  recordbegin: '', 
+  blockascompleterecord: false, 
+  rowdelimiter: '\n', 
+  nocolumndelimiter: false, 
+  headerlineno: 0, 
+  header: true ) 
+OUTPUT TO VisitStream;
+
+END FLOW ReadData;
+
+CREATE FLOW LoadCaches;
+
+CREATE OR REPLACE CACHE Rooms USING Global.FileReader ( 
+  PositionByEof: false, 
+  rolloverstyle: 'Default', 
+  Directory: 'UploadedFiles/', 
+  blocksize: 64, 
+  skipbom: true, 
+  Wildcard: 'room_cache.csv', 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  blockascompleterecord: false,
+  charset: 'UTF-8',
+  columndelimiter: ',',
+  columndelimittill: '-1',
+  eventtype: '',
+  handler: 'com.webaction.proc.DSVParser_1_0',
+  header: true,
+  headerlineno: 0,
+  ignoreemptycolumn: false,
+  ignoremultiplerecordbegin: true,
+  ignorerowdelimiterinquote: false,
+  linenumber: '-1',
+  nocolumndelimiter: false,
+  quoteset: '\"',
+  recordbegin: '',
+  recordend: '',
+  rowdelimiter: '\n',
+  separator: ':',
+  trimquote: true,
+  trimwhitespace: false ) 
+QUERY ( 
+  keytomap: 'id',
+  skipinvalid: 'false' ) 
+OF RoomsType;
+
+CREATE OR REPLACE CACHE Patients USING Global.FileReader ( 
+  PositionByEof: false, 
+  rolloverstyle: 'Default', 
+  Wildcard: 'patient_cache.csv', 
+  Directory: 'UploadedFiles/', 
+  blocksize: 64, 
+  skipbom: true, 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  blockascompleterecord: false,
+  charset: 'UTF-8',
+  columndelimiter: ',',
+  columndelimittill: '-1',
+  eventtype: '',
+  handler: 'com.webaction.proc.DSVParser_1_0',
+  header: true,
+  headerlineno: 0,
+  ignoreemptycolumn: false,
+  ignoremultiplerecordbegin: true,
+  ignorerowdelimiterinquote: false,
+  linenumber: '-1',
+  nocolumndelimiter: false,
+  quoteset: '\"',
+  recordbegin: '',
+  recordend: '',
+  rowdelimiter: '\n',
+  separator: ':',
+  trimquote: true,
+  trimwhitespace: false ) 
+QUERY ( 
+  keytomap: 'id',
+  skipinvalid: 'false' ) 
+OF PatientsType;
+
+END FLOW LoadCaches;
+
+CREATE FLOW EstimateWaitTimes;
+
+CREATE OR REPLACE CQ TriggerOnPatientStoppedWaiting 
+INSERT INTO PatientStoppedWaitingStream 
+select wq.prevstage as prevstage,
+       wq.currstage as currstage,
+	   wq.hospitalid as hospitalid,
+	   wq.duration as duration
+from
+  (select to_string(prev(w.patientid, w.stage)) as prevstage,
+          w.stage as currstage,
+	      w.hospitalid as hospitalid,
+   		  w.visitDuration as duration
+   from lastpatiententrywindow w ) wq
+where currstage <> prevstage
+and prevstage = "Waiting"
+and (currstage = "Assessment" 
+	 or currstage = "Treatment"
+	 or currstage = "Left");
+
+END FLOW EstimateWaitTimes;
+
+CREATE FLOW HandleAlerts;
+
+CREATE OR REPLACE STREAM WaitTimesStream OF WaitTimesStream_Type;
+
+CREATE OR REPLACE STREAM WebAlertStream OF Global.AlertEvent;
+
+END FLOW HandleAlerts;
+
+ALTER FLOW LoadCaches;
+
+CREATE OR REPLACE CACHE Hospitals USING Global.FileReader ( 
+  PositionByEof: false, 
+  rolloverstyle: 'Default', 
+  Directory: 'UploadedFiles/', 
+  blocksize: 64, 
+  skipbom: true, 
+  Wildcard: 'hospital_cache.csv', 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  blockascompleterecord: false,
+  charset: 'UTF-8',
+  columndelimiter: ',',
+  columndelimittill: '-1',
+  eventtype: '',
+  handler: 'com.webaction.proc.DSVParser_1_0',
+  header: true,
+  headerlineno: 0,
+  ignoreemptycolumn: false,
+  ignoremultiplerecordbegin: true,
+  ignorerowdelimiterinquote: false,
+  linenumber: '-1',
+  nocolumndelimiter: false,
+  quoteset: '\"',
+  recordbegin: '',
+  recordend: '',
+  rowdelimiter: '\n',
+  separator: ':',
+  trimquote: true,
+  trimwhitespace: false ) 
+QUERY ( 
+  keytomap: 'id',
+  skipinvalid: 'false' ) 
+OF HospitalsType;
+
+CREATE OR REPLACE CACHE Providers USING Global.FileReader ( 
+  PositionByEof: false, 
+  Wildcard: 'providers_cache.csv', 
+  rolloverstyle: 'Default', 
+  Directory: 'UploadedFiles/', 
+  blocksize: 64, 
+  skipbom: true, 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  blockascompleterecord: false,
+  charset: 'UTF-8',
+  columndelimiter: ',',
+  columndelimittill: '-1',
+  eventtype: '',
+  handler: 'com.webaction.proc.DSVParser_1_0',
+  header: true,
+  headerlineno: 0,
+  ignoreemptycolumn: false,
+  ignoremultiplerecordbegin: true,
+  ignorerowdelimiterinquote: false,
+  linenumber: '-1',
+  nocolumndelimiter: false,
+  quoteset: '\"',
+  recordbegin: '',
+  recordend: '',
+  rowdelimiter: '\n',
+  separator: ':',
+  trimquote: true,
+  trimwhitespace: false ) 
+QUERY ( 
+  keytomap: 'id',
+  skipinvalid: 'false' ) 
+OF ProvidersType;
+
+CREATE OR REPLACE CACHE Diagnoses USING Global.FileReader ( 
+  PositionByEof: false, 
+  Wildcard: 'diagnosis_cache.csv', 
+  rolloverstyle: 'Default', 
+  Directory: 'UploadedFiles/', 
+  blocksize: 64, 
+  skipbom: true, 
+  includesubdirectories: false ) 
+PARSE USING Global.DSVParser ( 
+  blockascompleterecord: false,
+  charset: 'UTF-8',
+  columndelimiter: ',',
+  columndelimittill: '-1',
+  eventtype: '',
+  handler: 'com.webaction.proc.DSVParser_1_0',
+  header: true,
+  headerlineno: 0,
+  ignoreemptycolumn: false,
+  ignoremultiplerecordbegin: true,
+  ignorerowdelimiterinquote: false,
+  linenumber: '-1',
+  nocolumndelimiter: false,
+  quoteset: '\"',
+  recordbegin: '',
+  recordend: '',
+  rowdelimiter: '\n',
+  separator: ':',
+  trimquote: true,
+  trimwhitespace: false ) 
+QUERY ( 
+  keytomap: 'id',
+  skipinvalid: 'false' ) 
+OF DiagnosesType;
+
+END FLOW LoadCaches;
+
+ALTER FLOW ReadData;
+
+CREATE OR REPLACE CQ ParseVisitData 
+INSERT INTO ParsedVisitStream 
+SELECT TO_DATEF(data[0], "yyyy-MM-dd HH:mm:ss") as timestamp,
+TO_INT(data[0].toString().substring(11,13)) as hourOfDay,
+TO_STRING(data[1]) as hospitalId,
+TO_STRING(data[2]) as patientId,
+TO_STRING(data[3]) as stage,
+TO_INT(data[4]) as visitDuration,
+TO_INT(data[5]) as stageDuration,
+TO_STRING(data[6]) as symptoms,
+TO_STRING(data[7]) as roomId,
+TO_STRING(data[8]) as providerId,
+TO_STRING(data[9]) as diagnosisCode
+ FROM VisitStream v
+ WHERE PAUSE(40L, v);
+
+END FLOW ReadData;
+
+ALTER FLOW HandleAlerts;
+
+CREATE OR REPLACE WINDOW WaitTimesWindow OVER WaitTimesStream 
+KEEP 2 ROWS 
+PARTITION BY id;
+
+CREATE OR REPLACE SUBSCRIPTION SendHospitalWebAlerts USING Global.WebAlertAdapter ( 
+  adapterName: 'WebAlertAdapter', 
+  isSubscription: 'true', 
+  channelName: 'test_SendHospitalWebAlerts' ) 
+INPUT FROM WebAlertStream;
+
+END FLOW HandleAlerts;
+
+ALTER FLOW ReadData;
+
+CREATE OR REPLACE CQ EnrichVisitData 
+INSERT INTO EnrichedVisitStream 
+SELECT 
+v.timestamp as timestamp,
+v.hourOfDay as hourOfDay,
+v.patientId as patientId,
+v.hospitalId as hospitalId,
+v.stage as stage,
+v.symptoms as symptoms,
+v.visitDuration as visitDuration,
+v.stageDuration as stageDuration,
+v.roomId as roomId,
+v.providerId as providerId,
+v.diagnosisCode as diagnosisCode,
+h.name as hospitalName, 
+h.lat as hospitalLat, 
+h.lon as hospitalLon,
+pa.age as patientAge,
+pa.lat as patientLat,
+pa.lon as patientLon
+FROM ParsedVisitStream v,
+	Hospitals h, Patients pa
+WHERE v.hospitalId = h.id	
+AND v.patientId = pa.id;
+
+END FLOW ReadData;
+
+ALTER FLOW HandleAlerts;
+
+CREATE OR REPLACE CQ AlertOnBadWaitTimes 
+INSERT INTO WebAlertStream 
+SELECT 
+  w.name,
+  w.id,
+  CASE
+    WHEN FIRST(w.waitTime) > 60 and 
+	     LAST(w.waitTime) <= 60 THEN 'info'
+    WHEN FIRST(w.waitTime) <= 60 and 
+	     LAST(w.waitTime) > 60 THEN 'warning'
+    ELSE 'info' END,
+  CASE
+    WHEN FIRST(w.waitTime) > 60 and 
+	     LAST(w.waitTime) <= 60 THEN 'raise'
+    WHEN FIRST(w.waitTime) <= 60 and 
+	     LAST(w.waitTime) > 60 THEN 'raise'
+    ELSE 'cancel' END,
+  CASE
+    WHEN FIRST(w.waitTime) > 60 and 
+	     LAST(w.waitTime) <= 60
+      THEN 'Hospital ' + w.name + ' wait time of ' +
+	        LAST(w.waitTime) + 
+			' minutes is back to acceptable' +
+			' was ' + FIRST(w.waitTime)
+    WHEN FIRST(w.waitTime) <= 60 and 
+	     LAST(w.waitTime) > 60
+	  THEN 'Hospital ' + w.name + ' wait time of ' +
+	        LAST(w.waitTime) + ' minutes is too high ' + 
+			' was ' + FIRST(w.waitTime) + ' with ' +
+			LAST(w.num) + " current visits"
+	ELSE ""
+    END
+FROM WaitTimesWindow w
+group by w.id;
+
+END FLOW HandleAlerts;
+
+ALTER FLOW ReadData;
+
+CREATE OR REPLACE CQ AddOuterJoinsToVisitData 
+INSERT INTO FullVisitStream 
+SELECT 
+v.timestamp as timestamp,
+v.hourOfDay as hourOfDay,
+v.patientId as patientId,
+v.hospitalId as hospitalId,
+v.stage as stage,
+v.symptoms as symptoms,
+v.visitDuration as visitDuration,
+v.stageDuration as stageDuration,
+v.roomId as roomId,
+v.providerID as providerId,
+v.diagnosisCode as diagnosisCode,
+v.hospitalName as hospitalName, 
+v.hospitalLat as hospitalLat, 
+v.hospitalLon as hospitalLon,
+v.patientAge as patientAge,
+v.patientLat as patientLat,
+v.patientLon as patientLon,
+r.name as roomName,
+r.roomType as roomType,
+pr.lastName as providerName,
+pr.providerType as providerType,
+d.name as diagnosis
+FROM EnrichedVisitStream v
+LEFT OUTER JOIN Rooms r
+ON r.id = v.roomId
+LEFT OUTER JOIN Providers pr
+ON pr.id = v.providerId
+LEFT OUTER JOIN Diagnoses d
+ON d.id = v.diagnosisCode;
+
+END FLOW ReadData;
+
+ALTER FLOW EstimateWaitTimes;
+
+CREATE OR REPLACE JUMPING WINDOW LastPatientEntryWindow OVER FullVisitStream 
+KEEP 1 ROWS 
+PARTITION BY hospitalId,patientId;
+
+END FLOW EstimateWaitTimes;
+
+CREATE JUMPING WINDOW ThirtyMinuteWindow OVER FullVisitStream 
+KEEP WITHIN 30 MINUTE ON timestamp;
+
+ALTER FLOW EstimateWaitTimes;
+
+CREATE OR REPLACE CQ GetNumAheadOnly 
+INSERT INTO NumAheadAndMaxDurationStream 
+SELECT 
+       w.hospitalId as hospitalId,
+       w.patientId as patientId,
+       LAST(w.stage) as stage,
+	   LAST(w.visitduration) as duration,
+	   COUNT(w2.patientId) as numAhead,
+	   MAX(w2.visitDuration) as maxDuration,
+	   TO_INT(prev(w.patientId+"NA", numAhead)) as prevNumAhead
+FROM LastPatientEntryWindow w,
+	 LastPatientEntryWindow w2
+WHERE w.hospitalid = w2.hospitalId
+AND w.stage = "Waiting"
+AND w2.stage = "Waiting"
+AND w.patientId <> w2.patientId
+AND w.visitDuration < w2.visitDuration
+group by w.hospitalId, w.patientId;
+
+END FLOW EstimateWaitTimes;
+
+CREATE FLOW VisitsAnalytics;
+
+CREATE OR REPLACE CQ GetVisitCount 
+INSERT INTO VisitCountStream 
+SELECT "Current Visits" as label,
+       count(*) as visits,
+       f.timestamp as timestamp
+FROM ThirtyMinuteWindow f, 
+(select max(w.timestamp) as maxts from ThirtyMinuteWindow w) m
+where f.timestamp = m.maxts
+AND f.stage <> "Discharged"
+and f.stage <> "Admitted"
+and f.stage <> "Left"
+group by f.timestamp;
+
+END FLOW VisitsAnalytics;
+
+ALTER FLOW HandleAlerts;
+
+CREATE CQ CalculateCurrentWaitTimes 
+INSERT INTO WaitTimesStream 
+SELECT 
+  v.hospitalname as name, 
+  v.hospitalid as id,
+  max(v.visitDuration) as waitTime,
+  sum(v.stageDuration) as totalTime,
+  CASE WHEN waitTime < 45 THEN "Normal" 
+       WHEN waitTime >=45 AND waitTime < 60 THEN "Medium"
+	   ELSE "High" END as waitStatus,
+  count(v.patientId) as num
+FROM ThirtyMinuteWindow v, 
+(select max(w.timestamp) as maxts from ThirtyMinuteWindow w) m
+where stage = "Waiting"
+and v.timestamp = m.maxts
+group by id
+order by id;
+
+END FLOW HandleAlerts;
+
+CREATE FLOW HospitalAnalytics;
+
+CREATE CQ GetVisitsByHospital 
+INSERT INTO VisitsByHospitalStream 
+SELECT   f.hospitalId as id,
+  f.hospitalname as name, 
+  last(f.hospitallat) as lat, 
+  last(f.hospitallon) as lon, 
+  max(CASE WHEN stage = "Waiting" THEN f.visitDuration
+	  ELSE 0 END) as waitTime,
+  CASE WHEN waitTime < 45 THEN "Normal" 
+       WHEN waitTime >=45 AND waitTime < 60 THEN "Medium"
+	   ELSE "High" END as waitStatus,
+  count(*) as num,
+f.timestamp as timestamp
+FROM ThirtyMinuteWindow f,
+(select max(w.timestamp) as maxts from ThirtyMinuteWindow w) m
+where f.timestamp = m.maxts
+AND f.stage <> "Discharged"
+and f.stage <> "Admitted"
+and f.stage <> "Left"
+group by id, f.timestamp;
+
+END FLOW HospitalAnalytics;
+
+CREATE FLOW DiagnosisAnalytics;
+
+CREATE OR REPLACE CQ GetDiagnosisCounts 
+INSERT INTO DiagnosisCountStream 
+SELECT     diagnosiscode + "-" + stage as label,
+           stage, 
+	   diagnosis,
+	   diagnosiscode,
+	   count(*) as cases,  
+	   TO_INT(cases*10000/total.count)/100.0 as casepercent,
+	   max(f.timestamp) as timestamp
+FROM ThirtyMinuteWindow f,
+  (select count(*) as count
+   from ThirtyMinuteWindow f2
+   where (f2.stage = "Discharged"
+     or f2.stage = "Admitted")) total
+WHERE (f.stage = "Discharged"
+or f.stage = "Admitted")
+group by diagnosis, stage;
+
+END FLOW DiagnosisAnalytics;
+
+CREATE FLOW WaitTimeStatsAnalytics;
+
+CREATE CQ GetWaitTimesStats 
+INSERT INTO WaitTimeStatsStream 
+SELECT "Wait Times" as label,
+  min(f.visitDuration) as minTime, 
+  max(f.visitDuration) as maxTime, 
+  avg(f.visitDuration) as avgTime, 
+  count(*) as num,
+  f.timestamp as timestamp
+FROM ThirtyMinuteWindow f,
+(select max(w.timestamp) as maxts from ThirtyMinuteWindow w) m
+where f.timestamp = m.maxts
+AND f.stage = "Waiting"
+group by f.timestamp;
+
+END FLOW WaitTimeStatsAnalytics;
+
+CREATE FLOW PreviousVisitsAnalytics;
+
+CREATE CQ GetPreviousVisitCount 
+INSERT INTO PreviousVisitCountStream 
+SELECT  "Previous Visits" as label,
+	 count(*) as visits,  
+	max(f.timestamp) as timestamp
+FROM ThirtyMinuteWindow f
+WHERE (f.stage = "Discharged"
+or f.stage = "Admitted"
+or f.stage = "Left");
+
+END FLOW PreviousVisitsAnalytics;
+
+ALTER FLOW VisitsAnalytics;
+
+CREATE CQ GetVisitsByStage 
+INSERT INTO VisitsByStageStream 
+SELECT stage, 
+case when stage = "Arrived" then 1 
+     when stage = "Waiting" then 2 
+	 when stage = "Assessment" then 3 
+	 else 4 end stageNumber, 
+	 count(*) as visits,  
+f.timestamp as timestamp
+FROM ThirtyMinuteWindow f,
+(select max(w.timestamp) as maxts from ThirtyMinuteWindow w) m
+where f.timestamp = m.maxts
+AND f.stage <> "Discharged"
+and f.stage <> "Admitted"
+and f.stage <> "Left"
+group by stage, f.timestamp;
+
+END FLOW VisitsAnalytics;
+
+ALTER FLOW PreviousVisitsAnalytics;
+
+CREATE OR REPLACE CQ GetPreviousVisitsByStage 
+INSERT INTO PreviousVisitsByStageStream 
+SELECT stage, 
+case when stage = "Discharged" then 1 
+     when stage = "Admitted" then 2 
+	 else 3 end stageNumber, 
+	 count(*) as visits,  
+	max(f.timestamp) as timestamp
+FROM ThirtyMinuteWindow f
+WHERE (f.stage = "Discharged"
+or f.stage = "Admitted"
+or f.stage = "Left")
+group by stage;
+
+END FLOW PreviousVisitsAnalytics;
+
+CREATE FLOW OccupancyAnalytics;
+
+CREATE OR REPLACE CQ GetOccupancy 
+INSERT INTO OccupancyStream 
+SELECT "Occupancy" as label,
+sum(CASE WHEN f.roomId is not null then 1 else 0 end) as occupiedRooms,
+r.allRooms as allrooms,
+to_int((occupiedRooms*100)/r.allrooms) as occ,
+f.timestamp as timestamp
+FROM ThirtyMinuteWindow f,
+(select max(w.timestamp) as maxts from ThirtyMinuteWindow w) m,
+(select count(*) as allrooms from Rooms) r
+where f.timestamp = m.maxts
+AND f.stage <> "Discharged"
+and f.stage <> "Admitted"
+and f.stage <> "Left"
+group by f.timestamp;
+
+END FLOW OccupancyAnalytics;
+
+CREATE EVENTTABLE CurrentVisitStatus USING STREAM ( 
+  name: 'FullVisitStream' ) 
+QUERY ( 
+  keytomap: 'patientId',
+  persistPolicy: 'false' ) 
+OF FullVisitStream_Type;
+
+ALTER FLOW EstimateWaitTimes;
+
+CREATE OR REPLACE JUMPING WINDOW NumAheadForPatient OVER NumAheadAndMaxDurationStream 
+KEEP 1 ROWS 
+PARTITION BY patientId;
+
+END FLOW EstimateWaitTimes;
+
+ALTER FLOW VisitsAnalytics;
+
+CREATE WACTIONSTORE VisitCountHistory CONTEXT OF VisitCountStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW VisitsAnalytics;
+
+ALTER FLOW HospitalAnalytics;
+
+CREATE WACTIONSTORE VisitsByHospitalHistory CONTEXT OF VisitsByHospitalStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW HospitalAnalytics;
+
+ALTER FLOW DiagnosisAnalytics;
+
+CREATE WACTIONSTORE DiagnosisHistory CONTEXT OF DiagnosisCountStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW DiagnosisAnalytics;
+
+ALTER FLOW WaitTimeStatsAnalytics;
+
+CREATE WACTIONSTORE WaitTimeStatsHistory CONTEXT OF WaitTimeStatsStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW WaitTimeStatsAnalytics;
+
+ALTER FLOW PreviousVisitsAnalytics;
+
+CREATE WACTIONSTORE PreviousVisitCountHistory CONTEXT OF PreviousVisitCountStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW PreviousVisitsAnalytics;
+
+ALTER FLOW VisitsAnalytics;
+
+CREATE WACTIONSTORE VisitsByStageHistory CONTEXT OF VisitsByStageStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW VisitsAnalytics;
+
+ALTER FLOW PreviousVisitsAnalytics;
+
+CREATE WACTIONSTORE PreviousVisitsByStageHistory CONTEXT OF PreviousVisitsByStageStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW PreviousVisitsAnalytics;
+
+ALTER FLOW OccupancyAnalytics;
+
+CREATE WACTIONSTORE OccupancyHistory CONTEXT OF OccupancyStream_Type USING ( storageProvider: 'elasticsearch' );
+
+END FLOW OccupancyAnalytics;
+
+ALTER FLOW EstimateWaitTimes;
+
+CREATE OR REPLACE CQ EstimatePatientsAheadAndWaitTime 
+INSERT INTO PatientsAheadAndWaitTimeStream 
+SELECT p.hospitalid as hospitalId,
+       w.patientId as patientId,
+	   ABS(n.maxDuration - w.visitDuration) as duration,
+	   n.numAhead as numAhead,
+	   pa.firstName as firstName
+FROM PatientStoppedWaitingStream p,
+     LastPatientEntryWindow w,
+	 NumAheadForPatient n,
+	 Patients pa
+WHERE p.hospitalid = w.hospitalId
+AND w.patientId = n.patientId
+AND w.stage = "Waiting"
+AND pa.id = w.patientId;
+
+END FLOW EstimateWaitTimes;
+
+ALTER FLOW VisitsAnalytics;
+
+CREATE EVENTTABLE VisitCountCurrent USING STREAM ( 
+  name: 'VisitCountStream' ) 
+QUERY ( 
+  keytomap: 'label',
+  persistPolicy: 'true' ) 
+OF VisitCountStream_Type;
+
+CREATE CQ PopulateVisitCountHistory 
+INSERT INTO VisitCountHistory 
+SELECT d FROM VisitCountStream d;
+
+END FLOW VisitsAnalytics;
+
+ALTER FLOW HospitalAnalytics;
+
+CREATE EVENTTABLE VisitsByHospitalCurrent USING STREAM ( 
+  name: 'VisitsByHospitalStream' ) 
+QUERY ( 
+  keytomap: 'id',
+  persistPolicy: 'true' ) 
+OF VisitsByHospitalStream_Type;
+
+CREATE CQ PopulateVisitsByHospitalHistory 
+INSERT INTO VisitsByHospitalHistory 
+SELECT d FROM VisitsByHospitalStream d;
+
+END FLOW HospitalAnalytics;
+
+ALTER FLOW DiagnosisAnalytics;
+
+CREATE CQ PopulateDiagnosisCountHistory 
+INSERT INTO DiagnosisHistory 
+SELECT d FROM DiagnosisCountStream d;
+
+CREATE EVENTTABLE DiagnosisCountCurrent USING STREAM ( 
+  name: 'DiagnosisCountStream' ) 
+QUERY ( 
+  keytomap: 'label',
+  persistPolicy: 'true' ) 
+OF DiagnosisCountStream_Type;
+
+END FLOW DiagnosisAnalytics;
+
+ALTER FLOW WaitTimeStatsAnalytics;
+
+CREATE EVENTTABLE WaitTimeStatsCurrent USING STREAM ( 
+  name: 'WaitTimeStatsStream' ) 
+QUERY ( 
+  keytomap: 'label',
+  persistPolicy: 'true' ) 
+OF WaitTimeStatsStream_Type;
+
+CREATE CQ PopulateWaitTimeStatsHistory 
+INSERT INTO WaitTimeStatsHistory 
+SELECT d FROM WaitTimeStatsStream d;
+
+END FLOW WaitTimeStatsAnalytics;
+
+ALTER FLOW PreviousVisitsAnalytics;
+
+CREATE EVENTTABLE PreviousVisitCountCurrent USING STREAM ( 
+  name: 'PreviousVisitCountStream' ) 
+QUERY ( 
+  keytomap: 'label',
+  persistPolicy: 'true' ) 
+OF PreviousVisitCountStream_Type;
+
+CREATE CQ PopulatePreviousVisitCountHistory 
+INSERT INTO PreviousVisitCountHistory 
+SELECT d FROM PreviousVisitCountStream d;
+
+END FLOW PreviousVisitsAnalytics;
+
+ALTER FLOW VisitsAnalytics;
+
+CREATE CQ PopulateVisitsByStageHistory 
+INSERT INTO VisitsByStageHistory 
+SELECT d FROM VisitsByStageStream d;
+
+CREATE EVENTTABLE VisitsByStageCurrent USING STREAM ( 
+  name: 'VisitsByStageStream' ) 
+QUERY ( 
+  keytomap: 'stage',
+  persistPolicy: 'true' ) 
+OF VisitsByStageStream_Type;
+
+END FLOW VisitsAnalytics;
+
+ALTER FLOW PreviousVisitsAnalytics;
+
+CREATE EVENTTABLE PreviousVisitsByStageCurrent USING STREAM ( 
+  name: 'PreviousVisitsByStageStream' ) 
+QUERY ( 
+  keytomap: 'stage',
+  persistPolicy: 'true' ) 
+OF PreviousVisitsByStageStream_Type;
+
+CREATE CQ PopulatePreviousVisitsByStageHistory 
+INSERT INTO PreviousVisitsByStageHistory 
+SELECT d FROM PreviousVisitsByStageStream d;
+
+END FLOW PreviousVisitsAnalytics;
+
+ALTER FLOW OccupancyAnalytics;
+
+CREATE EVENTTABLE OccupancyCurrent USING STREAM ( 
+  name: 'OccupancyStream' ) 
+QUERY ( 
+  keytomap: 'label',
+  persistPolicy: 'true' ) 
+OF OccupancyStream_Type;
+
+CREATE CQ PopulateOccupancyHistory 
+INSERT INTO OccupancyHistory 
+SELECT d FROM OccupancyStream d;
+
+END FLOW OccupancyAnalytics;
+
+ALTER FLOW EstimateWaitTimes;
+
+CREATE OR REPLACE CQ CreatePatientMessage 
+INSERT INTO PatientWaitMessageStream 
+SELECT
+  p.hospitalId as hospitalId,
+  p.patientId as patientId,
+  p.firstName + ", you are " +
+  p.numAhead + CASE WHEN p.numAhead = 1 THEN "st"
+				    WHEN p.numAhead = 2 THEN "nd"
+				    WHEN p.numAhead = 3 THEN "rd"
+				    ELSE "th" END  +
+  " in line at " + h.name + " with an estimated " +
+  p.duration + " minute wait time" as message
+FROM PatientsAheadAndWaitTimeStream p,
+	 Hospitals h
+WHERE h.id = p.hospitalId;
+
+CREATE WACTIONSTORE PatientWaitMessages CONTEXT OF PatientWaitMessageStream_Type USING ( storageProvider: 'elasticsearch' );
+
+CREATE CQ StorePatientMessages 
+INSERT INTO PatientWaitMessages 
+SELECT p FROM PatientWaitMessageStream p;
+
+END FLOW EstimateWaitTimes;
+
+END APPLICATION ERMonitor;
+
